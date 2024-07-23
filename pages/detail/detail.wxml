@@ -1,0 +1,4 @@
+<view>
+  <text>{{content.title}}</text>
+  <text>{{content.body}}</text>
+</view>

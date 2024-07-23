@@ -1,0 +1,15 @@
+<view class="bottom-buttons">
+    <button class="button {{active === 0 ? 'active' : ''}}" bindtap="goToMain" data-index="0">
+      <image style="position: relative; left: 73rpx; top: 10rpx" src="/pages/images/travel.png" mode="aspectFit" />
+      <span class="button-text" style="width: 69rpx; height: 39rpx; display: block; box-sizing: border-box; position: relative; left: 73rpx; top: -20rpx">出游</span>
+    </button>
+    <button class="button {{active === 1 ? 'active' : ''}}" bindtap="goToTeams" data-index="1">
+      <image style="position: relative; left: 73rpx; top: 9rpx" src="/pages/images/community.png" mode="aspectFit" />
+      <span class="button-text" style="width: 69rpx; height: 39rpx; display: block; box-sizing: border-box; position: relative; left: 73rpx; top: -20rpx">社区</span>
+    </button>
+    <button class="button {{active === 2 ? 'active' : ''}}" bindtap="goToPersonal" data-index="2">
+      <image style="position: relative; left: 68rpx; top: 10rpx; width: 80rpx; height: 60rpx; display: block; box-sizing: border-box" src="/pages/images/personal.png" mode="aspectFit" />
+      <span class="button-text" style="width: 80rpx; height: 33rpx; display: block; box-sizing: border-box; position: relative; left: 68rpx; top: -19rpx">我的</span>
+    </button>
+</view>
+

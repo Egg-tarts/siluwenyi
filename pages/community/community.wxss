@@ -1,0 +1,143 @@
+.container {
+  position: relative; /* 可选 */
+  width: 100%;
+  /* 删除 height: 100%; */
+}
+.button-text-popular
+{
+  position: relative;
+  border-radius: 50rpx;
+top:30rpx;
+left:10rpx;
+  width:20%;
+  height: 10rpx;
+  padding: 10rpx;
+  display: flex; /* 启用Flexbox布局 */
+  justify-content: center; /* 在主轴上居中（水平居中） */
+  align-items: center; /* 在交叉轴上居中（垂直居中） */
+  font-size: 20rpx;
+  color: #ffffff;
+  background-color: #d88e63;
+
+}
+.button-text-money {
+position: relative;
+left:100rpx;
+bottom:7rpx;
+  width:50%;
+  height: 25rpx;
+  padding: 10rpx;
+  text-align: left;
+  font-size: 19rpx;
+  color: #333;
+  background-color: #f4f4ec;
+}
+.button:hover {
+  background-color: #f0f0f0;
+}
+.button-text-popular-money{
+
+    height: 60rpx;
+    padding: 10rpx;
+    text-align: right;
+    font-size: 16rpx;
+    color: #333;
+    background-color: #f4f4ec;}
+
+.button-group {
+  position: relative;
+  top:-110rpx;
+  display: flex;
+  justify-content: space-around;
+  background-color: #fff;
+ 
+  display: flex;
+}
+
+
+.button {
+  font-size: 30rpx;
+letter-spacing: 60rpx;
+ height:40rpx;
+  width: 280rpx;
+  padding: 10rpx 20rpx;
+  margin: 30rpx;
+  color: #fff;
+  background-color: #f7f3e8;
+  border-radius: 50rpx;
+}
+.button .text {
+  padding-left: 70rpx; /* 或者使用 margin-left */
+}
+.button.active {
+  background-color: #e6d7b0!important;
+  color: #fff;
+}
+.scroll-view {
+  margin-top: -120rpx; /* 根据需要调整负的上边距 */
+  position: relative; 
+  height: auto; /* 自动高度，根据内容调整 */
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap; /* 允许子项换行 */
+}
+
+.button-grid-left,
+.button-grid-right {
+  width: 46%; /* 分配左右各48%宽度，加上边距确保不超过100% */
+  margin: 2%; /* 添加一些间距 */
+}
+
+.button_url_left,
+.button_url_right {
+  margin-bottom: 50rpx;
+  width: 100%;
+  background-color: #f4f4ec;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.2);
+  height: auto; /* 自动高度，根据内容调整 */
+}
+.button-image {
+  width: 100%; /* 图片宽度100%，适应容器宽度 */
+  height: auto; /* 图片高度自动，保持图片的自然比例 */
+  display: block; /* 确保图片作为一个块级元素，可以撑开容器 */
+}
+
+.button-text-big {
+  position: relative;
+  left:15rpx;
+  height: 30rpx;
+  padding: 10rpx;
+  text-align: left;
+  font-size: 26rpx;
+  color: #333;
+  background-color: #f4f4ec;
+}
+.button-text-normal {
+  position: relative;
+  left:15rpx;
+  height: 25rpx;
+  padding: 10rpx;
+  text-align: left;
+  font-size: 19rpx;
+  color: #333;
+  background-color: #f4f4ec;
+}
+
+.stars {
+  position: relative;
+top:20rpx;
+left:15rpx;
+width : 30%;
+  display: flex;
+  
+  justify-content: space-between; /* 分配均匀的间距 */
+  align-items: center;           /* 垂直居中对齐 */
+  padding: 2rpx;                /* 可以根据需要调整 */
+ 
+}
+.star {
+  width: 20rpx;                  /* 图案的宽度 */
+  height: 20rpx;                 /* 图案的高度 */
+}

@@ -1,0 +1,40 @@
+
+.bottom-buttons {
+  height:230rpx;
+  position: fixed; 
+  bottom: 0;
+  width: 100%; /* 或者根据实际需求设置宽度 */
+  background-color: #f4f4ec; /* 设置背景色，避免透明造成不可见 */
+  display: flex; 
+  justify-content: space-around; 
+}
+
+.button {
+  display: flex;         /* 启用 flexbox 布局 */
+  flex-direction: column; /* 设置主轴为垂直方向 */
+  justify-content: center; /* 垂直居中对齐内容 */
+  padding: 10px;        /* 添加内边距 */
+  background-color: #f4f4ec;
+  width: 140rpx; 
+  height: 160rpx; 
+  text-align: center; 
+  line-height: 60rpx; 
+  font-size: 28rpx; 
+  border: none;        /* 移除默认边框 */
+}
+.button-text {
+  margin-top: 5px;     /* 设置文字与图片之间的间距 */
+  font-size: 14px;     /* 设置文字大小 */
+  color: #eaded1;         /* 设置文字颜色 */
+}
+.button.active .button-text
+{
+  color: #77553e; /* 激活按钮的文本颜色 */
+ 
+}
+.button image{
+  width: 70rpx;   
+  height: 70rpx;  
+  max-width: 100%;  
+  max-height: 100%;  
+}
