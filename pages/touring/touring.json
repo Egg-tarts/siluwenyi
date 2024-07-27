@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+      "tabbar":  "/components/tabbar/tabbar",
+      "search":  "/components/search/search"
+  }
+}

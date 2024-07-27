@@ -1,6 +1,6 @@
 Component({
   data:{
-    active: 1 // 初始选中的按钮索引
+    active: 0 // 初始选中的按钮索引
   },
   properties: {
     list: {
@@ -31,7 +31,7 @@ Component({
   methods: {
       goToMain: function(e) {
         wx.redirectTo({
-          url:'/pages/homepage/homepage',
+          url:'/pages/touring/touring',
         })
         const index = parseInt(e.currentTarget.dataset.index, 10);
     this.setData({

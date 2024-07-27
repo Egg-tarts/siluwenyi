@@ -1,9 +1,13 @@
 {
   "pages": [
+    "pages/touring/touring",
     "pages/community/community",
     "components/tabbar/tabbar",
     "components/search/search",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/siluwenyi/siluwenyi",
+    "pages/fengxingwanli/fengxingwanli",
+    "pages/tuolingyuxiang/tuolingyuxiang"
   ],
   "window": {
     "navigationBarTextStyle": "black",
