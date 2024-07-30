@@ -1,66 +1,29 @@
-// pages/siluwenyi/siluwenyi.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    members: [
+      { id: 1, age: '' }
+    ]
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-
+  onAddMember() {
+    const members = this.data.members;
+    const newMember = { id: members.length + 1, age: '' };
+    this.setData({
+      members: [...members, newMember]
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
+  onInputChange(e) {
+    const { value } = e.detail;
+    const { index } = e.currentTarget.dataset;
+    const members = this.data.members;
+    members[index].age = value;
+    this.setData({ members });
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+  onSubmit() {
+    const formData = this.data;
+    // 在这里可以对表单数据进行处理，比如提交到服务器
+    console.log('Form Data:', formData);
   }
-})
+});

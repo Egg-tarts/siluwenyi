@@ -6,7 +6,6 @@
     "components/search/search",
     "pages/detail/detail",
     "pages/siluwenyi/siluwenyi",
-    "pages/fengxingwanli/fengxingwanli",
     "pages/tuolingyuxiang/tuolingyuxiang"
   ],
   "window": {

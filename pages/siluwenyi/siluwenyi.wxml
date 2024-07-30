@@ -1,2 +1,76 @@
 <!--pages/siluwenyi/siluwenyi.wxml-->
-<text>pages/siluwenyi/siluwenyi.wxml</text>
+<view class="container">
+  <view class="header">行程定制表单</view>
+  <view class="form">
+    <checkbox-group>
+      <label><checkbox value="推荐" />根据过往行程进行推荐</label>
+    </checkbox-group>
+
+    <view class="section">
+      <text class="section-title">1. 出行方式（按优先顺序选择）</text>
+      <view class="transport">
+        <view class="short-distance">
+          <checkbox-group>
+            <label><checkbox value="出租车/自驾" />出租车/自驾</label>
+            <label><checkbox value="地铁" />地铁</label>
+            <label><checkbox value="公交车" />公交车</label>
+            <label><checkbox value="步行" />步行</label>
+          </checkbox-group>
+        </view>
+        <view class="long-distance">
+          <checkbox-group>
+            <label><checkbox value="飞机" />飞机</label>
+            <label><checkbox value="高铁" />高铁</label>
+            <label><checkbox value="火车" />火车</label>
+            <label><checkbox value="长途汽车" />长途汽车</label>
+          </checkbox-group>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">2. 住宿价位</text>
+      <radio-group class="radio-group">
+        <label><radio value="低" />低</label>
+        <label><radio value="中" />中</label>
+        <label><radio value="高" />高</label>
+      </radio-group>
+    </view>
+
+    <view class="section">
+      <text class="section-title">3. 景点偏好</text>
+      <checkbox-group>
+        <label><checkbox value="博物馆/艺术馆" />博物馆/艺术馆</label>
+        <label><checkbox value="人文景观" />人文景观</label>
+        <label><checkbox value="自然景观" />自然景观</label>
+      </checkbox-group>
+    </view>
+
+    <view class="section">
+      <text class="section-title">4. 出行人员</text>
+      <view class="person">
+        <view class="person-item">
+          <text>成员1</text>
+          <input type="number" placeholder="年龄" />
+        </view>
+        <button class="add-member">+添加成员</button>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">5. 城市选择</text>
+      <checkbox-group class="city-selection">
+        <label><checkbox value="兰州" />兰州</label>
+        <label><checkbox value="金昌" />金昌</label>
+        <label><checkbox value="天水" />天水</label>
+        <label><checkbox value="张掖" />张掖</label>
+        <label><checkbox value="嘉峪关" />嘉峪关</label>
+        <label><checkbox value="白银" />白银</label>
+        <label><checkbox value="武威" />武威</label>
+        <label><checkbox value="平凉" />平凉</label>
+      </checkbox-group>
+    </view>
+
+    <button class="submit-button">生成行程</button>
+  </view>
+</view>
