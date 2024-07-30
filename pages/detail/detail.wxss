@@ -1,1 +1,87 @@
-/* pages/detail/detail.wxss */
+.container {
+  padding: 10rpx;
+  background-color: #f4f4ec;
+}
+
+.back-button {
+  position: absolute;
+  top: 10rpx;
+  left: 10rpx;
+  font-size: 20rpx;
+}
+
+.swiper-container {
+  width: 100%;
+  height: 1000rpx;
+}
+
+.swiper-image {
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  margin-top: 100rpx;
+}
+.comments-section {
+  margin-top: 20rpx; /* 为标题与正文之间添加一些间距 */
+}
+
+.comments-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-top: 1px solid #ddd; /* 给评论区标题添加顶部边框 */
+  padding-top: 30px;
+  padding-right: 560rpx; /* 确保标题靠左对齐 */
+  color:	#727272;
+}
+.text-big {
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+.content {
+  margin-top: 10rpx;
+}
+
+.comments {
+  margin-top: 0rpx;
+  border-top: 1px solid #ddd; /* 给评论区添加顶部边框 */
+}
+
+.comment-item {
+  padding-bottom: 30rpx; /* 增加与border-bottom的距离 */
+  display: flex;
+  align-items: flex-start;
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+  border-bottom: 1rpx solid #ddd; /* 在每个评论项下方添加边框 */
+}
+
+.avatar {
+  width: 60rpx;
+  height:60rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+}
+
+.comment-content {
+  margin-left: 20rpx; /* 向右移动 */
+  display: flex;
+  flex-direction: column;
+
+}
+
+.name {
+
+  position: relative;
+  top: -2px; /* 向上移动 */
+  color:	#8f8f8f;
+  font-size: 27rpx;
+  font-weight: bold;
+}
+
+.comment {
+  margin-top: 5rpx;
+}

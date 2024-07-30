@@ -1,4 +1,34 @@
-<view>
-  <text>{{content.title}}</text>
-  <text>{{content.body}}</text>
+<view class="container">
+  <swiper class="swiper-container" autoplay="true" interval="5000" duration="500">
+    <block wx:for="{{dataItem.images}}" wx:key="*this">
+      <swiper-item>
+        <image src="https://lzuer.mynatapp.cc{{item}}" class="swiper-image"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view class="title">
+    <text class="text-big">{{dataItem.text_big}}</text>
+  </view>
+
+  <view class="content">
+    <text>{{dataItem.text}}</text>
+  </view>
+  <view class="comments-section">
+    <view class="comments-title">
+      <text>共{{dataItem.comments.length}}条评论</text>
+    </view>
+  </view>
+  
+  <view class="comments">
+    <block wx:for="{{dataItem.comments}}" wx:key="*this">
+      <view class="comment-item">
+        <image src="https://lzuer.mynatapp.cc{{item.author.avatar}}" class="avatar"></image>
+        <view class="comment-content">
+          <text class="name">{{item.author.username}}</text>
+          <text class="comment">{{item.comment}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
 </view>

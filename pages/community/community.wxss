@@ -81,10 +81,9 @@ letter-spacing: 60rpx;
   display: flex;
   flex-wrap: wrap; /* 允许子项换行 */
 }
-
 .button-grid-left,
 .button-grid-right {
-  width: 46%; /* 分配左右各48%宽度，加上边距确保不超过100% */
+  width: 46%; /* 分配左右各46%宽度，加上边距确保不超过100% */
   margin: 2%; /* 添加一些间距 */
 }
 
@@ -98,12 +97,50 @@ letter-spacing: 60rpx;
   box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.2);
   height: auto; /* 自动高度，根据内容调整 */
 }
+
 .button-image {
   width: 100%; /* 图片宽度100%，适应容器宽度 */
   height: auto; /* 图片高度自动，保持图片的自然比例 */
   display: block; /* 确保图片作为一个块级元素，可以撑开容器 */
 }
 
+.button_head_txt {
+  padding: 10rpx;
+  font-size: 30rpx;
+  color: #333;
+  margin-top: 10rpx; /* 与图片保持一定距离 */
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10rpx;
+}
+
+.author-avatar {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+}
+
+.author-name {
+  flex-grow: 1;
+  margin-left: 10rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.like {
+  font-size: 28rpx;
+  color: #666;
+}
 .button-text-big {
   position: relative;
   left:15rpx;

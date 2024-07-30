@@ -1,129 +1,137 @@
 Page({
   data: {
     currentTab: 'scenic', // 默认激活的按钮
-    buttonListleft: [
-      {
-        text_big : '莫高窟',
-        text_normal:'不是看死了一千年的标本，而是看活了一千年的生命',
-        star: Array(5).fill('/pages/images/star.png'),
-        popular: "热门",
-        money: '￥ 成人120/学生65',
-        image: '/pages/images/6.jpg',
-        url: 'page1',
-      },
-      {
-        text_big : '莫高窟',
-        text_normal:'不是看死了一千年的标本，而是看活了一千年的生命',
-        star: Array(5).fill('/pages/images/star.png'),
-        popular: "热门",
-        money: '￥ 成人120/学生65',
-        image: '/pages/images/6.jpg',
-        url: 'page2'
-      },
-      {
-        text_big : '莫高窟',
-        text_normal:'不是看死了一千年的标本，而是看活了一千年的生命',
-        star: Array(5).fill('/pages/images/star.png'),
-        popular: "热门",
-        money: '￥ 成人120/学生65',
-        image: '/pages/images/6.jpg',
-        url: '/pages/changcheng/changcheng'
-      },
-      {
-        text_big : '嘉峪关关城',
-        text_normal:'天下第一雄关',
-        star: Array(5).fill('/pages/images/star.png'),
-        popular: "热门",
-        money: '￥ 成人55/学生45',
-        image: '/pages/images/4.jpg',
-        url: '/pages/yihuyuan/yihuyuan'
-      },
-      {
-        text_big : '嘉峪关关城',
-        text_normal:'天下第一雄关',
-        star: Array(5).fill('/pages/images/star.png'),
-        popular: "热门",
-        money: '￥ 成人55/学生45',
-        image: '/pages/images/4.jpg',
-        url: '/pages/yihuyuan/yihuyuan'
-      }, {
-        text_big : '嘉峪关关城',
-        text_normal:'天下第一雄关',
-        star: Array(5).fill('/pages/images/star.png'),
-        popular: "热门",
-        money: '￥ 成人55/学生45',
-        image: '/pages/images/4.jpg',
-        url: '/pages/yihuyuan/yihuyuan'
-      },
-    ],
-    buttonListright: [
-      {
-        text_big : '张掖七彩丹霞旅游景区',
-        text_normal:'色若渥丹，灿比明霞',
-        star: Array(5).fill('/pages/images/star.png'),
-        popular: "热门",
-        money: '￥ 成人93/学生66',
-        image: '/pages/images/2.jpg',
-        url: '/pages/gugong/gugong'
-      },
-      {
-        text_big : '莫高窟',
-        text_normal:'不是看死了一千年的标本，而是看活了一千年的生命',
-        star: Array(5).fill('/pages/images/star.png'),
-        popular: "热门",
-        money: '￥ 成人120/学生65',
-        image: '/pages/images/6.jpg',
-        url: '/pages/changcheng/changcheng'
-      },
-      {
-        text_big : '莫高窟',
-        text_normal:'不是看死了一千年的标本，而是看活了一千年的生命',
-        star: Array(5).fill('/pages/images/star.png'),
-        popular: "热门",
-        money: '￥ 成人120/学生65',
-        image: '/pages/images/6.jpg',
-        url: '/pages/changcheng/changcheng'
-      },
-      {
-        text_big : '嘉峪关关城',
-        text_normal:'天下第一雄关',
-        star: Array(5).fill('/pages/images/star.png'),
-        popular: "热门",
-        money: '￥ 成人55/学生45',
-        image: '/pages/images/4.jpg',
-        url: '/pages/yihuyuan/yihuyuan'
-      },
-      {
-        text_big : '嘉峪关关城',
-        text_normal:'天下第一雄关',
-        star: Array(5).fill('/pages/images/star.png'),
-        popular: "热门",
-        money: '￥ 成人55/学生45',
-        image: '/pages/images/4.jpg',
-        url: '/pages/yihuyuan/yihuyuan'
-      }, {
-        text_big : '嘉峪关关城',
-        text_normal:'天下第一雄关',
-        star: Array(5).fill('/pages/images/star.png'),
-        popular: "热门",
-        money: '￥ 成人55/学生45',
-        image: '/pages/images/4.jpg',
-        url: '/pages/yihuyuan/yihuyuan'
-      },
-    ]
+    buttonlist:[],
+    buttonListleft: [],
+    buttonListright: [],
+    buttonlist_recommend:[],
+    buttonListleft_recommend: [],
+    buttonListright_recommend: [],
+    popular:'热门'
   },
-  handleButtonClickUrl(event) {
-    const url = event.currentTarget.dataset.url;
+  onLoad: function() {
+    wx.request({
+      url: 'https://lzuer.mynatapp.cc/SRJC/attractions/', 
+      method: 'GET',
+      success: (res) => {
+        // 处理buttonlist数据
+        let buttonlist = res.data.map(item => {
+          return {
+            ...item,
+            images: [item.image1, item.image2, item.image3]
+          };
+        });
+
+        // 设置buttonlist到页面的data中
+        this.setData({
+          buttonlist: buttonlist
+        }, () => {
+          this.splitButtonList();
+          console.log(this.data.buttonListleft);
+          console.log(this.data.buttonListright);
+        });
+      }
+    });
+  },
+
+  splitButtonList: function() {
+    const { buttonlist } = this.data;
+    const buttonListleft = [];
+    const buttonListright = [];
+
+    buttonlist.forEach((item, index) => {
+      if (index % 2 === 0) {
+        // 索引为偶数的元素放入buttonListleft
+        buttonListleft.push(item);
+      } else {
+        // 索引为奇数的元素放入buttonListright
+        buttonListright.push(item);
+      }
+    });
+
+    // 更新数据
+    this.setData({
+      buttonListleft,
+      buttonListright
+    });
+  },
+  handleButtonClickUrl(e) {
+    const id = e.currentTarget.dataset.id;
+    console.log(id)
     wx.navigateTo({
-      url: `/pages/detail/detail?page=${url}`
+      url: `/pages/detail/detail?id=${id}`
+    });
+  },
+  splitButtonList_recommend: function() {
+    const { buttonlist_recommend } = this.data;
+    const buttonListleft_recommend = [];
+    const buttonListright_recommend = [];
+
+    buttonlist_recommend.forEach((item, index) => {
+      if (index % 2 === 0) {
+        // 索引为偶数的元素放入buttonListleft
+        buttonListleft_recommend.push(item);
+      } else {
+        // 索引为奇数的元素放入buttonListright
+        buttonListright_recommend.push(item);
+      }
+    });
+
+    // 更新数据
+    this.setData({
+      buttonListleft_recommend,
+      buttonListright_recommend
     });
   },
   handleButtonClick: function(e) {
     const type = e.currentTarget.dataset.type;
     this.setData({
       currentTab: type
-    }, () => {
-      ; 
-    });
+        });
+        if (type === 'scenic') {
+          wx.request({
+            url: 'https://lzuer.mynatapp.cc/SRJC/attractions/', 
+            method: 'GET',
+            success: (res) => {
+              // 处理buttonlist数据
+              let buttonlist = res.data.map(item => {
+                return {
+                  ...item,
+                  images: [item.image1, item.image2, item.image3]
+                };
+              });
+      
+              // 设置buttonlist到页面的data中
+              this.setData({
+                buttonlist: buttonlist
+              }, () => {
+                this.splitButtonList();
+                console.log(this.data.buttonListleft);
+                console.log(this.data.buttonListright);
+              });
+            }
+          });
+        } else if (type === 'city') {
+          wx.request({
+            url: 'https://lzuer.mynatapp.cc/SRJC/recommendations/', 
+            method: 'GET',
+            success: (res) => {
+              let buttonlist_recommend = res.data.map(item => {
+                return {
+                  ...item,
+                  images: [item.images1, item.images2, item.images3]
+                };
+              });
+              console.log(1),
+              this.setData({
+                buttonlist_recommend: buttonlist_recommend
+              },() => {console.log(res.data)
+                this.splitButtonList_recommend();
+                console.log(this.data.buttonListleft_recommend);
+                console.log(this.data.buttonListright_recommend);
+              });
+            }
+          })
+        }
   }
-});
+})
