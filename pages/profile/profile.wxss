@@ -1,0 +1,119 @@
+/* 页面容器 */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  background-color: #f4f4ec;
+}
+
+/* 顶部区域 */
+.top-section {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  background-color: #f4f4ec;
+  position: relative;
+}
+
+.top-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 5px; /* 减少右边距，将头像和文字更贴近 */
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 5px;
+}
+
+.other-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 0; /* 确保左边距为 0，让文字更靠近头像 */
+}
+
+.name-level {
+  display: flex;
+  align-items: center;
+}
+
+.user-name {
+  font-size: 25px;
+  font-weight: bold;
+  margin-right: 10px;
+  margin-bottom: 6px; 
+}
+
+.user-level {
+  font-size: 14px;
+  color: #888;
+}
+
+.user-points {
+  font-size: 14px;
+  color: #888;
+  margin-top: 5px;
+}
+
+.chuyou-text {
+  width: 100%;
+  text-align: left;
+  font-size: 25px;
+  margin: 5px 0; /* 减小上方空隙 */
+  padding-left: 10px;
+}
+
+.rectangle-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.rectangle {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px; 
+  background-color: #f4f4ec;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 4px 5px 10px rgba(0, 0, 0, 0.1);
+  width: 95%; /* 使框的宽度与页面宽度相当，留一点空隙 */
+}
+
+.rectangle-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.rectangle-text {
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.shequ-text {
+  width: 100%;
+  text-align: left;
+  font-size: 25px;
+  margin: 5px 0; /* 减小上方空隙 */
+  padding-left: 10px;
+  font-family: 'MyCustomFont';
+}
+
