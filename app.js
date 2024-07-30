@@ -15,6 +15,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    activeIndex: 1
+    activeIndex: 1,
+    token:null
   }
 })

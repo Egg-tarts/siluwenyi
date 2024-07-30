@@ -56,6 +56,9 @@
     </view>
   </view>
   <view  wx:if="{{currentTab === 'city'}}" class="scroll-view" scroll-y="true" >
+    <view class="floating-button" bindtap="navigateToMyRecommend">
+    <text class="plus-sign">+</text></view>
+
     <view class="button-grid-left">
   <block wx:for="{{buttonListleft_recommend}}" wx:key="index">
     <view class="button_url_left" data-id="{{item.id}}" bindtap="handleButtonClickUrl">

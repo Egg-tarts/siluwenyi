@@ -1,0 +1,19 @@
+<!-- pages/community/community.wxml -->
+<view class="container">
+  <button bindtap="publish" class="publish-btn"  >发表</button>
+  
+  <view class="input-section">
+    <textarea placeholder="旅游感受写下来吧" bindinput="bindTextInput" maxlength="300" class="input-textarea"></textarea>
+  </view>
+  
+  <view class="image-upload-section">
+    <block wx:for="{{images}}" wx:key="index">
+      <image src="{{item}}" class="uploaded-image"></image>
+    </block>
+    <button bindtap="chooseImage" class="add-image-btn" >+</button>
+  </view>
+  
+  <view class="title-input-section">
+    <input placeholder="标题" bindinput="bindTitleInput" class="title-input"/>
+  </view>
+</view>

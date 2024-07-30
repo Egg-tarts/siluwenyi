@@ -1,0 +1,74 @@
+/* pages/community/community.wxss */
+.container {
+  
+  padding: 20rpx;
+  background-color: #f4f4ec;
+  height: 100vh; /* 高度设为视口高度，确保充满界面 */
+  box-sizing: border-box; /* 确保内边距不影响容器总高度 */
+}
+
+.publish-btn {
+  font-size: 28rpx;
+  box-sizing: border-box;
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+  background-color: #e6d7b0;
+  height: 80rpx;
+  width: 200rpx!important; /* 确保按钮宽度足够 */
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-textarea {
+  margin-top: 150rpx;
+  width: 600rpx;
+  height: 200rpx;
+  padding: 10rpx;
+  box-sizing: border-box;
+}
+.image-upload-section {
+  display: flex;
+  margin-bottom: 20rpx; /* 修正 margin-bottom */
+}
+
+.add-image-btn {
+  width: 200rpx!important; /* 确保图片和按钮宽度合适 */
+  height: 200rpx;
+  margin-right: 10rpx; /* 图片和按钮之间的间距 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 移除 left 和 top 属性，因为它们会影响定位 */
+  margin-top: -500rpx; /* 向上移动按钮 */
+}
+
+.uploaded-image {
+  margin-top: -500rpx; /* 向上移动按钮 */
+  width: 200rpx!important; /* 设置图片宽度 */
+  height: 200rpx; /* 设置图片高度 */
+  margin-right: 10rpx; /* 图片之间的间距 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.add-image-btn {
+  background-color: #f0f0f0;
+  font-size: 120rpx; /* 增加字体大小 */
+  font-weight: lighter; /* 使用相对较细的字体权重 */
+}
+
+.title-input-section {
+  margin-top: -650rpx;
+  margin-bottom: 700rpx;
+  margin-left: -200rpx;
+}
+
+.title-input {
+  width: 100%;
+  height: 60rpx;
+}

@@ -151,6 +151,27 @@ letter-spacing: 60rpx;
   color: #333;
   background-color: #f4f4ec;
 }
+.floating-button {
+  position: fixed;
+  bottom: 240rpx; /* 距离底部的距离 */
+  right: 300rpx;  /* 距离右边的距离 */
+  width: 140rpx;
+  height: 140rpx;
+  background-color: #e6d7b0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.3);
+  z-index: 999; /* 确保按钮在最上层 */
+}
+
+/* 加号样式 */
+.plus-sign {
+  font-weight: lighter; /* 使用相对较细的字体权重 */
+  font-size: 100rpx;
+  color: #fff;
+}
 .button-text-normal {
   position: relative;
   left:15rpx;

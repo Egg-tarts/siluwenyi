@@ -9,6 +9,11 @@ Page({
     buttonListright_recommend: [],
     popular:'热门'
   },
+  navigateToMyRecommend: function() {
+    wx.navigateTo({
+      url: '/pages/myrecommend/myrecommend' // 替换为实际的路径
+    });
+  },
   onLoad: function() {
     wx.request({
       url: 'https://lzuer.mynatapp.cc/SRJC/attractions/', 

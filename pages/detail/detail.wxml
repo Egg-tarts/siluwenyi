@@ -19,7 +19,17 @@
       <text>共{{dataItem.comments.length}}条评论</text>
     </view>
   </view>
-  
+  <view class="container">
+  <!-- 评论和点赞容器 -->
+  <view class="comment-container">
+    <!-- 输入评论 -->
+    <input class="comment-input" placeholder="说的什么" bindinput="onInputComment" />
+    <!-- 点赞按钮 -->
+    <button class="like-button" bindtap="onLike">
+      <image class="like-icon" src="{{likeIcon}}"></image>
+    </button>
+  </view>
+</view>
   <view class="comments">
     <block wx:for="{{dataItem.comments}}" wx:key="*this">
       <view class="comment-item">

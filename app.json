@@ -3,7 +3,8 @@
     "pages/community/community",
     "components/tabbar/tabbar",
     "components/search/search",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/myrecommend/myrecommend"
   ],
   "window": {
     "navigationBarTextStyle": "black",
