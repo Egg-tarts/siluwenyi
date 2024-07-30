@@ -14,6 +14,7 @@ App({
     })
   },
   globalData: {
+    activeIndex: 0,
     userInfo: null
   }
 })
