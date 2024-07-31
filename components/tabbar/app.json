@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/category/category",
+    "pages/profile/profile",
+    "pages/register/register"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f4f4ec",
+    "navigationBarTitleText": "丝路问驿",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#97694F",
+    "selectedColor": "#1c1c1b",
+    "borderStyle": "black",
+    "backgroundColor": "#f4f4ec",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "出游",
+        "iconPath": "pages/graph/出游un.png",
+        "selectedIconPath": "pages/graph/出游un.png"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "text": "社区",
+        "iconPath": "pages/graph/社区un.png",
+        "selectedIconPath": "pages/graph/社区un.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "pages/graph/我的un.png",
+        "selectedIconPath": "pages/graph/我的un.png"
+      }
+    ]
+  }
+}
