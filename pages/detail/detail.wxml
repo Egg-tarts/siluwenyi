@@ -23,7 +23,7 @@
   <!-- 评论和点赞容器 -->
   <view class="comment-container">
     <!-- 输入评论 -->
-    <input class="comment-input" placeholder="说的什么" bindinput="onInputComment" />
+    <input class="comment-input" placeholder="想说点什么...🖊" bindinput="onInputComment" />
     <!-- 点赞按钮 -->
     <button class="like-button" bindtap="onLike">
       <image class="like-icon" src="{{likeIcon}}"></image>

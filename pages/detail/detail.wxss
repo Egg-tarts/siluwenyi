@@ -43,11 +43,13 @@
 
 .content {
   margin-top: 10rpx;
+
 }
 
 .comments {
   margin-top: 0rpx;
   border-top: 1px solid #ddd; /* 给评论区添加顶部边框 */
+  margin-bottom: 150rpx;
 }
 
 .comment-item {
@@ -76,7 +78,7 @@
 .name {
 
   position: relative;
-  top: -2px; /* 向上移动 */
+  top: -2rpx; /* 向上移动 */
   color:	#8f8f8f;
   font-size: 27rpx;
   font-weight: bold;
@@ -86,6 +88,7 @@
   margin-top: 5rpx;
 }
 .comment-container {
+  height: 100rpx;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -94,28 +97,33 @@
   background-color: #f4f4ec;
   padding: 10px;
   box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+
 }
 
 /* 评论输入框样式 */
 .comment-input {
+  margin-left: 30rpx;
+  margin-top: -20rpx;
   flex: 1;
-  height: 40px;
+  height: 60rpx;
   background-color:  #d3d3d3;
-  border-radius: 20px;
-  padding: 0 15px;
-  font-size: 16px;
+  border-radius: 20rpx;
+  padding: 0 15rpx;
+  font-size: 28rpx;
 }
 
 /* 点赞按钮样式 */
 .like-button {
-  width: 40px;
-  height: 40px;
+  margin-bottom: 55rpx;
+  padding-left: 200rpx;
+  width: 80rpx;
+  height: 80rpx;
   background: none;
   border: none;
 }
 
 /* 点赞图标样式 */
 .like-icon {
-  width: 30px;
-  height: 30px;
+  width: 80rpx;
+  height: 80rpx;
 }

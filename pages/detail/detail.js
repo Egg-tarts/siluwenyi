@@ -4,7 +4,7 @@ Page({
     dataItem: null,
     comment: '',
     like: 0,
-    likeIcon: '/pages/images/love_unfull.jpg'  // 初始图标路径
+    likeIcon: '/pages/images/love_unfull.png'  // 初始图标路径
   },
   onInputComment: function(e) {
     this.setData({
@@ -39,7 +39,7 @@ Page({
     const app = getApp();
     const token = app.globalData.token;
     const newLikeState = this.data.like === 0 ? 1 : 0;
-    const newLikeIcon = newLikeState === 1 ? '/pages/images/love_unfull.jpg' : '/pages/images/love_full.png';
+    const newLikeIcon = newLikeState === 1 ? '/pages/images/love_unfull.png' : '/pages/images/love_full.png';
     // 更新本地状态
     this.setData({
       like: newLikeState,
