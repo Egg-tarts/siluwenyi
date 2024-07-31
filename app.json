@@ -4,7 +4,9 @@
     "components/tabbar/tabbar",
     "components/search/search",
     "pages/detail/detail",
-    "pages/myrecommend/myrecommend"
+    "pages/myrecommend/myrecommend",
+    "pages/profile/profile",
+    "pages/register/register"
   ],
   "window": {
     "navigationBarTextStyle": "black",
