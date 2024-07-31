@@ -3,14 +3,14 @@
   <view class="top-section">
     <image class="top-icon" src="/pages/graph/右上.png" />
     <view class="avatar-section" bindtap="goToLoginPage">
-      <image class="avatar" src="/pages/graph/头像.jpg" />
+      <image class="avatar" src="{{userInfo.avatarUrl || '/pages/graph/头像.jpg!bg'}}" />
     </view>
     <view class="other-content">
       <view class="name-level">
-        <text class="user-name">我是科比</text>
-        <text class="user-level">Lv3</text>
+        <text class="user-name">{{userInfo.nickName || '点击登录'}}</text>
+        <text class="user-level">Lv-</text>
       </view>
-      <text class="user-points">积分:520</text>
+      <text class="user-points">积分:-</text>
     </view>
   </view>
 
@@ -50,22 +50,23 @@
       <text class="rectangle-text">我的发布</text>
     </view>
   </view>
+
   <view class="modal-container" wx:if="{{showModal}}">
     <view class="modal">
       <view class="modal-header">注册新用户</view>
       <form bindsubmit="handleSubmit">
         <view class="form-item">
-          <text>头像</text>
-          <button class="upload-button" bindtap="chooseAvatar">选择头像</button>
+          <image class="icon" src="/pages/graph/注册头像.jpg" />
+          <button class="upload-button" bindtap="chooseAvatar">从本地选择头像</button>
           <image class="avatar-preview" src="{{avatar}}" wx:if="{{avatar}}" />
         </view>
         <view class="form-item">
-          <text>昵称</text>
-          <input class="input" type="text" placeholder="请输入昵称" value="{{nickname}}" bindinput="handleNicknameInput" />
+          <image class="icon" src="/pages/graph/电话号码.jpg" /> <!-- 替换为你的图标路径 -->
+          <input class="input-line" type="number" placeholder="请输入电话号码" value="{{phone}}" bindinput="handlePhoneInput" />
         </view>
         <view class="form-item">
-          <text>电话号码</text>
-          <input class="input" type="number" placeholder="请输入电话号码" value="{{phone}}" bindinput="handlePhoneInput" />
+          <image class="icon" src="/pages/graph/用户名.jpg" /> <!-- 替换为你的图标路径 -->
+          <input class="input-line" type="text" placeholder="请输入昵称" value="{{nickname}}" bindinput="handleNicknameInput" />
         </view>
         <view class="form-footer">
           <button formType="submit" class="submit-button">提交</button>
