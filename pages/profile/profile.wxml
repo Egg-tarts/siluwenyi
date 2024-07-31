@@ -57,7 +57,7 @@
       <form bindsubmit="handleSubmit">
         <view class="form-item">
           <image class="icon" src="/pages/graph/注册头像.jpg" />
-          <button class="upload-button" bindtap="chooseAvatar">从本地选择头像</button>
+          <button class="upload-button" bindtap="chooseAvatar">选择头像</button>
           <image class="avatar-preview" src="{{avatar}}" wx:if="{{avatar}}" />
         </view>
         <view class="form-item">
@@ -76,4 +76,3 @@
     </view>
   </view>
 </view>
-<tabbar></tabbar>
