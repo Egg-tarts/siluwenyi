@@ -1,5 +1,4 @@
 /* 页面容器 */
-/* 页面容器 */
 .container {
   display: flex;
   flex-direction: column;
@@ -195,4 +194,3 @@
   border: none;
   width: 30%;
 }
-
