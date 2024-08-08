@@ -1,2 +1,19 @@
-<!--pages/register/register.wxml-->
-<text>pages/register/register.wxml</text>
+<view class="container">
+  <view class="form-section">
+    <view class="form-item">
+      <text class="form-label">头像</text>
+      <image class="avatar" src="{{avatarUrl || '/pages/graph/灰色微信头像.webp'}}" bindtap="chooseAvatar" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">昵称</text>
+      <input class="input-field" value="{{nickName}}" bindinput="onNickNameChange" placeholder="请输入昵称" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">电话号码</text>
+      <input class="input-field" value="{{phoneNumber}}" bindinput="onPhoneNumberChange" placeholder="请输入电话号码" />
+    </view>
+  </view>
+  <button class="submit-button" bindtap="submitForm">保存</button>
+</view>
+
+

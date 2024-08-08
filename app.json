@@ -6,7 +6,18 @@
     "pages/detail/detail",
     "pages/myrecommend/myrecommend",
     "pages/profile/profile",
-    "pages/register/register"
+    "pages/register/register",
+    "pages/cart/cart",
+    "pages/category/category",
+    "pages/history/history",
+    "pages/historyBrowse/historyBrowse",
+    "pages/home/home",
+    "pages/likes/likes",
+    "pages/logs/logs",
+    "pages/member/member",
+    "pages/orders/orders",
+    "pages/posts/posts"
+
   ],
   
   "window": {

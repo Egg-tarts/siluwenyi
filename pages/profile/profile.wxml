@@ -17,7 +17,7 @@
   <text class="chuyou-text">出游</text>
 
   <view class="rectangle-section">
-    <view class="rectangle">
+    <view class="rectangle" bindtap='navigateToMember'>
       <image class="rectangle-icon" src="/pages/graph/会员.png" />
       <text class="rectangle-text">会员</text>
     </view>
@@ -25,7 +25,7 @@
       <image class="rectangle-icon" src="/pages/graph/我的订单.png" />
       <text class="rectangle-text">我的订单</text>
     </view>
-    <view class="rectangle">
+    <view class="rectangle" bindtap='navigateToHistoryBrowse'>
       <image class="rectangle-icon" src="/pages/graph/历史行程.png" />
       <text class="rectangle-text">历史行程</text>
     </view>
@@ -37,15 +37,15 @@
 
   <text class="chuyou-text">社区</text>
   <view class="rectangle-section"> 
-    <view class="rectangle">
+    <view class="rectangle" bindtap="navigateToHistory">
       <image class="rectangle-icon" src="/pages/graph/浏览历史.png" />
       <text class="rectangle-text">浏览历史</text>
     </view>
-    <view class="rectangle">
+    <view class="rectangle" bindtap="navigateToLikes">
       <image class="rectangle-icon" src="/pages/graph/收藏.png" />
       <text class="rectangle-text">我的点赞</text>
     </view>
-    <view class="rectangle">
+    <view class="rectangle" bindtap="navigateToPosts">
       <image class="rectangle-icon" src="/pages/graph/发布.png" />
       <text class="rectangle-text">我的发布</text>
     </view>
