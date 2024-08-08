@@ -1,17 +1,24 @@
 Page({
-  onLoad() {
-      // 云开发初始化
-      wx.cloud.init({
-          env: 'houtai-1ghgpfr0872d2854', // 替换成你的云开发环境ID
-      })
+  data: {
+    userInfo: null
   },
-  // 退出登录
-  tuichu() {
-      wx.setStorageSync('user', null)
+
+  onLoad() {
+    wx.cloud.init({
+      env: 'houtai-1ghgpfr0872d2854',
+    });
+
+    this.loadUserInfo();
+  },
+
+  loadUserInfo() {
+    const userInfo = wx.getStorageSync('user');
+    if (userInfo) {
       this.setData({
           userInfo: null,
       })
-  },
+  }
+},
 
   // 获取昵称和电话号码接口
   getUserInfo(nickname, phone) {
@@ -38,7 +45,7 @@ Page({
               });
           }
       });
-  },
+    },
 
   // 获取照片文件接口
   uploadAvatarFile(filePath, callback) {

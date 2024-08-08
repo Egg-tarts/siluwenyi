@@ -30,7 +30,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 5px;
+  margin-right: 5px; /* 减少右边距，将头像和文字更贴近 */
 }
 
 .avatar {
@@ -44,7 +44,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 0;
+  margin-left: 0; /* 确保左边距为 0，让文字更靠近头像 */
 }
 
 .name-level {
@@ -74,7 +74,7 @@
   width: 100%;
   text-align: left;
   font-size: 25px;
-  margin: 5px 0;
+  margin: 5px 0; /* 减小上方空隙 */
   padding-left: 10px;
 }
 
@@ -95,10 +95,10 @@
   border: 1px solid #ddd;
   border-radius: 10px;
   box-shadow: 4px 5px 10px rgba(0, 0, 0, 0.1);
-  width: 90%;
+  width: 90%; /* 使框的宽度与页面宽度相当，留一点空隙 */
 }
 
-.rectangle-icon {
+.rectangle-icon{
   width: 30px;
   height: 30px;
   margin-right: 10px;
@@ -107,90 +107,4 @@
 .rectangle-text {
   font-size: 20px;
   margin-left: 10px;
-}
-
-.modal-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-}
-
-.modal {
-  background-color: white;
-  padding: 20px;
-  border-radius: 15px;
-  width: 80%;
-  max-width: 500px;
-}
-
-.modal-header {
-  font-size: 20px;
-  margin-bottom: 15px;
-  font-weight: bold;
-  margin-left: 100px;
-}
-
-.form-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.icon {
-  width: 35px;
-  height: 35px;
-  margin-right: 10px;
-}
-
-.input-line {
-  flex: 1;
-  border: none;
-  border-bottom: 2px solid #ddd;
-  padding: 10px 5px;
-  font-size: 16px;
-}
-
-.upload-button {
-  margin-top: 10px;
-  margin-left: 30px;
-}
-
-.avatar-preview {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin-top: 10px;
-}
-
-.form-footer {
-  display: flex;
-  justify-content: space-between;
-}
-
-.submit-button,
-.cancel-button {
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-.submit-button {
-  background-color: #6e6e58;
-  color: white;
-  border: none;
-  width: 30%;
-}
-
-.cancel-button {
-  background-color: #f4f4ec;
-  color: #333;
-  border: none;
-  width: 30%;
 }
