@@ -1,5 +1,15 @@
 <view class="container" >
-  <search></search>
+  <view class="search-container">
+    <!-- 搜索框 -->
+    <input class="search-input" bindinput="onInput"  bindconfirm="searchFunc"  />
+  <image class="search-icon" src="/pages/images/search.png" wx:if="{{showIcon}}" />
+    <!-- 显示信息的按钮 -->
+    <view class="info-button" bindtap="openCustomerServiceChat">
+  <cover-view class="button-cover">
+    <cover-image src="/pages/images/talk.png" class="button-image-1"></cover-image>
+  </cover-view>
+</view>
+  </view>
   <view class="button-group">
     <view 
       class="button {{currentTab === 'scenic' ? 'active' : ''}}" 

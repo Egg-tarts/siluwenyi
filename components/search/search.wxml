@@ -1,12 +1,2 @@
-<view class="search-container">
-    <!-- 搜索框 -->
-    <input class="search-input" bindinput="onInput"  />
-  <image class="search-icon" src="/pages/images/search.png" wx:if="{{showIcon}}" />
-    <!-- 显示信息的按钮 -->
-    <view class="info-button">
-  <cover-view class="button-cover">
-    <cover-image src="/pages/images/talk.png" class="button-image-1"></cover-image>
-  </cover-view>
-</view>
-
-  </view>
+<!--components/search/search.wxml-->
+<text>components/search/search.wxml</text>

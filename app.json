@@ -8,6 +8,7 @@
     "pages/profile/profile",
     "pages/register/register"
   ],
+  
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#ffffff"

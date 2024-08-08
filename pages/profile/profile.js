@@ -15,7 +15,7 @@ Page({
 
   // 获取昵称和电话号码接口
   getUserInfo(nickname, phone) {
-      console.log('用户信息:', { nickname, phone });
+
       wx.request({
           url: 'https://lzuer.mynatapp.cc/SRJC/register/',
           method: 'POST',
@@ -24,14 +24,14 @@ Page({
               phone: phone
           },
           success: res => {
-              console.log('用户信息提交成功', res);
+
               wx.showToast({
                   title: '信息提交成功',
                   icon: 'success'
               });
           },
           fail: err => {
-              console.log('用户信息提交失败', err);
+    
               wx.showToast({
                   title: '信息提交失败',
                   icon: 'error'
@@ -47,12 +47,12 @@ Page({
           filePath: filePath,
           name: 'avatar',
           success: res => {
-              console.log('头像上传成功', res);
+
               const data = JSON.parse(res.data);
               if (callback) callback(null, data.fileID);
           },
           fail: err => {
-              console.log('头像上传失败', err);
+
               if (callback) callback(err);
               wx.showToast({
                   title: '头像上传失败',
@@ -68,7 +68,7 @@ Page({
           wx.cloud.database().collection('user')
               .get()
               .then(res => {
-                  console.log("用户信息====", res);
+  
                   if (res.data.length) {
                       this.setData({
                           userInfo: res.data[0],
@@ -77,13 +77,13 @@ Page({
 
                       wx.setStorageSync('user', res.data[0]);
                   } else {
-                      console.log("还未注册====", res)
+
                       this.setData({
                           userInfo_tank: true
                       })
                   }
               }).catch(res => {
-                  console.log('请添加user表')
+
               })
       } else {
           this.setData({
@@ -94,7 +94,7 @@ Page({
 
   // 获取头像
   onChooseAvatar(e) {
-      console.log(e);
+
       this.setData({
           avatarUrl: e.detail.avatarUrl
       });
@@ -102,7 +102,7 @@ Page({
 
   // 获取用户昵称
   getNickName(e) {
-      console.log(e);
+
       this.setData({
           nickName: e.detail.value
       });
@@ -110,7 +110,7 @@ Page({
 
   // 获取用户电话号码
   getPhone(e) {
-      console.log(e);
+
       this.setData({
           phone: e.detail.value
       });

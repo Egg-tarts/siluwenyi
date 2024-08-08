@@ -1,14 +1,96 @@
+
 Page({
   data: {
     currentTab: 'scenic', // 默认激活的按钮
-    buttonlist:[],
+    buttonList_last:[],
+    buttonList:[],
     buttonListleft: [],
     buttonListright: [],
-    buttonlist_recommend:[],
+    buttonList_recommend_last:[],
+    buttonList_recommend:[],
     buttonListleft_recommend: [],
     buttonListright_recommend: [],
-    popular:'热门'
+    popular:'热门',
+    showIcon: true
   },
+  onInput: function(event) {
+    this.setData({
+      showIcon: event.detail.value.length === 0
+    });  
+  },
+  searchFunc: function(e) {
+    const that = this;
+    const searchValue = e.detail.value; // 获取输入框的值
+    const { currentTab } = that.data; // 获取当前Tab的值
+    if(searchValue.trim() !== ''&&currentTab==='scenic')
+    {
+      wx.request({
+        url: `https://lzuer.mynatapp.cc/SRJC/attractions/${searchValue}/search/`,
+        method: 'GET',
+        success(res) {
+          console.log(res)
+          let buttonList = res.data.map(item => {
+            return {
+              ...item,
+              images: [item.image1, item.image2, item.image3]
+            };
+          });
+          that.setData({
+              buttonList: buttonList // 假设返回数据中有一个list
+            }, () => {
+              console.log(that.data.buttonList)
+              that.splitButtonList();
+            });
+        },
+      });
+    }else if(searchValue.trim() === ''&&currentTab==='scenic')
+    {
+      that.setData({buttonList:that.data.buttonList_last},
+         () => {
+        that.splitButtonList();
+      });
+
+    }else if(searchValue.trim() !== ''&&currentTab==='city')
+    {
+      wx.request({
+        url: `https://lzuer.mynatapp.cc/SRJC/recommendations/${searchValue}/search/`,
+        method: 'GET',
+        success(res) {
+          console.log(res)
+          let buttonList_recommend = res.data.map(item => {
+            return {
+              ...item,
+              images: [item.images1, item.images2, item.images3]
+            };
+          });
+          that.setData({
+              buttonList_recommend: buttonList_recommend // 假设返回数据中有一个list
+            }, () => {
+              that.splitButtonList_recommend();
+            });
+        },
+      });
+    }else if(searchValue.trim() === ''&&currentTab==='city')
+    {
+      that.setData({buttonList_recommend:that.data.buttonList_recommend_last},
+         () => {
+        that.splitButtonList_recommend();
+      });
+
+    }
+   
+  },
+    openCustomerServiceChat: function() {
+      wx.openCustomerServiceChat({
+        extInfo: {},  // 可以留空，不需要自定义URL
+        success(res) {
+          console.log('客服对话启动成功', res);
+        },
+        fail(err) {
+          console.error('启动客服对话失败', err);
+        }
+      });
+    },
   navigateToMyRecommend: function() {
     wx.navigateTo({
       url: '/pages/myrecommend/myrecommend' // 替换为实际的路径
@@ -20,7 +102,7 @@ Page({
       method: 'GET',
       success: (res) => {
         // 处理buttonlist数据
-        let buttonlist = res.data.map(item => {
+        let buttonList = res.data.map(item => {
           return {
             ...item,
             images: [item.image1, item.image2, item.image3]
@@ -29,22 +111,21 @@ Page({
 
         // 设置buttonlist到页面的data中
         this.setData({
-          buttonlist: buttonlist
+          buttonList: buttonList,
+          buttonList_last:buttonList
         }, () => {
           this.splitButtonList();
-          console.log(this.data.buttonListleft);
-          console.log(this.data.buttonListright);
         });
       }
     });
   },
 
   splitButtonList: function() {
-    const { buttonlist } = this.data;
+    const { buttonList } = this.data;
     const buttonListleft = [];
     const buttonListright = [];
 
-    buttonlist.forEach((item, index) => {
+    buttonList.forEach((item, index) => {
       if (index % 2 === 0) {
         // 索引为偶数的元素放入buttonListleft
         buttonListleft.push(item);
@@ -62,17 +143,16 @@ Page({
   },
   handleButtonClickUrl(e) {
     const id = e.currentTarget.dataset.id;
-    console.log(id)
     wx.navigateTo({
       url: `/pages/detail/detail?id=${id}`
     });
   },
   splitButtonList_recommend: function() {
-    const { buttonlist_recommend } = this.data;
+    const { buttonList_recommend } = this.data;
     const buttonListleft_recommend = [];
     const buttonListright_recommend = [];
 
-    buttonlist_recommend.forEach((item, index) => {
+    buttonList_recommend.forEach((item, index) => {
       if (index % 2 === 0) {
         // 索引为偶数的元素放入buttonListleft
         buttonListleft_recommend.push(item);
@@ -99,7 +179,7 @@ Page({
             method: 'GET',
             success: (res) => {
               // 处理buttonlist数据
-              let buttonlist = res.data.map(item => {
+              let buttonList = res.data.map(item => {
                 return {
                   ...item,
                   images: [item.image1, item.image2, item.image3]
@@ -108,11 +188,11 @@ Page({
       
               // 设置buttonlist到页面的data中
               this.setData({
-                buttonlist: buttonlist
+                buttonList: buttonList,
+                buttonList_last:buttonList
               }, () => {
                 this.splitButtonList();
-                console.log(this.data.buttonListleft);
-                console.log(this.data.buttonListright);
+
               });
             }
           });
@@ -121,19 +201,17 @@ Page({
             url: 'https://lzuer.mynatapp.cc/SRJC/recommendations/', 
             method: 'GET',
             success: (res) => {
-              let buttonlist_recommend = res.data.map(item => {
+              let buttonList_recommend = res.data.map(item => {
                 return {
                   ...item,
                   images: [item.images1, item.images2, item.images3]
                 };
               });
-              console.log(1),
               this.setData({
-                buttonlist_recommend: buttonlist_recommend
-              },() => {console.log(res.data)
+                buttonList_recommend: buttonList_recommend,
+                buttonList_recommend_last:buttonList_recommend
+              },() => {
                 this.splitButtonList_recommend();
-                console.log(this.data.buttonListleft_recommend);
-                console.log(this.data.buttonListright_recommend);
               });
             }
           })

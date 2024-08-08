@@ -67,11 +67,10 @@ Component({
       // 更新全局对象中的 activeIndex
       const app = getApp();
       app.globalData.activeIndex = index;
-      console.log(1)
       wx.redirectTo({
         url: '/pages/profile/profile',
       });
-      console.log(1)
+
       this.setData({
         active: index,
       });
