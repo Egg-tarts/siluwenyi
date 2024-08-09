@@ -1,10 +1,127 @@
-/* pages/likes/likes.wxss */
-/* 页面容器 */
-.container {
+.page {
+  background-color: #f4f4ec;
+}
+
+/* 顶部用户信息及标题样式 */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background-color: #ffffff;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+  margin-bottom: 20rpx;
+}
+
+.user-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+.user-details {
+  margin-left: 20rpx;
+  flex: 1;
+}
+
+.user-name {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.page-title {
+  font-size: 30rpx;
+  color: #888;
+  text-align: center;
+}
+
+/* 加载动画样式 */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  padding: 20rpx;
+}
+
+/* 内容项样式 */
+.favorites-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10rpx;
+}
+
+.favorite-item {
+  position: relative;
+  width: 48%;
+  margin: 1%;
+  border-radius: 15rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  background-color: #ffffe0; /* 浅黄色背景 */
+  transition: transform 0.3s, box-shadow 0.3s;
+  padding: 20rpx;
+  box-sizing: border-box;
+  min-height: 350rpx; /* 增加模块的最小高度 */
+}
+
+.favorite-item.left {
+  transform: translateY(10rpx);
+}
+
+.favorite-item.right {
+  transform: translateY(-10rpx);
+}
+
+.favorite-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6rpx 18rpx rgba(0, 0, 0, 0.2);
+}
+
+.favorite-header {
+  font-size: 34rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.favorite-body {
+  font-size: 28rpx;
+  margin-bottom: 10rpx;
+}
+
+.favorite-footer {
+  position: absolute;
+  bottom: 10rpx;
+  right: 10rpx;
+}
+
+.favorite-likes {
+  font-size: 24rpx;
+  color: #888;
+}
+
+/* 探索更多内容按钮 */
+.explore-btn {
+  margin-top: 20rpx;
+  background-color: #d2b56d; /* 土黄色 */
+  color: #fff;
+  padding: 12rpx 24rpx;
+  border-radius: 20rpx;
+  font-size: 28rpx;
+}
+
+/* 无内容样式 */
+.no-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0;
-  margin: 0;
-  background-color: #f4f4ec;
+  justify-content: center;
+  height: 300rpx;
+  color: #888;
+  font-size: 28rpx;
+}
+
+/* 分页加载样式 */
+.load-more, .no-more {
+  text-align: center;
+  padding: 20rpx 0;
+  color: #888;
+  font-size: 28rpx;
 }
