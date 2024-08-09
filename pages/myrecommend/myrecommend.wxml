@@ -10,7 +10,7 @@
     <block wx:for="{{images}}" wx:key="index">
       <image src="{{item}}" class="uploaded-image"></image>
     </block>
-    <button bindtap="chooseImage" class="add-image-btn" >+</button>
+    <button bindtap="choosepicture" class="add-image-btn" >+</button>
   </view>
   
   <view class="title-input-section">

@@ -96,30 +96,54 @@ Page({
       url: '/pages/myrecommend/myrecommend' // 替换为实际的路径
     });
   },
-  onLoad: function() {
-    wx.request({
-      url: 'https://lzuer.mynatapp.cc/SRJC/attractions/', 
-      method: 'GET',
-      success: (res) => {
-        // 处理buttonlist数据
-        let buttonList = res.data.map(item => {
-          return {
-            ...item,
-            images: [item.image1, item.image2, item.image3]
-          };
-        });
+ 
+  onShow() {
+    const app = getApp();
+    console.log(app.globalData.currentTab)
+        if (app.globalData.currentTab === 'scenic') {
+          wx.request({
+            url: 'https://lzuer.mynatapp.cc/SRJC/attractions/', 
+            method: 'GET',
+            success: (res) => {
+              // 处理buttonlist数据
+              let buttonList = res.data.map(item => {
+                return {
+                  ...item,
+                  images: [item.image1, item.image2, item.image3]
+                };
+              });
+      
+              // 设置buttonlist到页面的data中
+              this.setData({
+                buttonList: buttonList,
+                buttonList_last:buttonList
+              }, () => {
+                this.splitButtonList();
 
-        // 设置buttonlist到页面的data中
-        this.setData({
-          buttonList: buttonList,
-          buttonList_last:buttonList
-        }, () => {
-          this.splitButtonList();
-        });
-      }
-    });
+              });
+            }
+          });
+        } else if (app.globalData.currentTab === 'city') {
+          wx.request({
+            url: 'https://lzuer.mynatapp.cc/SRJC/recommendations/', 
+            method: 'GET',
+            success: (res) => {
+              let buttonList_recommend = res.data.map(item => {
+                return {
+                  ...item,
+                  images: [item.images1, item.images2, item.images3]
+                };
+              });
+              this.setData({
+                buttonList_recommend: buttonList_recommend,
+                buttonList_recommend_last:buttonList_recommend
+              },() => {
+                this.splitButtonList_recommend();
+              });
+            }
+          })
+        }
   },
-
   splitButtonList: function() {
     const { buttonList } = this.data;
     const buttonListleft = [];
@@ -169,7 +193,10 @@ Page({
     });
   },
   handleButtonClick: function(e) {
+    const app = getApp();
     const type = e.currentTarget.dataset.type;
+    app.globalData.currentTab = type;
+    console.log(app.globalData.currentTab)
     this.setData({
       currentTab: type
         });

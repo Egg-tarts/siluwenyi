@@ -16,6 +16,7 @@ App({
   globalData: {
     userInfo: null,
     activeIndex: 1,
-    token:null
+    token:null,
+    currentTab: 'scenic'
   }
 })
