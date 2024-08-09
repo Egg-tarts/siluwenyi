@@ -4,10 +4,10 @@
     <input class="search-input" bindinput="onInput"  bindconfirm="searchFunc"  />
   <image class="search-icon" src="/pages/images/search.png" wx:if="{{showIcon}}" />
     <!-- 显示信息的按钮 -->
-    <view class="info-button" bindtap="openCustomerServiceChat">
-  <cover-view class="button-cover">
+    <view class="info-button">
+      <button open-type="contact" bindcontact="handleContact" type="primary"class="custom-button" style="width: 164rpx; height: 80rpx; display: block; box-sizing: border-box; left: -36rpx; top: -15rpx; position: absolute">
     <cover-image src="/pages/images/talk.png" class="button-image-1"></cover-image>
-  </cover-view>
+</button>
 </view>
   </view>
   <view class="button-group">

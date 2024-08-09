@@ -23,6 +23,7 @@
     "pages/detail1/detail1"
   ],
   "window": {
+
     "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#ffffff"
   },
