@@ -1,66 +1,86 @@
-// pages/posts/posts.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    user: {},
+    posts: [],
+    loading: false,
+    hasContent: false,
+    hasMore: true,
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-
+  onLoad() {
+    this.fetchUserInfo();
+    this.loadPosts();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
+  // 获取用户信息
+  fetchUserInfo() {
+    const token = wx.getStorageSync('token');
+    wx.request({
+      url: 'https://lzuer.mynatapp.cc/SRJC/getinfo/',
+      method: 'GET',
+      header: {
+        'Authorization': `Bearer ${token}`
+      },
+      success: res => {
+        this.setData({
+          user: res.data.user
+        });
+      }
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
+  // 加载发布内容
+  loadPosts() {
+    if (this.data.loading || !this.data.hasMore) return;
 
+    this.setData({ loading: true });
+    const token = wx.getStorageSync('token');
+    wx.request({
+      url: 'https://lzuer.mynatapp.cc/SRJC/mycomments/',
+      method: 'GET',
+      header: {
+        'Authorization': `Bearer ${token}`
+      },
+      success: res => {
+        const posts = res.data.posts;
+        this.setData({
+          posts: this.data.posts.concat(posts),
+          hasContent: posts.length > 0,
+          hasMore: res.data.hasMore,
+          loading: false
+        });
+      }
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
+  // 点击查看发布内容
+  viewPost(e) {
+    const postId = e.currentTarget.dataset.postId;
+    wx.navigateTo({
+      url: `/pages/post-detail/post-detail?id=${postId}`
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
+  // 创建新发布
+  createPost() {
+    wx.navigateTo({
+      url: '/pages/create-post/create-post'
+    });
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
+  // 下拉刷新
+  onRefresh() {
+    this.setData({
+      posts: [],
+      hasMore: true
+    });
+    this.loadPosts();
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+  // 加载更多
+  loadMore() {
+    if (this.data.hasMore) {
+      this.loadPosts();
+    }
   }
-})
+});
