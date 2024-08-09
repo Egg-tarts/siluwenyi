@@ -13,8 +13,8 @@ Component({
         },
         {
           text: 'g',
-          iconPath: "/pages/images/community.png",
-          selectedIconPath: "/pages/images/community.png",
+          iconPath:"/pages/images/community.png",
+          selectedIconPath:"/pages/images/community.png",
         },
         {
           text: 'p',
@@ -29,21 +29,19 @@ Component({
     }
   },
   lifetimes: {
-    attached: function() {
-      // 在组件加载时，从全局对象中读取 active 的值
+    attached() {
       const app = getApp();
-      this.setData({
-        active: app.globalData.activeIndex
+      this.setData({active: app.globalData.activeIndex}, () => {
+        console.log(this.data.active);
       });
     }
   },
   methods: {
     goToMain: function(e) {
       const index = parseInt(e.currentTarget.dataset.index, 10);
-      // 更新全局对象中的 activeIndex
       const app = getApp();
       app.globalData.activeIndex = index;
-      wx.redirectTo({
+      wx.navigateTo({
         url: '/pages/touring/touring',
       });
       this.setData({
@@ -52,10 +50,9 @@ Component({
     },
     goToTeams: function(e) {
       const index = parseInt(e.currentTarget.dataset.index, 10);
-      // 更新全局对象中的 activeIndex
       const app = getApp();
       app.globalData.activeIndex = index;
-      wx.redirectTo({
+      wx.navigateTo({
         url: '/pages/community/community',
       });
       this.setData({
@@ -64,16 +61,14 @@ Component({
     },
     goToPersonal: function(e) {
       const index = parseInt(e.currentTarget.dataset.index, 10);
-      // 更新全局对象中的 activeIndex
       const app = getApp();
       app.globalData.activeIndex = index;
-      wx.redirectTo({
+      wx.navigateTo({
         url: '/pages/profile/profile',
       });
-
       this.setData({
         active: index,
       });
     }
   }
-});
+})

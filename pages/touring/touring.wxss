@@ -8,6 +8,7 @@
   border-radius: 20px;
   flex-direction: row;
   margin-top:30rpx ;
+  box-shadow:0px 4px 6px 2px #5e5e5e;
 }
 .search-bar icon {
   margin-right: 10rpx;
@@ -46,6 +47,7 @@
   width: 600rpx;
   height: 400rpx;
   margin-right: 20rpx;
+  box-shadow:0px 4px 6px 2px #5e5e5e;
 }
 .textright1{
   display: flex;
@@ -78,4 +80,7 @@
 }
 .zhankong{
   height:300rpx;
+}
+.tupian{
+  border-radius: 30rpx;
 }

@@ -18,12 +18,10 @@
     "pages/member/member",
     "pages/orders/orders",
     "pages/posts/posts",
-    
     "pages/siluwenyi/siluwenyi",
-    "pages/tuolingyuxiang/tuolingyuxiang"
-
+    "pages/tuolingyuxiang/tuolingyuxiang",
+    "pages/detail1/detail1"
   ],
-  
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#ffffff"

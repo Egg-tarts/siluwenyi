@@ -1,0 +1,10 @@
+<view class="container">
+  <image class="product-image" src="https://lzuer.mynatapp.cc{{product.images1}}" />
+  <view class="product-info">
+    <text class="product-name">{{product.name}}</text>
+    <text class="product-price">{{product.money}}起</text>
+    <text class="product-description">{{product.text}}</text>
+  </view>
+  <button class="add-to-cart" bindtap="addToCart">加入购物车</button>
+
+</view>
