@@ -1,17 +1,9 @@
 Page({
   data: {
     avatarUrl: '/pages/graph/头像.jpg',
-    nickName: '',
-    phoneNumber: '',
-    Token: '' // 保存 Token
-  },
+    username: '',
+    phone: '',
 
-  onLoad() {
-    // 从本地存储中获取 Token
-    const Token = wx.getStorageSync('Token');
-    if (Token) {
-      this.setData({ Token });
-    }
   },
 
   chooseAvatar() {
@@ -21,88 +13,80 @@ Page({
         const tempFilePaths = res.tempFilePaths;
         this.setData({
           avatarUrl: tempFilePaths[0]
-        });
+        },
+        ()=>{console.log(this.data.avatarUrl)}
+        );
       }
     });
   },
 
   onNickNameChange(event) {
     this.setData({
-      nickName: event.detail.value
+      username: event.detail.value
     });
   },
 
   onPhoneNumberChange(event) {
     this.setData({
-      phoneNumber: event.detail.value
+      phone: event.detail.value
     });
   },
 
   submitForm() {
-    const { nickName, phoneNumber } = this.data;
-
-    if (!nickName || !phoneNumber) {
+    const { username, phone } = this.data;
+    if (!username || !phone) {
       wx.showToast({
         title: '请填写所有信息',
         icon: 'none'
       });
       return;
     }
-
-    // 1. 先上传昵称和电话号码以获取Token
     this.uploadUserInfo();
   },
+  
 
   uploadUserInfo() {
-    const { nickName, phoneNumber } = this.data;
-
+    const { username, phone } = this.data;
     wx.request({
       url: 'https://lzuer.mynatapp.cc/SRJC/register/', // 上传昵称和电话号码的接口
       method: 'POST',
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
       data: {
-        nickName: nickName,        // 昵称 (string)
-        phoneNumber: phoneNumber   // 电话号码 (string)
+        username: username, // 昵称 (string)
+        phone: phone // 电话号码 (string)
       },
-      success: (res) => {
-        if (res.statusCode === 200 && res.data.Token) {
-          const Token = res.data.Token;
-          this.setData({ Token });
-
-          // 保存Token到本地存储
-          wx.setStorageSync('Token', Token);
-
-          // 2. 获取Token后上传头像
-          this.uploadAvatar();
-        } else {
-          wx.showToast({
-            title: '保存信息失败',
-            icon: 'none'
-          });
-        }
-      },
-      fail: () => {
-        wx.showToast({
-          title: '保存信息失败',
-          icon: 'none'
+      success: () => {
+        console.log(1);
+        wx.request({
+          url: 'https://lzuer.mynatapp.cc/SRJC/login/', // 登录接口
+          method: 'POST',
+          data: {
+            phone: phone // 电话号码 (string)
+          },
+          success: (res) => {
+            console.log(res);
+            const app = getApp(); 
+            const Token = res.data.token;
+            app.globalData.token = Token;
+            console.log(app.globalData.token);
+            this.uploadAvatar();
+          }
         });
       }
     });
   },
-
+  
   uploadAvatar() {
-    const { avatarUrl, Token } = this.data;
-
+    const app = getApp(); 
+    const { avatarUrl } = this.data;
     if (avatarUrl) {
       wx.uploadFile({
         url: 'https://lzuer.mynatapp.cc/SRJC/avatar/', // 上传头像的接口
-        filePath: avatarUrl,  // 头像文件
-        name: 'avatar',       // 文件对应的 key
-        formData: {
-          Token: Token  // 使用从后端获取的 Token
+        method: 'POST',
+        header: {
+          Authorization: 'Token ' + app.globalData.token
         },
+        filePath: avatarUrl, // 传递文件路径
+        name: 'file', // 文件对应的 key 值
         success: (res) => {
           console.log('头像上传成功', res);
           if (res.statusCode === 200) {
@@ -118,15 +102,21 @@ Page({
             });
           }
         },
-        fail: () => {
+        fail: (err) => {
+          console.error('头像上传失败', err);
           wx.showToast({
             title: '头像上传失败',
             icon: 'none'
           });
         }
       });
+    } else {
+      wx.showToast({
+        title: '请先选择头像',
+        icon: 'none'
+      });
     }
-  }
+}
 });
 
 

@@ -1,13 +1,33 @@
 Page({
   data: {
-    userInfo: {
       avatarUrl: '', // 用户头像URL
-      nickName: ''   // 用户昵称
-    }
+      name: ''   // 用户昵称
+
   },
-  onLoad: function() {
-    // 初始化页面
+  onShow() {
+    console.log(1)
+    const app = getApp();
+    console.log(app.globalData.token)
+    wx.request({
+      url: 'https://lzuer.mynatapp.cc/SRJC/getinfo/', // 上传昵称和电话号码的接口
+      method: 'GET',
+      header:{
+        Authorization: 'Token ' + app.globalData.token
+      },
+      success: (res) => {
+        console.log(res)
+        // 假设 res.data 是返回的数据
+        this.setData({
+          avatarUrl: res.data.avatar,
+          name: res.data.username
+        });
+      },
+      fail: (error) => {
+        console.error("请求失败", error);
+      }
+    });
   },
+
   navigateToLikes: function() {
     this.checkLoginStatus('/pages/likes/likes');
   },
@@ -24,8 +44,8 @@ Page({
     this.checkLoginStatus('/pages/historyBrowse/historyBrowse')
   },
   checkLoginStatus: function(url) {
-    const userToken = wx.getStorageSync('userToken');
-    if (!userToken) {
+    const app = getApp();
+    if (!app.globalData.token) {
       wx.showModal({
         title: '请登录',
         content: '您需要登录后才能查看内容。',
@@ -46,6 +66,7 @@ Page({
       });
   }
 },
+  
   goToRegisterPage: function() {
     wx.navigateTo({
       url: '/pages/register/register'
