@@ -18,7 +18,7 @@
       bindtap="onProductTap"
     >
       <image class="product-image" src="https://lzuer.mynatapp.cc{{item.images1}}" />
-      <view class='aaa'>
+      <view class="aaa">
         <text class="product-name">{{item.name}}</text>
         <text class="product-price">{{item.money}}起</text>
       </view>
