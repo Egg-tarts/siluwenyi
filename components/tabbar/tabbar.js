@@ -1,6 +1,6 @@
 Component({
   data: {
-    active: 1 // 初始选中的按钮索引
+    active: 0 // 初始选中的按钮索引
   },
   properties: {
     list: {

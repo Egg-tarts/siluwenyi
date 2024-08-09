@@ -1,0 +1,40 @@
+<!--index.wxml-->
+   <!-- 其他圆角矩形 -->
+   <view class="container">
+   <view class="search-bar">
+    <icon type="search" size="20"></icon>
+    <input type="text" placeholder="搜索..." />
+  </view>
+  <scroll-view class="image-group" scroll-x="true">
+          <image src="/pages/images/dunhuang.jpg"></image>
+          <image src="/pages/images/dunhuang.jpg"></image>
+          <image src="/pages/images/dunhuang.jpg"></image>
+          <image src="/pages/images/dunhuang.jpg"></image>
+          <image src="/pages/images/dunhuang.jpg"></image>
+          <image src="/pages/images/dunhuang.jpg"></image>
+        </scroll-view>
+<view class="rectangle" bindtap="goToPage1">
+  <image src="/pages/images/tower.png" style="width: 200rpx; height: 120px;"></image>
+  <view class="textright1">
+  <text class="largetext">丝路问驿</text>
+  <text class="smalltext">定制一场说走就走的旅行</text>
+</view>
+  
+</view>
+<view class="rectangle" bindtap="goToPage2">
+  <image src="/pages/images/horse.png" style="width: 300rpx;  height: 120px;"></image>
+  <view class="textright">
+  <text class="largetext">风行万里</text>
+  <text class="smalltext1">查看我的行程</text>
+  </view>
+</view>
+<view class="rectangle" bindtap="goToPage3">
+  <image src="/pages/images/flower.png" style="width:300rpx;  height: 120px;"></image>
+  <view class="textright">
+  <text class="largetext">驼铃余响</text>
+  <text class="smalltext1">用文创寄托回忆</text>
+  </view>
+</view>
+<view class="zhankong"></view>
+</view>
+<tabbar></tabbar>

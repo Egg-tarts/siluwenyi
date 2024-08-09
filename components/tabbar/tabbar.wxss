@@ -1,7 +1,8 @@
 
 .bottom-buttons {
   height:230rpx;
-  position: fixed; 
+  position: fixed;
+
   bottom: 0;
   width: 100%; /* 或者根据实际需求设置宽度 */
   background-color: #f4f4ec; /* 设置背景色，避免透明造成不可见 */

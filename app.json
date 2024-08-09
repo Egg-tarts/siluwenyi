@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/touring/touring",
     "pages/community/community",
     "components/tabbar/tabbar",
     "components/search/search",
@@ -16,7 +17,10 @@
     "pages/logs/logs",
     "pages/member/member",
     "pages/orders/orders",
-    "pages/posts/posts"
+    "pages/posts/posts",
+    
+    "pages/siluwenyi/siluwenyi",
+    "pages/tuolingyuxiang/tuolingyuxiang"
 
   ],
   

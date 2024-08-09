@@ -1,0 +1,81 @@
+/**index.wxss**/
+
+.rectangle{
+  display: flex;
+  background-color: rgb(250,241,232);
+  color: rgb(132, 110, 99);
+  width: 700rpx;
+  border-radius: 20px;
+  flex-direction: row;
+  margin-top:30rpx ;
+}
+.search-bar icon {
+  margin-right: 10rpx;
+}
+.container {
+  padding: 0rpx;
+  display: flex;
+  overflow-y:scroll;
+  position: relative; /* 可选 */
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  padding: 10rpx;
+  background-color: rgb(229,215,180);
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+  width:90%;
+  margin-left: 7rpx;
+  height: 40rpx;
+  margin-top: 40rpx;
+  border-radius: 40px;
+}
+.dunhuang{
+  border-radius: 40rpx;
+  width: 700rpx;
+}
+.image-group {
+  display: flex;
+  white-space: nowrap;
+  margin-top: 30rpx;
+}
+.image-group image {
+  display: inline-block;
+  width: 600rpx;
+  height: 400rpx;
+  margin-right: 20rpx;
+}
+.textright1{
+  display: flex;
+  flex-direction: column;
+  margin-left: 100rpx ;
+}
+.textright{
+  display: flex;
+  flex-direction: column;
+  
+}
+.largetext{
+  font-size: 70rpx;
+  font-weight: 600;
+  justify-content: center;
+  margin-top: 15rpx;
+}
+.smalltext{
+  font-size: 35rpx;
+  font-weight: 600;
+  justify-content: center;
+  margin-top: 15rpx;
+}
+.smalltext1{
+  font-size: 35rpx;
+  font-weight: 600;
+  justify-content: center;
+  margin-top: 15rpx;
+  margin-left: 50rpx;
+}
+.zhankong{
+  height:300rpx;
+}
