@@ -1,19 +1,27 @@
-<!-- pages/index/index.wxml -->
 <view class="container">
   <view class="header">
     <view class="search-bar">
-    <icon type="search" size="20"></icon>
-    <input type="text" placeholder="搜索..." />
-  </view>
-    
+      <icon type="search" size="20"></icon>
+      <input 
+        type="text" 
+        placeholder="搜索..." 
+        bindinput="onSearchInput"
+      />
+    </view>
   </view>
   <view class="products">
-    <view class="product" wx:for="{{products}}" wx:key="id">
-      <image class="product-image" src="{{item.image}}" />
-      <view class = 'aaa'>
-      <text class="product-name">{{item.name}}</text>
-      <text class="product-price">{{item.price}}起</text>
-    </view>
+    <view 
+      class="product" 
+      wx:for="{{filteredProducts}}" 
+      wx:key="id" 
+      data-id="{{item.id}}"
+      bindtap="onProductTap"
+    >
+      <image class="product-image" src="https://lzuer.mynatapp.cc{{item.images1}}" />
+      <view class='aaa'>
+        <text class="product-name">{{item.name}}</text>
+        <text class="product-price">{{item.money}}起</text>
+      </view>
     </view>
   </view>
 </view>

@@ -1,18 +1,17 @@
-/* pages/siluwenyi/siluwenyi.wxss */
 .container {
   padding: 20px;
-  background-color: #fff;
 }
 
 .header {
-  font-size: 24px;
-  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
   margin-bottom: 20px;
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
 }
 
 .section {
@@ -20,59 +19,25 @@
 }
 
 .section-title {
-  font-size: 22px;
-  margin-bottom: 10px;
+  font-size: 16px;
   font-weight: bold;
-  background-color: rgb(255, 211, 146);
-  width: 1000rpx;
-}
-
-.transport {
-  display: flex;
-  flex-direction: column;
-}
-
-.short-distance, .long-distance {
   margin-bottom: 10px;
 }
 
-.checkbox-group, .radio-group, .city-selection {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.checkbox-group label, .radio-group label, .city-selection label {
-  width: 45%;
-  margin-right: 5%;
+.transport, .person {
   margin-bottom: 10px;
 }
 
-.person {
-  display: flex;
-  flex-direction: column;
-}
-
-.person-item {
-  display: flex;
-  align-items: center;
+.checkbox-group, .radio-group {
   margin-bottom: 10px;
-}
-
-.person-item text {
-  width: 50px;
-}
-
-.add-member {
-  align-self: flex-start;
 }
 
 .submit-button {
   width: 100%;
   padding: 10px;
-  background-color: #b89602;
-  color: #000;
+  background-color: #1aad19;
+  color: white;
   border: none;
-  text-align: center;
-  font-size: 18px;
   border-radius: 5px;
+  text-align: center;
 }

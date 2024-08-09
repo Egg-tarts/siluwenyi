@@ -1,17 +1,10 @@
 <!--index.wxml-->
    <!-- 其他圆角矩形 -->
    <view class="container">
-   <view class="search-bar">
-    <icon type="search" size="20"></icon>
-    <input type="text" placeholder="搜索..." />
-  </view>
+   
   <scroll-view class="image-group" scroll-x="true">
-          <image src="/pages/images/dunhuang.jpg"></image>
-          <image src="/pages/images/dunhuang.jpg"></image>
-          <image src="/pages/images/dunhuang.jpg"></image>
-          <image src="/pages/images/dunhuang.jpg"></image>
-          <image src="/pages/images/dunhuang.jpg"></image>
-          <image src="/pages/images/dunhuang.jpg"></image>
+          <image class = "tupian" src="/pages/images/dunhuang.jpg"></image>
+          <image class = "tupian" src="/pages/images/dunhuang.jpg"></image><image class = "tupian" src="/pages/images/dunhuang.jpg"></image><image class = "tupian" src="/pages/images/dunhuang.jpg"></image><image class = "tupian" src="/pages/images/dunhuang.jpg"></image><image class = "tupian" src="/pages/images/dunhuang.jpg"></image>
         </scroll-view>
 <view class="rectangle" bindtap="goToPage1">
   <image src="/pages/images/tower.png" style="width: 200rpx; height: 120px;"></image>
