@@ -1,3 +1,8 @@
 {
-  "usingComponents": {}
+  "pages": [
+    "pages/member/member"
+  ],
+  "window": {
+    "navigationBarTitleText": "用户页面"
+  }
 }
