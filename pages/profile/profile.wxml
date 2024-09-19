@@ -29,7 +29,7 @@
       <image class="rectangle-icon" src="/pages/graph/历史行程.png" />
       <text class="rectangle-text">历史行程</text>
     </view>
-    <view class="rectangle">
+    <view class="rectangle" bindtap='navigateToCategory'>
       <image class="rectangle-icon" src="/pages/graph/购物车.png" />
       <text class="rectangle-text">购物车</text>
     </view>
@@ -51,4 +51,3 @@
     </view>
   </view>
 </view>
-<tabbar></tabbar>
