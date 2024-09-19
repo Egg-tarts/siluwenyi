@@ -1,1 +1,150 @@
-/* pages/member/member.wxss */
+/* 全局容器 */
+.container {
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+/* 用户信息区域 */
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.username {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.level-progress {
+  display: flex;
+  align-items: center;
+}
+
+.level {
+  margin-right: 10px;
+  color: #999; /* 显示为灰色 */
+}
+
+.progress-bar {
+  width: 150px;
+  height: 10px;
+  background-color: #ddd;
+  position: relative;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.progress {
+  height: 100%;
+  background-color: yellow;
+  border-radius: 5px;
+}
+
+.progress-text {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 灰色实线 */
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+  margin: 20px 0;
+}
+
+/* 三个模块 */
+.module-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.module-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.module-icon {
+  width: 110px;
+  height: 110px;
+  margin-bottom: 5px;
+  margin-right: 7px;
+  margin-left: 7px;
+}
+
+
+
+/* 两个竖着的模块，占据整个页面宽度 */
+.vertical-module {
+  width: 112%; /* 占满全宽 */
+  margin-bottom: 20px;
+  background-color: #f4f4ec;
+
+}
+
+.vertical-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #f8d67f;
+}
+
+.vertical-text {
+  font-size: 17px;
+  color: #333;
+  font-weight: bold;
+  margin-left:10px;
+}
+
+.vertical-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+}
+
+/* 景点介绍 */
+.spot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.spot-item {
+  background-color: #f4f4ec;
+  text-align: center;
+  padding:10px;
+  border-radius: 10px;
+  height:120px;
+  width:140px;
+}
+
+.spot-image {
+  width: 100%;
+  height: 80px;
+  object-fit:contain;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.spot-text {
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(156, 113, 31);
+}
