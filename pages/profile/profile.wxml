@@ -21,7 +21,7 @@
       <image class="rectangle-icon" src="/pages/graph/会员.png" />
       <text class="rectangle-text">会员</text>
     </view>
-    <view class="rectangle">
+    <view class="rectangle" bindtap="navigateToOrders">
       <image class="rectangle-icon" src="/pages/graph/我的订单.png" />
       <text class="rectangle-text">我的订单</text>
     </view>
