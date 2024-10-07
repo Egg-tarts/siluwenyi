@@ -42,7 +42,9 @@ Page({
   navigateToCategory: function() {
     this.checkLoginStatus('/pages/category/category');
   },
-  
+  navigateToOrders: function() {
+    this.checkLoginStatus('/pages/orders/orders');
+  },
   navigateToMember: function() {
     // 无论是否登录，都允许进入会员页面
     wx.navigateTo({
@@ -84,4 +86,5 @@ Page({
     });
   }
 });
+
 
