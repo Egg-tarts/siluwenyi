@@ -1,0 +1,262 @@
+/* 全局容器 */
+.container {
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+/* 用户信息区域 */
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.username {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.level-progress {
+  display: flex;
+  align-items: center;
+}
+
+.level {
+  margin-right: 10px;
+  color: #999; /* 显示为灰色 */
+}
+
+.progress-bar {
+  width: 150px;
+  height: 10px;
+  background-color: #ddd;
+  position: relative;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.progress {
+  height: 100%;
+  background-color: yellow;
+  border-radius: 5px;
+}
+
+.progress-text {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 灰色实线 */
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+  margin: 20px 0;
+}
+
+/* 三个模块 */
+.module-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.module-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.module-icon {
+  width: 110px;
+  height: 110px;
+  margin-bottom: 5px;
+  margin-right: 7px;
+  margin-left: 7px;
+}
+
+
+
+/* 两个竖着的模块，占据整个页面宽度 */
+.vertical-module {
+  width: 112%; /* 占满全宽 */
+  margin-bottom: 20px;
+  background-color: #f4f4ec;
+
+}
+
+.vertical-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #f8d67f;
+}
+
+.vertical-text {
+  font-size: 17px;
+  color: #333;
+  font-weight: bold;
+  margin-left:10px;
+}
+
+.vertical-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+}
+
+/* 景点介绍 */
+.spot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.spot-item {
+  background-color: #f4f4ec;
+  text-align: center;
+  padding:10px;
+  border-radius: 10px;
+  height:120px;
+  width:140px;
+}
+
+.spot-image {
+  width: 100%;
+  height: 80px;
+  object-fit:contain;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.spot-text {
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(156, 113, 31);
+}
+/* 弹窗样式 */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  padding: 30px;  /* 增加内边距 */
+  width: 60%;     /* 增加宽度，适应屏幕 */
+  max-width: 500px; /* 最大宽度 */
+  background-color:#f4f4ec; /* 设置背景颜色 */
+  border-radius: 15px; /* 增加圆角 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 添加阴影 */
+}
+
+.info-item {
+  margin-bottom: 15px; /* 增加每一项之间的间距 */
+}
+.popup-avatar {
+  width: 90px; /* 头像宽度 */
+  height: 90px; /* 头像高度 */
+  border-radius: 50%; /* 圆形头像 */
+  margin-bottom: 15px; /* 头像与下方内容的间距 */
+  margin-left: 75px;
+}
+.close-icon {
+  width: 30px; /* 设置关闭图标宽度 */
+  height: 30px; /* 设置关闭图标高度 */
+  position: absolute; /* 绝对定位 */
+  top: 60px; /* 距离顶部 10px */
+  right: 52px; /* 距离右侧 10px */
+  cursor: pointer; /* 鼠标悬停时显示为指针 */
+}
+.info-text {
+  font-weight:bold; /* 微加粗字体 */
+  text-align: left; /* 左对齐 */
+}
+
+
+.popup-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.popup-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.popup-phone {
+  font-size: 14px;
+  color: #666;
+  margin: 10px 0;
+}
+
+/* 按钮样式 */
+/* 调整按钮之间的间距 */
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 15px; /* 增加按钮之间的间距 */
+}
+
+.edit-button, .save-button {
+  width: 45%;
+  padding: 10px 0;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+}
+
+.edit-button {
+  background-color: #f8d67f;  /* 暖色系 */
+  color: #333;
+}
+
+.save-button {
+  background-color: #f4b183;  /* 暖色系 */
+  color: #fff;
+}
+
+/* 修改input样式，默认禁用状态 */
+.info-input {
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+  color: #333;
+  padding: 5px 0;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+}
+
+/* 在编辑模式下，启用input的背景色 */
+.info-input:enabled {
+  background-color: #f4f4ec;
+  border-bottom: 1px solid #f4b183;
+}
+
+
+

@@ -1,0 +1,16 @@
+<view class="order-container">
+  <block wx:for="{{orderItems}}" wx:key="id">
+    <view class="order-item">
+      <view class="item-content">
+        <view class="item-photo">
+          <image src="{{item.photo}}" mode="aspectFill"></image>
+        </view>
+        <view class="item-info">
+          <text class="item-name">{{item.name}}</text>
+          <text class="item-quantity">数量：{{item.quantity}}</text>
+        </view>
+        <view class="item-price">¥{{item.price}}</view>
+      </view>
+    </view>
+  </block>
+</view>

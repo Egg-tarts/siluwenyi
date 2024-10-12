@@ -1,0 +1,45 @@
+.order-container {
+  padding: 10px;
+  background-color: #f4f4ec;
+  height: 100vh; /* 改为100vh以适应屏幕高度 */
+}
+
+.order-item {
+  margin-bottom: 10px;
+  background-color: rgb(255, 246, 168);
+  overflow: hidden;
+  display: flex;
+}
+
+.item-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.item-photo image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.item-info {
+  flex-grow: 1;
+}
+
+.item-name {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.item-quantity {
+  font-size: 14px;
+  color: #888;
+}
+
+.item-price {
+  font-size: 16px;
+  color: #f60;
+  margin-right: 10px;
+}

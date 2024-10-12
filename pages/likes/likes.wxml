@@ -1,0 +1,59 @@
+<view class="page">
+  <!-- 用户信息及标题 -->
+  <view class="header">
+    <image class="user-avatar" src="{{user.avatarUrl}}" />
+    <view class="user-details">
+      <text class="user-name">{{user.name}}</text>
+      <text class="page-title">我的喜欢</text>
+    </view>
+  </view>
+
+  <!-- 下拉刷新 -->
+  <scroll-view
+    class="content-container"
+    scroll-y
+    bindscrolltolower="loadMore"
+    enable-back-to-top
+    refresher-enabled
+    refresher-triggered="onRefresh"
+    refresher-background="#f4f4ec"
+    refresher-text="下拉刷新"
+  >
+    <!-- 加载动画 -->
+    <view wx:if="{{loading}}" class="loading-spinner">
+      <image src="/assets/loading.gif" />
+    </view>
+
+    <!-- 发布的内容列表 -->
+    <block wx:if="{{hasContent}}">
+      <view class="posts-container">
+        <block wx:for="{{posts}}" wx:key="index">
+          <view class="post-item {{index % 2 === 0 ? 'left' : 'right'}}" bindtap="viewPost" data-post-id="{{item.id}}">
+            <view class="post-header">{{item.title}}</view>
+            <view class="post-body">{{item.description}}</view>
+            <view class="post-footer">
+              <text class="post-clicks">点击量：{{item.clicks}}</text>
+              <button class="unlike-btn" bindtap="unlikePost" data-post-id="{{item.id}}">取消喜欢</button> <!-- 添加取消喜欢按钮 -->
+            </view>
+          </view>
+        </block>
+      </view>
+    </block>
+
+    <!-- 无内容时显示 -->
+    <block wx:else>
+      <view class="no-content">
+        <text>暂无喜欢内容，快去探索吧</text>
+        <button class="create-btn" bindtap="createPost">前往探索。。。</button>
+      </view>
+    </block>
+
+    <!-- 分页加载 -->
+    <view wx:if="{{hasMore}}" class="load-more" bindtap="loadMore">
+      <text>加载更多...</text>
+    </view>
+    <view wx:else class="no-more">
+      <text>没有更多内容了</text>
+    </view>
+  </scroll-view>
+</view>

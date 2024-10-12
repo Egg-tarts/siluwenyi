@@ -1,0 +1,146 @@
+.page {
+  background-color: #f4f4ec;
+}
+
+/* 顶部用户信息及标题样式 */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background-color: #ffffff;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+  margin-bottom: 20rpx;
+}
+
+.user-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+.user-details {
+  margin-left: 20rpx;
+  flex: 1;
+}
+
+.user-name {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.page-title {
+  font-size:medium;
+  color: rgb(231, 123, 21);
+  text-align: center;
+  margin-left: 105px;
+  font-weight: bold;
+}
+
+/* 加载动画样式 */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  padding: 20rpx;
+}
+
+/* 内容项样式 */
+.posts-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10rpx;
+}
+
+.post-item {
+  position: relative;
+  width: 48%;
+  margin: 1%;
+  border-radius: 15rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  background-color: #ffffe0; /* 浅黄色背景 */
+  transition: transform 0.3s, box-shadow 0.3s;
+  padding: 20rpx;
+  box-sizing: border-box;
+  min-height: 300rpx; /* 增加模块的最小高度 */
+}
+
+/* 新增推荐内容样式 */
+.recommendations-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10rpx;
+}
+
+.recommendation-item {
+  width: 90%;
+  margin-bottom: 20rpx;
+  border-radius: 15rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  background-color: #ffe5b4; /* 暖色背景 */
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.post-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.recommendation-body {
+  font-size: 28rpx;
+  margin-bottom: 10rpx;
+}
+
+.recommendation-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #888;
+}
+
+.recommendation-date {
+  font-size: 24rpx;
+}
+
+.like-icon {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+/* 分页加载样式 */
+.load-more, .no-more {
+  text-align: center;
+  padding: 20rpx 0;
+  color: #888;
+  font-size: 28rpx;
+}
+/* 无内容样式 */
+.no-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;           /* 水平居中 */
+  justify-content: flex-start;    /* 垂直从顶部开始排列 */
+  height: 100vh;                 /* 占满整个视口高度，确保内容靠顶部 */
+  padding-top: 150rpx;           /* 为顶部的 "暂无发布内容" 提供一些间距 */
+  color: #888;
+}
+
+.no-content-text {
+  font-size: 32rpx;              /* 调整字体大小 */
+  font-weight: bold;             /* 粗体显示 */
+  color: #666;
+}
+
+/* 创建新发布按钮 */
+.create-btn {
+  margin-top: 40rpx;             /* 与 "暂无发布内容" 保持一定距离 */
+  background-color: #d2b56d;     /* 土黄色 */
+  color: #fff;
+  padding: 12rpx 24rpx;
+  border-radius: 20rpx;
+  font-size: 28rpx;
+}
