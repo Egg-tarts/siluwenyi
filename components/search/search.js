@@ -5,9 +5,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    showIcon: true
   },
-
+  onInput: function(event) {
+    this.setData({
+      showIcon: event.detail.value.length === 0
+    });  },
   /**
    * 生命周期函数--监听页面加载
    */

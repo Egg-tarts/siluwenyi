@@ -30,7 +30,7 @@ Page({
   },
 
   selectItem: function(e) {
-    const selectedItems = e.detail.value;
+    const selectedItems = e.detail1.value;
     const updatedCartItems = this.data.cartItems.map(item => {
       item.selected = selectedItems.includes(String(item.id));
       return item;
@@ -45,7 +45,7 @@ Page({
   },
 
   selectAll: function(e) {
-    const selectAll = e.detail.value.length > 0;
+    const selectAll = e.detail1.value.length > 0;
     const updatedCartItems = this.data.cartItems.map(item => {
       item.selected = selectAll;
       return item;
@@ -93,7 +93,7 @@ Page({
 
   changeQuantity: function(e) {
     const itemId = e.currentTarget.dataset.id;
-    const quantity = parseInt(e.detail.value, 10);
+    const quantity = parseInt(e.detail1.value, 10);
     const updatedCartItems = this.data.cartItems.map(item => {
       if (item.id === itemId && quantity > 0) {
         item.quantity = quantity;

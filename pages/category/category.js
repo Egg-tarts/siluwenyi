@@ -87,7 +87,7 @@ Page({
 
   // 选择单个商品
   selectItem(e) {
-    const index = e.detail.value;
+    const index = e.detail1.value;
     const updatedItems = [...this.data.cartItems];
     updatedItems[index].checked = !updatedItems[index].checked;
     this.setData({

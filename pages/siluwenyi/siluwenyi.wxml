@@ -6,6 +6,8 @@
         <label><checkbox value="推荐" />根据过往行程进行推荐</label>
       </checkbox-group>
 
+     
+
       <view class="section">
         <text class="section-title">1. 整体预算</text>
         <radio-group name="accommodation">
@@ -22,15 +24,18 @@
           <label><checkbox value="人文景观" />人文景观</label>
           <label><checkbox value="自然景观" />自然景观</label>
           <label><checkbox value="特色美食" />特色美食</label>
+          
         </checkbox-group>
       </view>
 
       <view class="section">
         <text class="section-title">3. 出行人员</text>
-        <view class="person-item">
-          <text>成员年龄（用逗号隔开）</text>
-          <input name="age1" type="number" placeholder="年龄" />
-        </view>
+        
+          <view class="person-item">
+            <text>成员年龄（用逗号隔开）</text>
+            <input name="age1" type="number" placeholder="年龄" />
+          
+      </view>
       </view>
 
       <view class="section">
@@ -47,7 +52,10 @@
         </radio-group>
       </view>
 
-      <button class="submit-button" formType="submit">生成行程</button>
+      <button class="submit-button" formType="submit" >生成行程</button>
+
+        
     </form>
   </view>
+  
 </view>

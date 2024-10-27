@@ -4,7 +4,8 @@ Page({
     dataItem: null,
     comment: '',
     like: 0,
-    likeIcon: '/pages/images/love_unfull.png'  // 初始图标路径
+    likeIcon: '/pages/images/love_unfull.png',  // 初始图标路径
+    likelist: null
   },
   onInputComment: function(e) {
     const id = this.data.id
@@ -65,7 +66,7 @@ Page({
     const app = getApp();
     const token = app.globalData.token;
     const newLikeState = this.data.like === 0 ? 1 : 0;
-    const newLikeIcon = newLikeState === 1 ? '/pages/images/love_unfull.png' : '/pages/images/love_full.png';
+    const newLikeIcon = this.data.likeIcon === '/pages/images/love_unfull.png' ? '/pages/images/love_full.png' : '/pages/images/love_unfull.png';
     // 更新本地状态
     this.setData({
       like: newLikeState,
@@ -114,7 +115,9 @@ Page({
   onLoad: function(options) {
     const id = options.id;
     this.setData({ id });
-
+    const app = getApp();
+    const token = app.globalData.token;
+    const that = this
     // 尝试第一个路由的数据请求
     this.fetchData(`https://lzuer.mynatapp.cc/SRJC/recommendations/${id}/`)
       .then(data => {
@@ -166,6 +169,33 @@ Page({
       })
       .catch(error => {
     
+      });
+      wx.request({
+        url: `https://lzuer.mynatapp.cc/SRJC/mylikes/`, // 替换为你的点赞接口
+        method: 'GET',
+        header: {
+          Authorization: 'Token ' + token 
+        },
+        success: function(res) {
+          console.log(res)
+          console.log(res.data.recommendations)
+          console.log(id)
+          const numericId = Number(id); 
+          const isIdInList = res.data.recommendations.some(item => item.id === numericId);
+          if (isIdInList) {
+            that.setData({
+              like: 1,
+              likeIcon: '/pages/images/love_full.png',  // 初始图标路径
+            }, function() {
+              console.log(2);
+            });
+          } else {
+
+          }
+      },
+        fail: function(error) {
+        
+        }
       });
   },
 

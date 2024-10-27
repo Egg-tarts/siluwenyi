@@ -9,7 +9,7 @@ Page({
   goToPage2: function() {
    
     wx.navigateTo({
-      url: '/pages/fengxingwanli/fengxingwanli'
+      url: '/pages/comfirmRoute/comfirmRoute'
     });
   },
   goToPage3: function() {
