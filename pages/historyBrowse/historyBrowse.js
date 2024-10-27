@@ -1,7 +1,7 @@
 Page({
   data: {
     user: {},
-    favorites: [],
+    historyItems: [],  // 修改为 historyItems
     loading: false,
     hasContent: false,
     hasMore: true,
@@ -9,10 +9,9 @@ Page({
 
   onLoad() {
     this.fetchUserInfo();
-    this.loadFavorites();
+    this.fetchHistoryItems();  // 修改为 fetchHistoryItems
   },
 
-  // 获取用户信息
   fetchUserInfo() {
     const token = wx.getStorageSync('token');
     wx.request({
@@ -29,58 +28,57 @@ Page({
     });
   },
 
-  // 加载喜欢的内容
-  loadFavorites() {
+  fetchHistoryItems() {  // 修改为 fetchHistoryItems
     if (this.data.loading || !this.data.hasMore) return;
 
     this.setData({ loading: true });
     const token = wx.getStorageSync('token');
     wx.request({
-      url: 'https://lzuer.mynatapp.cc/SRJC/mylikes/',
+      url: 'https://lzuer.mynatapp.cc/SRJC/myairoutes/',
       method: 'GET',
       header: {
         'Authorization': `Bearer ${token}`
       },
       success: res => {
-        const favorites = res.data.favorites;
+        const historyItems = res.data.historyItems;  // 修改为 historyItems
         this.setData({
-          favorites: this.data.favorites.concat(favorites),
-          hasContent: favorites.length > 0,
+          historyItems: this.data.historyItems.concat(historyItems),
+          hasContent: historyItems.length > 0,
           hasMore: res.data.hasMore,
           loading: false
         });
+      },
+      fail: () => {
+        this.setData({ loading: false });
+        wx.showToast({ title: '加载失败', icon: 'none' });
       }
     });
   },
 
-  // 点击查看喜欢的内容
-  viewItem(e) {
+  viewHistoryItem(e) {  // 修改为 viewHistoryItem
     const itemId = e.currentTarget.dataset.itemId;
     wx.navigateTo({
       url: `/pages/item-detail/item-detail?id=${itemId}`
     });
   },
 
-  // 探索更多内容
   exploreMore() {
     wx.navigateTo({
       url: '/pages/explore/explore'
     });
   },
 
-  // 下拉刷新
   onRefresh() {
     this.setData({
-      favorites: [],
+      historyItems: [],  // 修改为 historyItems
       hasMore: true
     });
-    this.loadFavorites();
+    this.fetchHistoryItems();  // 修改为 fetchHistoryItems
   },
 
-  // 加载更多
   loadMore() {
     if (this.data.hasMore) {
-      this.loadFavorites();
+      this.fetchHistoryItems();  // 修改为 fetchHistoryItems
     }
   }
 });

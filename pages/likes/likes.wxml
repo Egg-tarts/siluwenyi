@@ -24,15 +24,16 @@
       <image src="/assets/loading.gif" />
     </view>
 
-    <!-- 喜欢的内容列表 -->
+    <!-- 发布的内容列表 -->
     <block wx:if="{{hasContent}}">
-      <view class="favorites-container">
-        <block wx:for="{{favorites}}" wx:key="index">
-          <view class="favorite-item {{index % 2 === 0 ? 'left' : 'right'}}" bindtap="viewItem" data-item-id="{{item.id}}">
-            <view class="favorite-header">{{item.title}}</view>
-            <view class="favorite-body">{{item.description}}</view>
-            <view class="favorite-footer">
-              <text class="favorite-likes">点赞量：{{item.likes}}</text>
+      <view class="posts-container">
+        <block wx:for="{{posts}}" wx:key="index">
+          <view class="post-item {{index % 2 === 0 ? 'left' : 'right'}}" bindtap="viewPost" data-post-id="{{item.id}}">
+            <view class="post-header">{{item.title}}</view>
+            <view class="post-body">{{item.description}}</view>
+            <view class="post-footer">
+              <text class="post-clicks">点击量：{{item.clicks}}</text>
+              <button class="unlike-btn" bindtap="unlikePost" data-post-id="{{item.id}}">取消喜欢</button> <!-- 添加取消喜欢按钮 -->
             </view>
           </view>
         </block>
@@ -42,8 +43,8 @@
     <!-- 无内容时显示 -->
     <block wx:else>
       <view class="no-content">
-        <text>暂无喜欢的内容</text>
-        <button class="explore-btn" bindtap="exploreMore">探索更多内容</button>
+        <text>暂无喜欢内容，快去探索吧</text>
+        <button class="create-btn" bindtap="createPost">前往探索。。。</button>
       </view>
     </block>
 

@@ -4,7 +4,7 @@
     <!-- 为头像图片绑定点击事件 -->
     <image class="avatar" src="{{avatarUrl}}||'/pages/graph/灰色微信头像.webp'" bindtap="handleAvatarClick"></image>
     <view class="user-details">
-      <text class="username">{{name}}||用户名</text>
+      <text class="username">{{name}}</text>
       <view class="level-progress">
         <text class="level">Lv.--</text> <!-- 等级暂不显示 -->
         <view class="progress-bar">
@@ -33,14 +33,14 @@
 
   <!-- 两个竖着的模块，宽度改为全宽 -->
   <view class="vertical-module">
-    <view class="vertical-item">
-      <text class="vertical-text">个人信息</text>
+    <view class="vertical-item" bindtap="showUserInfo">
+     <text class="vertical-text">个人信息</text>
       <image class="vertical-icon" src="http://sk0jj0v9g.hn-bkt.clouddn.com/04b659460d8f992fb2b65f10e382b379.jpg"></image>
     </view>
     <view class="vertical-item">
-      <text class="vertical-text">联系我们</text>
-      <image class="vertical-icon" src="http://sk0jj0v9g.hn-bkt.clouddn.com/04b659460d8f992fb2b65f10e382b379.jpg"></image>
-    </view>
+    <text class="vertical-text">联系我们</text>
+    <image class="vertical-icon" src="http://sk0jj0v9g.hn-bkt.clouddn.com/04b659460d8f992fb2b65f10e382b379.jpg"></image>
+  </view>
   </view>
 
   <!-- 四个景点介绍 -->
@@ -62,4 +62,47 @@
       <text class="spot-text">兰州-白塔山</text>
     </view>
   </view>
+  <!-- 弹窗 -->
+  <!-- 弹窗 -->
+  <!-- 弹窗 -->
+<!-- 弹窗 -->
+  <view class="popup" wx:if="{{showPopup}}">
+    <view class="popup-content">
+      <image class="close-icon" src="/pages/graph/OIP.jpg" bindtap="handlePopupClose" />
+      <image class="popup-avatar" src="/pages/graph/abc.jpg" />
+
+      <!-- 个人信息区域 -->
+      <view class="info-item">
+        <text class="info-text">所在地：</text>
+        <input class="info-input" value="{{location}}" disabled="{{!isEditing}}" bindinput="handleInputChange" data-field="location" />
+      </view>
+      <view class="info-item">
+        <text class="info-text">电话号码：</text>
+        <input class="info-input" value="{{phoneNumber}}" disabled="{{!isEditing}}" bindinput="handleInputChange" data-field="phoneNumber" />
+      </view>
+      <view class="info-item">
+        <text class="info-text">生日：</text>
+        <input class="info-input" value="{{birthday}}" disabled="{{!isEditing}}" bindinput="handleInputChange" data-field="birthday" />
+      </view>
+      <view class="info-item">
+        <text class="info-text">国家：</text>
+        <input class="info-input" value="{{country}}" disabled="{{!isEditing}}" bindinput="handleInputChange" data-field="country" />
+      </view>
+      <view class="info-item">
+        <text class="info-text">星座：</text>
+        <input class="info-input" value="{{zodiac}}" disabled="{{!isEditing}}" bindinput="handleInputChange" data-field="zodiac" />
+      </view>
+      <view class="info-item">
+        <text class="info-text">个性签名：</text>
+        <input class="info-input" value="{{signature}}" disabled="{{!isEditing}}" bindinput="handleInputChange" data-field="signature" />
+      </view>
+
+      <!-- 添加“编辑”和“保存”按钮，调整间距 -->
+      <view class="popup-buttons">
+        <button class="edit-button" bindtap="editUserInfo">编辑</button>
+        <button class="save-button" bindtap="saveUserInfo">保存</button>
+      </view>
+    </view>
+  </view>
+
 </view>

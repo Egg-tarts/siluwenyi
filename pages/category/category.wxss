@@ -1,7 +1,7 @@
 .cart-container {
   padding: 10px;
   background-color: #f4f4ec;
-  height:1200px;
+  height: 100vh; /* 改为100vh以适应屏幕高度 */
 }
 
 .cart-item {
@@ -60,7 +60,7 @@
   display: flex;
   align-items: center;
   width: 150px;
-  transform: translateX(150px); /* 使按钮初始时在视图外 */
+  transform: translateX(150px);
   transition: transform 0.3s ease;
 }
 
@@ -105,3 +105,4 @@
   background-color: #f60;
   color: white;
 }
+
