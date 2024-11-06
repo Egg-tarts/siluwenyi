@@ -1,0 +1,37 @@
+<!-- pages/index/index.wxml -->
+<view class="container">
+  <view class="header">
+    <text class="title">甘肃文旅优惠券</text>
+  </view>
+  <view class="search-bar">
+    <input class="search-input" type="text" placeholder="搜索优惠券"/>
+    <button class="search-button">搜索</button>
+  </view>
+  <view class="filters">
+    <view class="filter-item" data-type="all" bindtap="filterCoupons">全部</view>
+    <view class="filter-item" data-type="food" bindtap="filterCoupons">美食</view>
+    <view class="filter-item" data-type="sightseeing" bindtap="filterCoupons">观光</view>
+    <view class="filter-item" data-type="culture" bindtap="filterCoupons">文化</view>
+  </view>
+  <view class="coupon-list">
+    <block wx:for="{{coupons}}" wx:key="id">
+      <view class="coupon-item" bindtap="viewDetails" data-id="{{item.id}}">
+        <view class="coupon-header">
+          <image class="coupon-image" src="{{item.image}} "></image>
+          <view class="coupon-title">{{item.title}}</view>
+        </view>
+        <view class="coupon-body">
+          <view class="coupon-description">{{item.description}}</view>
+          <view class="coupon-conditions">{{item.conditions}}</view>
+          <view class="coupon-expiry">{{item.expiry}}</view>
+        </view>
+        <view class="coupon-footer">
+          <button class="coupon-button" data-id="{{item.id}}" bindtap="claimCoupon">立即领取</button>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="loading" wx:if="{{loading}}">
+    <loading/>
+  </view>
+</view>

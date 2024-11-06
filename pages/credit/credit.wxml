@@ -1,0 +1,26 @@
+<view class="container">
+  <!-- 左侧分类栏 -->
+  <view class="sidebar">
+    <block wx:for="{{categories}}" wx:key="name">
+      <view class="category-item {{currentCategory === item.name ? 'active' : ''}}" data-id="{{index}}" bindtap="onChangeCategory">
+        <text class="category-name">{{item.name}}</text>
+      </view>
+    </block>
+  </view>
+
+  <!-- 右侧商品展示区 -->
+  <view class="content">
+    <view class="category-title">
+      <text>积分兑换商品：{{currentCategory}}</text>
+    </view>
+    <view class="product-list">
+      <view class="product" wx:for="{{currentCategoryProducts}}" wx:key="id">
+        <image class="product-image" src="{{item.image}}" mode="aspectFill"/>
+        <view class="product-info">
+          <text class="product-name">{{item.name}}</text>
+          <text class="product-requirement">需要积分：{{item.needs}}分</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

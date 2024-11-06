@@ -1,0 +1,112 @@
+<view class="container">
+  <!-- 用户信息区域 -->
+  <view class="user-info">
+    <!-- 为头像图片绑定点击事件 -->
+    <image class="avatar" src="{{avatarUrl}}||'https://img.picui.cn/free/2024/11/05/6729e0f77528e.jpg'" bindtap="handleAvatarClick"></image>
+    <view class="user-details">
+      <text class="username">{{name}}</text>
+      <view class="level-progress">
+        <text class="level">Lv.--</text> <!-- 等级暂不显示 -->
+        <view class="progress-bar">
+          <view class="progress" style="width: 0%;"></view> <!-- 进度条宽度为 0% -->
+        </view>
+        <text class="progress-text">0/200</text> <!-- 显示进度为 0/200 -->
+      </view>
+    </view>
+  </view>
+
+  <!-- 灰色实线 -->
+  <view class="divider"></view>
+
+  <!-- 三个模块：我的积分，优惠券，购物车 -->
+  <view class="module-row">
+  <!-- 我的积分 -->
+    <view class="module-item" bindtap="goToCredit">
+      <image class="module-icon" src="https://img.picui.cn/free/2024/11/05/6729e0f76394d.jpg"></image>
+    </view>
+    <!-- 优惠券 -->
+    <view class="module-item" bindtap="goToCoupon">
+      <image class="module-icon" src="https://img.picui.cn/free/2024/11/05/6729e0f759441.png"></image>
+    </view>
+    <!-- 购物车 -->
+    <view class="module-item" bindtap="goToCart">
+      <image class="module-icon" src="https://img.picui.cn/free/2024/11/05/6729e0f725353.png"></image>
+    </view>
+  </view>
+
+
+  <!-- 两个竖着的模块，宽度改为全宽 -->
+  <view class="vertical-module">
+    <view class="vertical-item" bindtap="showUserInfo">
+     <text class="vertical-text">个人信息</text>
+      <image class="vertical-icon" src="https://img.picui.cn/free/2024/11/05/6729fcb70b2b0.jpg"></image>
+    </view>
+    <view class="vertical-item">
+    <text class="vertical-text">联系我们</text>
+    <image class="vertical-icon" src="https://img.picui.cn/free/2024/11/05/6729fcb70b2b0.jpg"></image>
+  </view>
+  </view>
+
+  <!-- 四个景点介绍 -->
+  <view class="spot-grid">
+    <view class="spot-item">
+      <image class="spot-image" src="https://img.picui.cn/free/2024/11/05/6729fc1e35a80.jpg"></image>
+      <text class="spot-text">敦煌-莫高窟</text>
+    </view>
+    <view class="spot-item">
+      <image class="spot-image" src="https://img.picui.cn/free/2024/11/05/6729fc4bb8d35.png"></image>
+      <text class="spot-text">天水-麦积山</text>
+    </view>
+    <view class="spot-item">
+      <image class="spot-image" src="https://img.picui.cn/free/2024/11/05/6729fc4c1ce59.jpg"></image>
+      <text class="spot-text">张掖-七彩丹霞</text>
+    </view>
+    <view class="spot-item">
+      <image class="spot-image" src="https://img.picui.cn/free/2024/11/05/6729fc4b0ca4b.jpg"></image>
+      <text class="spot-text">兰州-白塔山</text>
+    </view>
+  </view>
+  <!-- 弹窗 -->
+  <!-- 弹窗 -->
+  <!-- 弹窗 -->
+<!-- 弹窗 -->
+  <view class="popup" wx:if="{{showPopup}}">
+    <view class="popup-content">
+      <image class="close-icon" src="/pages/graph/OIP.jpg" bindtap="handlePopupClose" />
+      <image class="popup-avatar" src="/pages/graph/abc.jpg" />
+
+      <!-- 个人信息区域 -->
+      <view class="info-item">
+        <text class="info-text">所在地：</text>
+        <input class="info-input" value="{{location}}" disabled="{{!isEditing}}" bindinput="handleInputChange" data-field="location" />
+      </view>
+      <view class="info-item">
+        <text class="info-text">电话号码：</text>
+        <input class="info-input" value="{{phoneNumber}}" disabled="{{!isEditing}}" bindinput="handleInputChange" data-field="phoneNumber" />
+      </view>
+      <view class="info-item">
+        <text class="info-text">生日：</text>
+        <input class="info-input" value="{{birthday}}" disabled="{{!isEditing}}" bindinput="handleInputChange" data-field="birthday" />
+      </view>
+      <view class="info-item">
+        <text class="info-text">国家：</text>
+        <input class="info-input" value="{{country}}" disabled="{{!isEditing}}" bindinput="handleInputChange" data-field="country" />
+      </view>
+      <view class="info-item">
+        <text class="info-text">星座：</text>
+        <input class="info-input" value="{{zodiac}}" disabled="{{!isEditing}}" bindinput="handleInputChange" data-field="zodiac" />
+      </view>
+      <view class="info-item">
+        <text class="info-text">个性签名：</text>
+        <input class="info-input" value="{{signature}}" disabled="{{!isEditing}}" bindinput="handleInputChange" data-field="signature" />
+      </view>
+
+      <!-- 添加“编辑”和“保存”按钮，调整间距 -->
+      <view class="popup-buttons">
+        <button class="edit-button" bindtap="editUserInfo">编辑</button>
+        <button class="save-button" bindtap="saveUserInfo">保存</button>
+      </view>
+    </view>
+  </view>
+
+</view>
