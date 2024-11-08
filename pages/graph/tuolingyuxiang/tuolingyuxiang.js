@@ -20,7 +20,7 @@ Page({
     });
   },
   onSearchInput: function (event) {
-    const searchValue = event.detail.value.toLowerCase();
+    const searchValue = event.detail1.value.toLowerCase();
     const filtered = this.data.products.filter(product => 
       product.name.toLowerCase().includes(searchValue)
     );

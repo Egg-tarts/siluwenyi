@@ -22,20 +22,22 @@ Page({
   },
   addToCart: function () {
     const that = this;
-    const token = wx.getStorageSync('userToken'); // 获取存储的token
-    const productId = that.data.productId; // 从data中获取productId
+    const app = getApp(); // 获取全局 app 实例
+    const token = app.globalData.token; // 使用全局 token
+    const productId = that.data.productId; // 从 data 中获取 productId
 
     wx.request({
-      url: `https://lzuer.mynatapp.cc/SRJC/addtocart/${productId}/`, // 将productId拼接到URL中
+      url: `https://lzuer.mynatapp.cc/SRJC/addtocart/${productId}/`, // 将 productId 拼接到 URL 中
       method: 'POST',
       data: {
-        quantity: 1 // 默认添加1个商品
+        quantity: 1 // 默认添加 1 个商品
       },
       header: {
-        'Authorization': `Bearer ${token}`, // 将token添加到请求头中
-        'Content-Type': 'application/json' // 指定Content-Type为JSON格式
+        Authorization: 'Token 7384d57763633082c097d4c6a2ee3bac13412ca0', // 使用全局 token
+        'Content-Type': 'application/json' // 指定 Content-Type 为 JSON 格式
       },
       success(res) {
+        console.log(res)
         if (res.statusCode === 200) {
           wx.showToast({
             title: '商品加入购物车成功',
@@ -60,4 +62,4 @@ Page({
       }
     });
   }
-});
+})

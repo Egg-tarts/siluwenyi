@@ -8,10 +8,10 @@ Page({
 
   onLoad: function (options) {
     const that = this;
-
+    const app = getApp(); 
     // 接收传递过来的数据
-    const answer = decodeURIComponent("根据您的需求，我为您推荐甘肃省内的旅游目的地：兰州市。以下是一份详细的行程安排：\n\n## 第一天\n\n### 景点推荐\n\n1. **甘肃博物馆**（位于兰州市）\n - 经纬度：103.8293°E, 36.0574°N\n\n2. **兰州水车博物馆**（位于兰州市）\n - 经纬度：103.8333°E, 36.0611°N\n\n### 第二天\n\n### 景点推荐\n\n1. **白塔山公园**（位于兰州市）\n - 经纬度：103.8275°E, 36.0625°N\n\n2. **黄河风情园**（位于兰州市）\n - 经纬度：103.7350°E, 36.0600°N\n");
-
+    const answer = app.globalData.answer
+    console.log(answer); 
     // 正则表达式提取经纬度信息
     const regex = /经纬度：([\d.-]+)°[EW],\s*([\d.-]+)°[NS]/g;
     let match;

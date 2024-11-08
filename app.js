@@ -17,6 +17,7 @@ App({
     userInfo: null,
     activeIndex: 0,
     token:null,
-    currentTab: 'scenic'
+    currentTab: 'scenic',
+    answer: null
   }
 })

@@ -20,7 +20,9 @@
     "pages/posts/posts",
     "pages/siluwenyi/siluwenyi",
     "pages/tuolingyuxiang/tuolingyuxiang",
-    "pages/detail1/detail1"
+    "pages/detail1/detail1",
+    "pages/map/map",
+    "pages/fengxingwanli/fengxingwanli"
   ],
   "window": {
 
