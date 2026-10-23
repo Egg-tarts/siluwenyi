@@ -63,9 +63,10 @@
 
 .avatar {
   width: 60rpx;
-  height:60rpx;
+  height: 60rpx;
   border-radius: 50%;
   margin-right: 10rpx;
+  background: #e6d8c0;
 }
 
 .comment-content {
@@ -86,6 +87,34 @@
 
 .comment {
   margin-top: 5rpx;
+}
+
+.comment-actions {
+  display: flex;
+  align-items: center;
+  margin-top: 14rpx;
+}
+
+.comment-action {
+  margin-right: 24rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 8rpx;
+  color: #7a5734;
+  font-size: 22rpx;
+  background: rgba(232, 216, 192, 0.78);
+}
+
+.reply-list {
+  margin-top: 14rpx;
+  padding: 14rpx 16rpx;
+  border-radius: 8rpx;
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.reply-item {
+  color: #66513a;
+  font-size: 23rpx;
+  line-height: 1.45;
 }
 .comment-container {
   height: 100rpx;

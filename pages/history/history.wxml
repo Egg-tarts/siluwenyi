@@ -1,60 +1,51 @@
-<!--pages/history/history.wxml-->
 <view class="page">
-  <!-- 用户信息及标题 -->
   <view class="header">
-    <image class="user-avatar" src="{{user.avatarUrl}}" />
+    <image class="user-avatar" src="{{user.avatarUrl}}" mode="aspectFill" />
     <view class="user-details">
       <text class="user-name">{{user.name}}</text>
-      <text class="page-title">历史浏览</text>
+      <text class="page-title">我的评论</text>
     </view>
   </view>
 
-  <!-- 下拉刷新 -->
   <scroll-view
     class="content-container"
     scroll-y
     bindscrolltolower="loadMore"
     enable-back-to-top
     refresher-enabled
-    refresher-triggered="onRefresh"
+    refresher-triggered="{{loading}}"
+    bindrefresherrefresh="onRefresh"
     refresher-background="#f4f4ec"
     refresher-text="下拉刷新"
   >
-    <!-- 加载动画 -->
     <view wx:if="{{loading}}" class="loading-spinner">
-      <image src="/assets/loading.gif" />
+      <text>加载中...</text>
     </view>
 
-    <!-- 喜欢的内容列表 -->
     <block wx:if="{{hasContent}}">
-      <view class="favorites-container">
-        <block wx:for="{{favorites}}" wx:key="index">
-          <view class="favorite-item {{index % 2 === 0 ? 'left' : 'right'}}" bindtap="viewItem" data-item-id="{{item.id}}">
-            <view class="favorite-header">{{item.title}}</view>
-            <view class="favorite-body">{{item.description}}</view>
-            <view class="favorite-footer">
-              <text class="favorite-likes">点赞量：{{item.likes}}</text>
-            </view>
+      <view class="posts-container">
+        <block wx:for="{{posts}}" wx:key="from_id">
+          <view class="post-item" bindtap="viewPost" data-post-id="{{item.from_id}}">
+            <view class="post-header">{{item.from_title}}</view>
+            <view class="post-content">我的评论：{{item.comment_detail}}</view>
+            <view class="post-content">时间：{{item.time}}</view>
           </view>
         </block>
       </view>
     </block>
 
-    <!-- 无内容时显示 -->
     <block wx:else>
       <view class="no-content">
-        <text>暂无历史内容</text>
-        <button class="explore-btn" bindtap="exploreMore">查看更多历史内容</button>
+        <text>暂无评论内容，快去社区看看吧</text>
+        <button class="create-btn" bindtap="createPost">前往评论</button>
       </view>
     </block>
 
-    <!-- 分页加载 -->
     <view wx:if="{{hasMore}}" class="load-more" bindtap="loadMore">
       <text>加载更多...</text>
     </view>
     <view wx:else class="no-more">
-      <text>没有更多历史信息了</text>
+      <text>已经到底了哦</text>
     </view>
   </scroll-view>
 </view>
-

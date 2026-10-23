@@ -1,27 +1,78 @@
-<view class="container">
-  <view class="header">
-    <view class="search-bar">
-      <icon type="search" size="20"></icon>
-      <input 
-        type="text" 
-        placeholder="搜索..." 
-        bindinput="onSearchInput"
-      />
+<scroll-view class="page page-market" scroll-y="true" enhanced="true" show-scrollbar="false">
+  <view class="back-button" bindtap="goBack">‹ 返回</view>
+
+  <view class="hero">
+    <view class="eyebrow">Cultural Market</view>
+    <view class="title">驼铃余响</view>
+    <view class="subtitle">把旅途里的纹样、铃声、器物和气味带回日常，让一段丝路记忆继续发声。</view>
+    <view class="hero-tags">
+      <text>非遗灵感</text>
+      <text>城市限定</text>
+      <text>可带走的回忆</text>
     </view>
   </view>
-  <view class="products">
-    <view 
-      class="product" 
-      wx:for="{{filteredProducts}}" 
-      wx:key="id" 
-      data-id="{{item.id}}"
-      bindtap="onProductTap"
-    >
-      <image class="product-image" src="https://lzuer.mynatapp.cc{{item.images1}}" />
-      <view class='aaa'>
-        <text class="product-name">{{item.name}}</text>
-        <text class="product-price">{{item.money}}起</text>
+
+  <view class="search-card">
+    <icon type="search" size="18" color="#8a5b34"></icon>
+    <input type="text" placeholder="搜索文创、城市、纹样、气味" bindinput="onSearchInput" />
+  </view>
+
+  <view class="section-head">
+    <view>
+      <view class="section-title">主题系列</view>
+      <view class="section-subtitle">按文化意象挑选纪念物</view>
+    </view>
+  </view>
+  <scroll-view class="collection-strip" scroll-x="true" show-scrollbar="false">
+    <view class="collection-track">
+      <view wx:for="{{collections}}" wx:key="name" class="collection-card">
+        <view class="collection-count">{{item.count}}</view>
+        <view class="collection-name">{{item.name}}</view>
+        <view class="collection-desc">{{item.desc}}</view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="section-head">
+    <view>
+      <view class="section-title">精选文创</view>
+      <view class="section-subtitle">精选丝路文创，适合旅途收藏与伴手礼挑选</view>
+    </view>
+  </view>
+  <view wx:if="{{loadingProducts}}" class="market-state">
+    <view class="state-mark">...</view>
+    <view class="state-title">正在同步文创商品</view>
+  </view>
+  <view wx:if="{{showProductState}}" class="{{stateClass}}">
+    <view class="state-mark">空</view>
+    <view class="state-title">{{stateText}}</view>
+  </view>
+  <view wx:if="{{showProductList}}" class="products">
+    <view wx:for="{{filteredProducts}}" wx:key="id" class="product" data-id="{{item.id}}" bindtap="onProductTap">
+      <image wx:if="{{item.image}}" class="product-image" src="{{item.image}}" mode="aspectFill" />
+      <view wx:if="{{!item.image}}" class="product-image product-image--empty">暂无图片</view>
+      <view class="product-info">
+        <view class="product-meta">{{item.city}} · {{item.tag}}</view>
+        <view class="product-name">{{item.name}}</view>
+        <view class="product-desc">{{item.desc}}</view>
+        <view class="product-bottom">
+          <view class="product-price">¥{{item.money}}起</view>
+          <view class="buy-link">查看</view>
+        </view>
       </view>
     </view>
   </view>
-</view>
+
+  <view class="module">
+    <view class="section-title">匠人工坊</view>
+    <view class="workshop-list">
+      <view wx:for="{{workshops}}" wx:key="title" class="workshop-item">
+        <view class="workshop-mark">{{index + 1}}</view>
+        <view>
+          <view class="workshop-title">{{item.title}}</view>
+          <view class="workshop-desc">{{item.desc}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

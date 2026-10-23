@@ -1,217 +1,100 @@
+const contentStore = require('../../utils/contentStore')
+
 Page({
   data: {
-    id: null,
+    id: '1',
     dataItem: null,
     comment: '',
     like: 0,
-    likeIcon: '/pages/images/love_unfull.png',  // 初始图标路径
-    likelist: null
+    likeIcon: '/pages/images/love_unfull.png'
   },
-  onInputComment: function(e) {
-    const id = this.data.id
-    const app = getApp();
-    const token = app.globalData.token;
+
+  onLoad(options) {
+    const id = options.id || '1'
+    this.loadDetail(id)
+  },
+
+  loadDetail(id) {
+    const dataItem = contentStore.getDetail(id)
+    const liked = contentStore.isLiked(id)
+
+    this.setData({
+      id,
+      dataItem,
+      like: liked ? 1 : 0,
+      likeIcon: liked ? '/pages/images/love_full.png' : '/pages/images/love_unfull.png'
+    })
+  },
+
+  onCommentInput(e) {
     this.setData({
       comment: e.detail.value
-    });
-    // 如果有评论内容，则向后端发送评论信息
-    if (this.data.comment.trim()) {
-      if(app.globalData.currentTab==='city'){
-      wx.request({
-        url: `https://lzuer.mynatapp.cc/SRJC/recommendations/${id}/comments/`, // 替换为你的评论接口
-        method: 'POST',
-        header: {
-          Authorization: 'Token ' + token // 使用全局 token
-        },
-        data: {
-          comment: this.data.comment
-        },
-        success: ()  => {
-          console.log(this.data.comment)
-          this.setData({
-            comment: ''
-          },()=>{ wx.nextTick(() => {
-            console.log('Comment cleared:', this.data.comment);
-            this.onLoad({ id: this.data.id });
-          });
-        });
-      },
-        fail: function(error) {
-        }
-      });
+    })
+  },
+
+  onInputComment() {
+    const comment = this.data.comment.trim()
+
+    if (!comment) {
+      wx.showToast({
+        title: '先写一点内容吧',
+        icon: 'none'
+      })
+      return
     }
-  }else{
-    wx.request({
-      url: `https://lzuer.mynatapp.cc/SRJC/attractions/${id}/comments/`, // 替换为你的评论接口
-      method: 'POST',
-      header: {
-        Authorization: 'Token ' + token // 使用全局 token
-      },
-      data: {
-        comment: this.data.comment
-      },
-      success: function(res) {
-        this.onLoad({ id: this.data.id });
-      },
-      fail: function(error) {
-      }
-    });
-  }
 
-  },
-
-  // 点赞处理函数
-  onLike: function() {
-    const id = this.data.id
-    const app = getApp();
-    const token = app.globalData.token;
-    const newLikeState = this.data.like === 0 ? 1 : 0;
-    const newLikeIcon = this.data.likeIcon === '/pages/images/love_unfull.png' ? '/pages/images/love_full.png' : '/pages/images/love_unfull.png';
-    // 更新本地状态
+    const comments = contentStore.saveComment(this.data.id, comment)
     this.setData({
-      like: newLikeState,
-      likeIcon: newLikeIcon
-    });
-    if(app.globalData.currentTab==='city'){
-    // 向后端发送点赞请求
-    wx.request({
-      url: `https://lzuer.mynatapp.cc/SRJC/recommendations/${id}/like/`, // 替换为你的点赞接口
-      method: 'POST',
-      header: {
-        Authorization: 'Token ' + token 
-      },
-      success: function(res) {
-        console.log(1)
-        
-      },
-      fail: function(error) {
-      
-      }
-    });
-  }else{
-    wx.request({
-      url: `https://lzuer.mynatapp.cc/SRJC/attractions/${id}/like/`, // 替换为你的点赞接口
-      method: 'POST',
-      header: {
-        Authorization: 'Token ' + token 
-      },
-      success: function(res) {
+      comment: '',
+      'dataItem.comments': comments
+    })
 
-      },
-      fail: function(error) {
-      
-      }
-    });
-
-  }
+    wx.showToast({
+      title: '评论已发布',
+      icon: 'success'
+    })
   },
 
-  navigateBack: function () {
+  onLike() {
+    const liked = contentStore.toggleLike(this.data.id)
+
+    this.setData({
+      like: liked ? 1 : 0,
+      likeIcon: liked ? '/pages/images/love_full.png' : '/pages/images/love_unfull.png'
+    })
+    wx.showToast({
+      title: liked ? '已点赞' : '已取消',
+      icon: 'none'
+    })
+  },
+
+  onCommentLike(e) {
+    const commentId = e.currentTarget.dataset.id
+    const comments = contentStore.toggleCommentLike(this.data.id, commentId)
+    this.setData({
+      'dataItem.comments': comments
+    })
+  },
+
+  onCommentReply(e) {
+    const commentId = e.currentTarget.dataset.id
+    const comments = contentStore.addCommentReply(this.data.id, commentId)
+    this.setData({
+      'dataItem.comments': comments
+    })
+    wx.showToast({
+      title: '已回复',
+      icon: 'success'
+    })
+  },
+
+  navigateBack() {
+    if (getCurrentPages().length > 1) {
+      wx.navigateBack()
+      return
+    }
     wx.navigateTo({
       url: '/pages/community/community'
-    });
-  },
-
-  onLoad: function(options) {
-    const id = options.id;
-    this.setData({ id });
-    const app = getApp();
-    const token = app.globalData.token;
-    const that = this
-    // 尝试第一个路由的数据请求
-    this.fetchData(`https://lzuer.mynatapp.cc/SRJC/recommendations/${id}/`)
-      .then(data => {
-
-        // 如果找到数据，则设置 dataItem
-        if (data && Object.keys(data).length > 0) {
-          const dataItem = data
-
-          if (dataItem) {
-
-            this.setData({ 
-              dataItem: {
-                ...dataItem,
-                images: [dataItem.images1, dataItem.images2, dataItem.images3],
-                text_big: dataItem.head_txt
-              } 
-            });
-
-            return; // 提前返回，避免继续执行
-          }
-        }
-        // 如果没有找到，继续请求第二个路由的数据
-        return this.fetchData(`https://lzuer.mynatapp.cc/SRJC/attractions/${id}/`);
-      })
-      .catch(error => {
-
-        // 如果第一个路由请求失败，继续请求第二个路由的数据
-        return this.fetchData(`https://lzuer.mynatapp.cc/SRJC/attractions/${id}/`);
-      })
-      .then(data => {
-
-        // 如果找到数据，则设置 dataItem
-        if (data && Object.keys(data).length > 0) {
-          const dataItem = data
-
-          if (dataItem) {
-            this.setData({ 
-              dataItem: {
-                ...dataItem,
-                images: [dataItem.image1, dataItem.image2, dataItem.image3, dataItem.image4, dataItem.image5]
-              }
-            }, () => {
-              
-            });
-          }
-        } else {
-         ;
-        }
-      })
-      .catch(error => {
-    
-      });
-      wx.request({
-        url: `https://lzuer.mynatapp.cc/SRJC/mylikes/`, // 替换为你的点赞接口
-        method: 'GET',
-        header: {
-          Authorization: 'Token ' + token 
-        },
-        success: function(res) {
-          console.log(res)
-          console.log(res.data.recommendations)
-          console.log(id)
-          const numericId = Number(id); 
-          const isIdInList = res.data.recommendations.some(item => item.id === numericId);
-          if (isIdInList) {
-            that.setData({
-              like: 1,
-              likeIcon: '/pages/images/love_full.png',  // 初始图标路径
-            }, function() {
-              console.log(2);
-            });
-          } else {
-
-          }
-      },
-        fail: function(error) {
-        
-        }
-      });
-  },
-
-  fetchData: function(url) {
-    return new Promise((resolve, reject) => {
-      wx.request({
-        url: url,
-        method: 'GET',
-        success: (res) => {
-      
-          resolve(res.data);
-        },
-        fail: (error) => {
-          reject(error);
-        }
-      });
-    });
+    })
   }
-});
+})

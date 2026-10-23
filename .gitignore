@@ -1,0 +1,22 @@
+# secrets and local env
+.env
+.env.*
+!**/.env.example
+server/.env
+server/cloudrun-env*.json
+
+# WeChat DevTools local override
+project.private.config.json
+
+# dependencies and build output
+node_modules/
+miniprogram_npm/
+
+# logs and OS junk
+*.log
+npm-debug.log
+.DS_Store
+Thumbs.db
+
+# deploy bundles
+*.zip

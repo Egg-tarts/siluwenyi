@@ -1,33 +1,235 @@
-<!--index.wxml-->
-   <!-- 其他圆角矩形 -->
-   <view class="container">
-   
-  <scroll-view class="image-group" scroll-x="true">
-          <image class = "tupian" src="/pages/images/dunhuang.jpg"></image>
-          <image class = "tupian" src="/pages/images/dunhuang.jpg"></image><image class = "tupian" src="/pages/images/dunhuang.jpg"></image><image class = "tupian" src="/pages/images/dunhuang.jpg"></image><image class = "tupian" src="/pages/images/dunhuang.jpg"></image><image class = "tupian" src="/pages/images/dunhuang.jpg"></image>
-        </scroll-view>
-<view class="rectangle" bindtap="goToPage1">
-  <image src="/pages/images/tower.png" style="width: 200rpx; height: 120px;"></image>
-  <view class="textright1">
-  <text class="largetext">丝路问驿</text>
-  <text class="smalltext">定制一场说走就走的旅行</text>
-</view>
-  
-</view>
-<view class="rectangle" bindtap="goToPage2">
-  <image src="/pages/images/horse.png" style="width: 300rpx;  height: 120px;"></image>
-  <view class="textright">
-  <text class="largetext">风行万里</text>
-  <text class="smalltext1">查看我的行程</text>
+<view class="tour-page">
+  <swiper
+    class="page-swiper"
+    vertical="true"
+    current="{{pageIndex}}"
+    duration="420"
+    easing-function="easeOutCubic"
+    bindchange="onPageChange"
+  >
+    <swiper-item class="page-slide">
+      <view id="section-home" class="tour-screen snap-section">
+    <image class="tour-bg" src="https://free.picui.cn/free/2026/06/20/6a357410cb402.png" mode="aspectFill" />
+    <view class="tour-shade"></view>
+    <view class="tour-vignette"></view>
+
+    <view class="tour-header">
+      <view class="header-mark"></view>
+      <view class="header-text">
+        <view class="header-title">丝路问驿</view>
+        <view class="header-subtitle">Silk Road Chronicle</view>
+      </view>
+    </view>
+
+    <view class="translate-float" bindtap="openTravelTranslate">
+      <view class="translate-icon">译</view>
+      <view>
+        <view class="translate-title">随行翻译</view>
+        <view class="translate-desc">方言 · 英语 · 俄语 · 民俗提醒</view>
+      </view>
+    </view>
+
+    <view class="menu-zone">
+      <swiper
+        class="menu-swiper"
+        current="{{activeIndex}}"
+        previous-margin="185rpx"
+        next-margin="185rpx"
+        duration="320"
+        circular="false"
+        bindchange="onMenuChange"
+      >
+        <swiper-item
+          wx:for="{{tourMenus}}"
+          wx:key="id"
+          wx:for-index="index"
+          class="menu-slide"
+        >
+          <view
+            class="{{item.itemClass}}"
+            data-id="{{item.id}}"
+            data-index="{{index}}"
+            bindtap="onMenuTap"
+          >
+            <image class="menu-icon" src="{{item.image}}" mode="aspectFit" />
+          </view>
+        </swiper-item>
+      </swiper>
+
+      <view class="menu-dots">
+        <view
+          wx:for="{{tourMenus}}"
+          wx:key="id"
+          wx:for-index="index"
+          class="{{item.dotClass}}"
+        ></view>
+      </view>
+
+      <view class="more-cue">
+        <view class="cue-arrow">⌃</view>
+        <view class="cue-text">向上滑动查看更多</view>
+      </view>
+    </view>
+      </view>
+    </swiper-item>
+
+    <swiper-item class="page-slide">
+      <view id="section-map" class="map-screen snap-section">
+    <image
+      class="map-bg"
+      src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEVyehqNlsgipSa52k6HepBNwZYlANaggAC6R8AAufTsVVLBMH1dxgTdjwE.png"
+      mode="aspectFill"
+    />
+    <view class="map-shade"></view>
+    <view class="museum-map">
+      <view class="map-title-row">
+        <view class="map-ornament">♜</view>
+        <view class="map-title">文博地图</view>
+        <view class="map-ornament">♜</view>
+      </view>
+
+      <swiper
+        class="map-center-visual"
+        current="{{cityIndex}}"
+        duration="320"
+        circular="true"
+        easing-function="easeOutCubic"
+        bindchange="onCityChange"
+      >
+        <swiper-item
+          wx:for="{{gansuCities}}"
+          wx:key="name"
+          class="map-center-slide"
+        >
+          <image
+            class="map-center-image"
+            src="{{item.image}}"
+            mode="aspectFit"
+            data-index="{{index}}"
+            bindtap="openCityIntro"
+          />
+        </swiper-item>
+      </swiper>
+      <view class="map-center-caption" bindtap="openCityIntro">
+        <view class="map-center-name">{{activeCity.name}}</view>
+        <view class="map-center-desc">{{activeCity.desc}}</view>
+      </view>
+
+      <swiper
+        class="city-tabs"
+        current="{{cityIndex}}"
+        previous-margin="258rpx"
+        next-margin="258rpx"
+        duration="320"
+        circular="true"
+        easing-function="easeOutCubic"
+        bindchange="onCityChange"
+      >
+        <swiper-item
+          wx:for="{{gansuCities}}"
+          wx:key="name"
+          wx:for-index="index"
+          class="city-tab-slide"
+        >
+          <view
+            class="city-tab {{index === cityIndex ? 'city-tab--active' : ''}}"
+            data-index="{{index}}"
+            bindtap="openCityIntro"
+          >
+            {{item.name}}
+          </view>
+        </swiper-item>
+      </swiper>
+    </view>
+    <view class="map-cue">
+      <view class="cue-arrow">⌃</view>
+      <view class="cue-text">向上滑动查看更多</view>
+    </view>
+      </view>
+    </swiper-item>
+
+    <swiper-item class="page-slide">
+      <view class="map-after-screen snap-section">
+        <image
+          class="map-after-bg"
+          src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEV0NlqN4A4G1eWATBtm_VQnspsGz-zWwACiyMAAufTuVVpp0hsww_Q-zwE.png"
+          mode="aspectFill"
+        />
+        <view class="ai-butler" bindtap="openButler">
+          <view class="butler-bubble">{{butlerSaying}}</view>
+          <view class="butler-avatar-wrap">
+            <image class="butler-avatar" src="{{butlerImage}}" mode="aspectFit" />
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+
+  <view wx:if="{{showButlerDialog}}" class="butler-dialog-mask" catchtouchmove="noop">
+    <view class="butler-dialog">
+      <view class="dialog-head">
+        <view class="dialog-title-wrap">
+          <view class="dialog-title">丝路小管家</view>
+          <view class="dialog-subtitle">路线、导览、提醒都可以问我</view>
+        </view>
+        <view class="dialog-close" bindtap="closeButler">×</view>
+      </view>
+
+      <view class="ai-status-panel">
+        <view class="ai-live-status">
+          <view class="ai-live-pulse"></view>
+          <view class="ai-live-text">{{butlerStatusText}}</view>
+        </view>
+        <view wx:for="{{butlerCapabilities}}" wx:key="label" class="ai-status-item">
+          <view class="ai-status-dot"></view>
+          <view>
+            <view class="ai-status-label">{{item.label}}</view>
+            <view class="ai-status-value">{{item.value}}</view>
+          </view>
+        </view>
+      </view>
+
+      <scroll-view
+        class="chat-list"
+        scroll-y="true"
+        scroll-with-animation="true"
+        scroll-into-view="{{butlerScrollIntoView}}"
+      >
+        <view
+          wx:for="{{butlerMessages}}"
+          wx:key="id"
+          id="{{item.id}}"
+          class="{{item.roleClass}}"
+        >
+          <view class="{{item.bubbleClass}}">{{item.text}}</view>
+        </view>
+      </scroll-view>
+
+      <view class="quick-grid">
+        <view
+          wx:for="{{butlerQuickQuestions}}"
+          wx:key="text"
+          class="quick-question"
+          data-question="{{item.text}}"
+          bindtap="askQuickQuestion"
+        >
+          {{item.text}}
+        </view>
+      </view>
+
+      <view class="chat-input-row">
+        <input
+          class="chat-input"
+          placeholder="问问丝路小管家"
+          value="{{butlerInput}}"
+          bindinput="onButlerInput"
+          confirm-type="send"
+          bindconfirm="submitButlerInput"
+        />
+        <view class="send-button" bindtap="submitButlerInput">发送</view>
+      </view>
+    </view>
   </view>
+
+  <tabbar></tabbar>
 </view>
-<view class="rectangle" bindtap="goToPage3">
-  <image src="/pages/images/flower.png" style="width:300rpx;  height: 120px;"></image>
-  <view class="textright">
-  <text class="largetext">驼铃余响</text>
-  <text class="smalltext1">用文创寄托回忆</text>
-  </view>
-</view>
-<view class="zhankong"></view>
-</view>
-<tabbar></tabbar>

@@ -1,61 +1,236 @@
-<view class="container">
-  <view class="header">行程定制表单</view>
-  <view class="form">
-    <form bindsubmit="formSubmit" report-submit="true">
-      <checkbox-group name="recommendation">
-        <label><checkbox value="推荐" />根据过往行程进行推荐</label>
-      </checkbox-group>
+<scroll-view class="page page-siluwenyi" scroll-y="true" enhanced="true" show-scrollbar="false">
+  <view class="back-button" bindtap="goBack">‹ 返回</view>
 
-     
-
-      <view class="section">
-        <text class="section-title">1. 整体预算</text>
-        <radio-group name="accommodation">
-          <label><radio value="低" />低</label>
-          <label><radio value="中" />中</label>
-          <label><radio value="高" />高</label>
-        </radio-group>
-      </view>
-
-      <view class="section">
-        <text class="section-title">2. 景点偏好</text>
-        <checkbox-group name="scenery">
-          <label><checkbox value="博物馆/艺术馆" />博物馆/艺术馆</label>
-          <label><checkbox value="人文景观" />人文景观</label>
-          <label><checkbox value="自然景观" />自然景观</label>
-          <label><checkbox value="特色美食" />特色美食</label>
-          
-        </checkbox-group>
-      </view>
-
-      <view class="section">
-        <text class="section-title">3. 出行人员</text>
-        
-          <view class="person-item">
-            <text>成员年龄（用逗号隔开）</text>
-            <input name="age1" type="number" placeholder="年龄" />
-          
-      </view>
-      </view>
-
-      <view class="section">
-        <text class="section-title">4. 出行时间</text>
-        <radio-group name="cities">
-          <label><radio value="一天" />一天</label>
-          <label><radio value="两天" />两天</label>
-          <label><radio value="三天" />三天</label>
-          <label><radio value="四天" />四天</label>
-          <label><radio value="五天" />五天</label>
-          <label><radio value="六天" />六天</label>
-          <label><radio value="七天" />七天</label>
-          <label><radio value="八天" />八天</label>
-        </radio-group>
-      </view>
-
-      <button class="submit-button" formType="submit" >生成行程</button>
-
-        
-    </form>
+  <view class="hero hero-silk">
+    <view class="hero-copy">
+      <view class="eyebrow">Real-time AI Route</view>
+      <view class="title">丝路问驿</view>
+      <view class="subtitle">严格根据你的预算、天数、年龄、偏好与交通方式生成路线；没有填写标准，就不会直接给出预设内容。</view>
+    </view>
+    <view class="hero-panel">
+      <view class="panel-kicker">生成状态</view>
+      <view class="panel-route">{{resultSummary}}</view>
+      <view class="panel-score">{{statusMark}}</view>
+      <view class="panel-unit">{{statusText}}</view>
+    </view>
   </view>
-  
-</view>
+
+  <view class="module form-module">
+    <view class="module-head">
+      <view>
+        <view class="module-title">基础标准</view>
+        <view class="module-subtitle">这些内容会原样参与 AI 路线生成</view>
+      </view>
+      <view class="required-mark">必填</view>
+    </view>
+
+    <checkbox-group class="history-row" bindchange="toggleHistory">
+      <label class="history-card">
+        <checkbox value="history" checked="{{form.useHistory}}" />
+        <text>根据过往行程进行推荐</text>
+      </label>
+    </checkbox-group>
+
+    <view class="field-grid">
+      <view class="field">
+        <view class="field-label">出发地</view>
+        <input class="input" data-field="startCity" value="{{form.startCity}}" bindinput="onFieldInput" placeholder="如 兰州" />
+      </view>
+      <view class="field">
+        <view class="field-label">目的地/范围</view>
+        <input class="input" data-field="destination" value="{{form.destination}}" bindinput="onFieldInput" placeholder="如 敦煌/河西走廊" />
+      </view>
+    </view>
+
+    <view class="field">
+      <view class="field-label">成员年龄</view>
+      <input class="input" data-field="ages" value="{{form.ages}}" bindinput="onFieldInput" placeholder="如 22, 24, 50" />
+    </view>
+
+    <view class="choice-section">
+      <view class="field-label">整体预算</view>
+      <radio-group class="choice-row" bindchange="chooseBudget">
+        <label wx:for="{{budgetOptions}}" wx:key="value" class="{{item.className}}">
+          <radio value="{{item.value}}" checked="{{item.active}}" />
+          <text>{{item.value}}</text>
+        </label>
+      </radio-group>
+    </view>
+
+    <view class="choice-section">
+      <view class="field-label">出行天数</view>
+      <radio-group class="choice-grid" bindchange="chooseDays">
+        <label wx:for="{{dayOptions}}" wx:key="value" class="{{item.className}}">
+          <radio value="{{item.value}}" checked="{{item.active}}" />
+          <text>{{item.value}}</text>
+        </label>
+      </radio-group>
+    </view>
+
+    <view class="choice-section">
+      <view class="field-label">景点偏好</view>
+      <checkbox-group class="choice-grid" bindchange="onPreferenceChange">
+        <label wx:for="{{preferenceOptions}}" wx:key="value" class="{{item.className}}">
+          <checkbox value="{{item.value}}" checked="{{item.active}}" />
+          <text>{{item.label}}</text>
+        </label>
+      </checkbox-group>
+    </view>
+
+    <view class="choice-section">
+      <view class="field-label">交通方式</view>
+      <checkbox-group class="choice-grid" bindchange="onTransportChange">
+        <label wx:for="{{transportOptions}}" wx:key="value" class="{{item.className}}">
+          <checkbox value="{{item.value}}" checked="{{item.active}}" />
+          <text>{{item.label}}</text>
+        </label>
+      </checkbox-group>
+    </view>
+
+    <view class="field">
+      <view class="field-label">额外要求</view>
+      <textarea class="textarea" data-field="note" value="{{form.note}}" bindinput="onFieldInput" placeholder="如 不要太赶、希望包含莫高窟、适合长辈等" />
+    </view>
+
+    <view wx:if="{{errorText}}" class="error-box">{{errorText}}</view>
+
+    <button class="{{submitClass}}" loading="{{isGenerating}}" disabled="{{isGenerating}}" bindtap="generateRoute">
+      {{submitText}}
+    </button>
+  </view>
+
+  <view class="module dark-module">
+    <view class="module-head">
+      <view>
+        <view class="module-title light">AI 生成过程</view>
+        <view class="module-subtitle light-sub">根据你的旅行标准，逐步生成可执行路线</view>
+      </view>
+    </view>
+    <view class="process-list">
+      <view wx:for="{{generationSteps}}" wx:key="title" class="process-item process-item--{{item.state}}">
+        <view class="process-dot"></view>
+        <view class="process-copy">
+          <view class="process-title">{{item.title}}</view>
+          <view class="process-desc">{{item.desc}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{hasResult}}" class="module result-module">
+    <view class="module-head">
+      <view>
+        <view class="module-title">路线报告</view>
+        <view class="module-subtitle">按你的出行标准整理成可查看、可复制、可导航的行程</view>
+      </view>
+    </view>
+
+    <view class="report-hero">
+      <view class="report-title">{{displayReport.title}}</view>
+      <view class="report-chip-row">
+        <view wx:for="{{displayReport.chips}}" wx:key="*this" class="report-chip">{{item}}</view>
+      </view>
+    </view>
+
+    <view class="trip-info-panel">
+      <view class="trip-info-head">
+        <view>
+          <view class="trip-info-kicker">路线总览</view>
+          <view class="trip-info-title">{{tripInfo.title}}</view>
+          <view class="trip-info-subtitle">{{tripInfo.subtitle}}</view>
+        </view>
+        <view class="trip-map-button" bindtap="goMap">地图</view>
+      </view>
+
+      <view class="trip-summary-row">
+        <view wx:for="{{tripInfo.summaryCards}}" wx:key="label" class="trip-summary-card">
+          <view class="trip-summary-value">{{item.value}}</view>
+          <view class="trip-summary-label">{{item.label}}</view>
+        </view>
+      </view>
+
+      <scroll-view class="trip-day-scroll" scroll-x="true" show-scrollbar="false">
+        <view class="trip-day-track">
+          <view
+            wx:for="{{tripInfo.dayTabs}}"
+            wx:key="index"
+            class="{{item.className}}"
+            data-index="{{item.index}}"
+            bindtap="chooseTripDay"
+          >
+            <view class="trip-day-label">{{item.label}}</view>
+          </view>
+        </view>
+      </scroll-view>
+
+      <view wx:if="{{tripInfo.activeDay}}" class="trip-day-detail">
+        <view class="trip-route-card">
+          <view class="trip-route-day">{{tripInfo.activeDay.dayShort}}</view>
+          <view class="trip-route-main">
+            <view class="trip-route-title">{{tripInfo.activeDay.routeTitle}}</view>
+            <view class="trip-route-sub">{{tripInfo.activeDay.mapSummary}}</view>
+          </view>
+        </view>
+
+        <view class="trip-info-grid">
+          <view class="trip-info-card">
+            <view class="trip-card-label">交通方式</view>
+            <view class="trip-card-text">{{tripInfo.activeDay.transportBrief}}</view>
+          </view>
+          <view class="trip-info-card">
+            <view class="trip-card-label">门票/价格</view>
+            <view class="trip-card-text">{{tripInfo.activeDay.ticketBrief}}</view>
+          </view>
+        </view>
+
+        <view class="timeline">
+          <view wx:for="{{tripInfo.activeDay.timeline}}" wx:key="name" class="{{item.className}}">
+            <view class="timeline-dot"></view>
+            <view class="timeline-body">
+              <view class="timeline-top">
+                <view class="timeline-name">{{item.name}}</view>
+                <view class="timeline-time">{{item.time}}</view>
+              </view>
+              <view class="timeline-meta">{{item.traffic}} · {{item.distance}}</view>
+              <view class="timeline-ticket">{{item.ticket}}</view>
+            </view>
+          </view>
+        </view>
+
+        <view class="trip-section-title">交通与票务</view>
+        <view class="trip-long-card">
+          <view class="trip-long-label">交通</view>
+          <view class="trip-long-text">{{tripInfo.activeDay.transportText}}</view>
+        </view>
+        <view class="trip-long-card trip-long-card--ticket">
+          <view class="trip-long-label">票务</view>
+          <view class="trip-long-text">{{tripInfo.activeDay.ticketText}}</view>
+        </view>
+
+        <view class="trip-section-title">餐饮安排</view>
+        <view class="trip-meal-list">
+          <view wx:for="{{tripInfo.activeDay.mealCards}}" wx:key="title" class="trip-meal-card">
+            <view class="trip-meal-title">{{item.title}}</view>
+            <view class="trip-meal-text">{{item.text}}</view>
+          </view>
+        </view>
+
+        <view class="trip-section-title">出行注意</view>
+        <view class="trip-notice-list">
+          <view wx:for="{{tripInfo.activeDay.noticeList}}" wx:key="*this" class="trip-notice-item">{{item}}</view>
+        </view>
+
+        <view class="trip-action-row">
+          <view class="trip-action trip-action--dark" bindtap="goMap">查看地图路线</view>
+          <view class="trip-action" bindtap="copyResult">复制行程信息</view>
+        </view>
+      </view>
+
+      <view class="report-tips">
+        <view class="tips-title">出行提醒</view>
+        <view wx:for="{{displayReport.tips}}" wx:key="*this" class="tips-item">{{item}}</view>
+      </view>
+    </view>
+
+  </view>
+</scroll-view>

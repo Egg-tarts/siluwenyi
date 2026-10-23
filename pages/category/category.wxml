@@ -1,28 +1,31 @@
 <view class="cart-container">
+  <view class="cart-title">我的购物车</view>
+  <view wx:if="{{!hasItems}}" class="empty-cart">
+    <view class="empty-mark">空</view>
+    <view class="empty-text">还没有加入文创商品</view>
+  </view>
   <block wx:for="{{cartItems}}" wx:key="id">
-    <view class="cart-item" data-index="{{index}}" bindtouchstart="touchStart" bindtouchmove="touchMove">
-      <view class="item-content" style="transform: translateX({{item.translateX}}px)">
+    <view class="cart-item" data-id="{{item.cultural_product.id}}" data-index="{{index}}">
+      <checkbox
+        class="item-check"
+        checked="{{item.selected}}"
+        bindchange="toggleSelectItem"
+      ></checkbox>
+      <view class="item-content">
         <view class="item-photo">
-          <image src="{{item.photo}}" mode="aspectFill"></image>
+          <image src="{{item.cultural_product.images1}}" mode="aspectFill"></image>
         </view>
         <view class="item-info">
-          <text class="item-name">{{item.name}}</text>
-          <text class="item-quantity">数量：{{item.quantity}}</text>
+          <text class="item-name">{{item.cultural_product.name}}</text>
+          <text class="item-quantity">数量 x{{item.quantity}}</text>
         </view>
-        <view class="item-price">¥{{item.price}}</view>
-        <view class="item-select">
-          <checkbox value="{{index}}" checked="{{item.checked}}" bindchange="selectItem"></checkbox>
-        </view>
-      </view>
-      <view class="swipe-buttons">
-        <button class="share-btn" bindtap="shareItem" data-index="{{index}}">分享</button>
-        <button class="delete-btn" bindtap="deleteItem" data-index="{{index}}">删除</button>
+        <view class="item-price">¥{{item.cultural_product.money}}</view>
       </view>
     </view>
   </block>
 </view>
-
 <view class="footer">
-  <button class="select-all-btn" bindtap="selectAll">全选</button>
-  <button class="pay-btn" bindtap="payNow">一起付款</button>
+  <button class="select-all-btn" bindtap="toggleSelectAll">选择全部</button>
+  <view class="cart-total">{{totalText}}</view>
+  <button class="pay-btn" bindtap="payNow">付款</button>
 </view>

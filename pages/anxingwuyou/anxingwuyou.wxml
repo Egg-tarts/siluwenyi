@@ -1,0 +1,84 @@
+<scroll-view class="page" scroll-y="true" enhanced="true" show-scrollbar="false">
+  <view class="back-button" bindtap="goBack">返回</view>
+
+  <view class="hero">
+    <view class="eyebrow">Safe Journey · 本地实时守护</view>
+    <view class="title">安行无忧</view>
+    <view class="subtitle">根据本机时间、定位授权、行前清单和甘肃线路规则生成实时安全提醒。</view>
+    <view class="hero-actions">
+      <view class="time-pill">{{liveTime}}</view>
+      <view class="refresh-pill" bindtap="manualRefresh">{{refreshText}}</view>
+    </view>
+  </view>
+
+  <view class="safety-panel">
+    <view class="score-box {{scoreClass}}">
+      <view class="score">{{score}}</view>
+      <view class="score-label">{{scoreLevel}}</view>
+    </view>
+    <view class="panel-main">
+      <view class="panel-title">实时安心指数</view>
+      <view class="panel-desc">{{summary}}</view>
+      <view class="location-card">
+        <view>
+          <view class="location-name">{{locationLabel}}</view>
+          <view class="location-desc">{{locationDetail}}</view>
+        </view>
+        <view class="location-status">{{locationStatus}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="signal-grid">
+    <view wx:for="{{liveSignals}}" wx:key="label" class="signal-card">
+      <view class="signal-label">{{item.label}}</view>
+      <view class="signal-value">{{item.value}}</view>
+      <view class="signal-state">{{item.state}}</view>
+    </view>
+  </view>
+
+  <view class="section-head">
+    <view>
+      <view class="section-title">行前清单</view>
+      <view class="section-subtitle">点击即可标记，安全指数会立即变化</view>
+    </view>
+  </view>
+  <view wx:for="{{checks}}" wx:key="id" class="{{item.className}}" data-id="{{item.id}}" bindtap="toggleCheck">
+    <view class="check-dot">{{item.doneText}}</view>
+    <view class="check-main">
+      <view class="check-title">{{item.title}}</view>
+      <view class="check-desc">{{item.desc}}</view>
+    </view>
+    <view class="check-status">{{item.statusText}}</view>
+  </view>
+
+  <view class="module">
+    <view class="section-title module-title">当前提醒</view>
+    <view wx:for="{{alerts}}" wx:key="title" class="alert-item">
+      <view class="alert-level">{{item.level}}</view>
+      <view class="alert-main">
+        <view class="alert-title">{{item.title}}</view>
+        <view class="alert-desc">{{item.desc}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="module">
+    <view class="section-title module-title">同行照护</view>
+    <view wx:for="{{familyCards}}" wx:key="title" class="family-card">
+      <view class="family-title">{{item.title}}</view>
+      <view class="family-desc">{{item.desc}}</view>
+    </view>
+  </view>
+
+  <view class="module emergency">
+    <view class="section-title module-title">应急联系</view>
+    <view class="contact-grid">
+      <view wx:for="{{contacts}}" wx:key="name" class="contact-card" data-phone="{{item.value}}" bindtap="callContact">
+        <view class="contact-name">{{item.name}}</view>
+        <view class="contact-value">{{item.value}}</view>
+        <view class="contact-tip">{{item.tip}}</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

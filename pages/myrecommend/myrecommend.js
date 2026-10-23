@@ -1,105 +1,140 @@
+const contentStore = require('../../utils/contentStore')
+
 Page({
   data: {
     text: '',
-    images: [], // 存储用户选择的图片路径
+    images: [],
     head_txt: '',
-    avatarUrl: ''
+    user: contentStore.getProfileUser(),
+    authorName: '未登录旅人',
+    authorDesc: '登录后发布内容会保存记录',
+    publishing: false,
+    tagOptions: ['旅行笔记', '路线心得', '文博记录', '美食分享'],
+    activeTag: '旅行笔记'
   },
 
-  bindTextInput: function(e) {
+  onShow() {
+    const user = contentStore.getProfileUser()
+    this.setData({
+      user,
+      authorName: user && user.loggedIn ? user.nickName : '未登录旅人',
+      authorDesc: user && user.isGuest
+        ? '游客内容会保存在本机记录'
+        : (user && user.loggedIn ? '内容会同步到你的个人记录' : '请先进行游客登录后发布')
+    })
+  },
+
+  goBack() {
+    if (getCurrentPages().length > 1) {
+      wx.navigateBack()
+      return
+    }
+    wx.reLaunch({ url: '/pages/community/community' })
+  },
+
+  bindTextInput(e) {
     this.setData({
       text: e.detail.value
-    }, () => { console.log(this.data.text) });
+    })
   },
 
-  bindTitleInput: function(e) {
+  bindTitleInput(e) {
     this.setData({
       head_txt: e.detail.value
-    }, () => { console.log(this.data.head_txt) });
+    })
+  },
+
+  chooseTag(e) {
+    this.setData({
+      activeTag: e.currentTarget.dataset.tag
+    })
   },
 
   choosepicture() {
     wx.chooseImage({
-      count: 1, // 允许选择一张图片
+      count: 1,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
       success: (res) => {
-        const tempFilePaths = res.tempFilePaths;
-        this.setData({
-          images: [...this.data.images, ...tempFilePaths] // 将新选择的图片路径添加到 images 数组中
-        }, () => {
-          console.log(this.data.images); // 输出选择的图片路径
-        });
+        const filePath = res.tempFilePaths && res.tempFilePaths[0]
+        if (!filePath) return
+
+        wx.saveFile({
+          tempFilePath: filePath,
+          success: saved => {
+            this.addImage(saved.savedFilePath || filePath)
+          },
+          fail: () => {
+            this.addImage(filePath)
+          }
+        })
       }
-    });
+    })
   },
-  publish: function() {
-    const app = getApp();
-    const images = this.data.images;
-    const text = this.data.text;
-    const head_txt = this.data.head_txt;
 
-    // 上传图片的函数
-    const uploadImage = (index) => {
-        if (index >= images.length) {
-            // 所有图片上传完毕后，提交文本数据
-            wx.request({
-                url: 'https://lzuer.mynatapp.cc/SRJC/recommendations/', // 替换为你的发布接口
-                method: 'POST',
-                header: {
-                    Authorization: 'Token ' + app.globalData.token,
-                },
-                data: {
-                    text: text,
-                    head_txt: head_txt
-                },
-                success: function(res) {
-                    console.log(res);
-                    wx.showToast({
-                        title: '发布成功',
-                        icon: 'success'
-                    });
-                    wx.navigateBack({
-                        delta: 1
-                    });
-                },
-                fail: function(err) {
-                    console.error('请求失败:', err);
-                    wx.showToast({
-                        title: '发布失败',
-                        icon: 'none'
-                    });
-                }
-            });
-            return;
-        }
+  addImage(path) {
+    this.setData({
+      images: this.data.images.concat(path).slice(0, 3)
+    })
+  },
 
-        const imagePath = images[index];
-        wx.uploadFile({
-            url: 'https://lzuer.mynatapp.cc/SRJC/recommendations/', // 替换为你的图片上传接口
-            filePath: imagePath,
-            name: `images${index + 1}`,
-            formData: {
-                text: text,
-                head_txt: head_txt
-            },
-            header: {
-                Authorization: 'Token ' + app.globalData.token,
-            },
-            success: function(res) {
-                console.log(`图片${index + 1}上传成功`, res);
-                uploadImage(index + 1); // 上传下一张图片
-            },
-            fail: function(err) {
-                console.error(`图片${index + 1}上传失败`, err);
-                wx.showToast({
-                    title: '图片上传失败',
-                    icon: 'none'
-                });
-            }
-        });
-    };
+  removeImage(e) {
+    const index = Number(e.currentTarget.dataset.index)
+    this.setData({
+      images: this.data.images.filter((item, itemIndex) => itemIndex !== index)
+    })
+  },
 
-    uploadImage(0); // 从第一张图片开始上传
-}
+  publish() {
+    if (this.data.publishing) return
 
+    const user = contentStore.getProfileUser()
+    if (!user || !user.loggedIn) {
+      const loginUrl = '/pages/profileLogin/profileLogin?mode=guestRequired&redirect=' + encodeURIComponent('/pages/myrecommend/myrecommend')
+      wx.showToast({ title: '请先进行游客登录', icon: 'none' })
+      setTimeout(() => {
+        wx.navigateTo({
+          url: loginUrl,
+          fail: () => wx.redirectTo({ url: loginUrl })
+        })
+      }, 420)
+      return
+    }
 
-});
+    const title = this.data.head_txt.trim()
+    const text = this.data.text.trim()
+
+    if (!title || !text) {
+      wx.showToast({
+        title: '请先填写标题和内容',
+        icon: 'none'
+      })
+      return
+    }
+
+    this.setData({ publishing: true })
+    const savedPost = contentStore.savePost({
+      title,
+      text,
+      image: this.data.images[0],
+      tag: this.data.activeTag
+    })
+
+    if (!savedPost) {
+      this.setData({ publishing: false })
+      wx.showToast({ title: '请先进行游客登录', icon: 'none' })
+      return
+    }
+
+    wx.showToast({
+      title: '发布成功',
+      icon: 'success'
+    })
+
+    setTimeout(() => {
+      wx.redirectTo({
+        url: '/pages/posts/posts'
+      })
+    }, 650)
+  }
+})

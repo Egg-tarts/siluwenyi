@@ -1,0 +1,43 @@
+<scroll-view class="credit-page" scroll-y="true" enhanced="true" show-scrollbar="false">
+  <view class="back-button" bindtap="goBack">‹ 返回</view>
+
+  <view class="hero">
+    <view class="hero-title">积分兑换</view>
+    <view class="hero-subtitle">累计积分，提升等级，兑换丝路旅行礼遇。</view>
+    <view class="level-row">
+      <view class="level-badge">Lv{{user.level}}</view>
+      <view class="points">{{user.points}} 积分</view>
+    </view>
+    <view class="progress-track">
+      <view class="progress-fill" style="width: {{user.progressPercent}}%;"></view>
+    </view>
+    <view class="progress-text">距离 Lv{{user.level + 1}} 还需 {{user.nextLevelPoints - user.points}} 积分</view>
+  </view>
+
+  <view class="section-title">可兑换礼遇</view>
+  <view class="gift-list">
+    <view wx:for="{{gifts}}" wx:key="id" class="{{item.cardClass}}">
+      <image class="gift-image" src="{{item.image}}" mode="aspectFill" />
+      <view class="gift-info">
+        <view class="gift-tag">{{item.tag}}</view>
+        <view class="gift-name">{{item.name}}</view>
+        <view class="gift-desc">{{item.desc}}</view>
+        <view class="gift-bottom">
+          <view class="gift-points">{{item.points}} 积分</view>
+          <view class="gift-button" data-id="{{item.id}}" bindtap="exchange">{{item.buttonText}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-title">积分任务</view>
+  <view class="task-panel">
+    <view wx:for="{{tasks}}" wx:key="title" class="task-item">
+      <view>
+        <view class="task-title">{{item.title}}</view>
+        <view class="task-desc">{{item.desc}}</view>
+      </view>
+      <view class="task-points">{{item.points}}</view>
+    </view>
+  </view>
+</scroll-view>

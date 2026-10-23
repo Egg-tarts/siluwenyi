@@ -1,0 +1,44 @@
+<scroll-view class="service-page service-page--{{service.theme}}" scroll-y="true" enhanced="true" show-scrollbar="false">
+  <view class="topbar">
+    <view class="back-button" bindtap="goBack">‹ 返回</view>
+    <view class="top-title">我的服务</view>
+  </view>
+
+  <view class="hero">
+    <view class="hero-mark">{{service.mark}}</view>
+    <view class="hero-main">
+      <view class="hero-title">{{service.title}}</view>
+      <view class="hero-desc">{{service.desc}}</view>
+    </view>
+  </view>
+
+  <view class="card-list">
+    <view wx:for="{{service.cards}}" wx:key="title" wx:for-index="index" class="service-card" data-index="{{index}}" bindtap="tapCard">
+      <view>
+        <view class="card-title">{{item.title}}</view>
+        <view class="card-desc">{{item.desc}}</view>
+      </view>
+      <view class="card-tag">{{item.tag}}</view>
+    </view>
+  </view>
+
+  <view class="action-panel">
+    <view class="panel-title">操作内容</view>
+    <textarea class="action-input" value="{{inputText}}" bindinput="onInput" placeholder="可填写备注、地址、咨询问题或服务需求" />
+    <button class="primary-button" bindtap="handlePrimary">{{service.primaryText}}</button>
+  </view>
+
+  <view class="record-panel">
+    <view class="panel-title">本机记录</view>
+    <view wx:if="{{records.length}}" class="record-list">
+      <view wx:for="{{records}}" wx:key="id" class="record-item">
+        <view class="record-title">{{item.title}}</view>
+        <view class="record-desc">{{item.desc}}</view>
+        <view class="record-time">{{item.user}} · {{item.time}}</view>
+      </view>
+    </view>
+    <view wx:else class="empty-record">还没有保存记录，点击上方操作即可写入本机。</view>
+  </view>
+
+  <view class="bottom-space"></view>
+</scroll-view>

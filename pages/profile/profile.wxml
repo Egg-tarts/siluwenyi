@@ -1,53 +1,157 @@
-<view class="container">
-  <!-- 顶部区域 -->
-  <view class="top-section">
-    <image class="top-icon" src="/pages/graph/右上.png" />
-    <view class="avatar-section" bindtap="goToRegisterPage">
-      <image class="avatar" src="{{avatarUrl || '/pages/graph/灰色微信头像.webp'}}" />
+<scroll-view class="profile-page" scroll-y="true" enhanced="true" show-scrollbar="false">
+  <view class="emergency-float" bindtap="goEmergency">SOS</view>
+
+  <view class="user-panel" bindtap="goLogin">
+    <image class="avatar" src="{{user.avatarUrl}}" mode="aspectFill" />
+    <view class="user-main">
+      <view class="user-name">{{user.nickName}}</view>
+      <view class="user-id">ID: {{user.userId}}</view>
+      <view class="login-tip">{{user.loginTip}}</view>
     </view>
-    <view class="other-content">
-      <view class="name-level">
-        <text class="user-name">{{name || '点击登录'}}</text>
-        <text class="user-level">Lv-</text>
+  </view>
+
+  <view class="stats-row">
+    <view class="stat-item">
+      <view class="stat-value">{{user.footprints}}</view>
+      <view class="stat-label">我的足迹</view>
+    </view>
+    <view class="stat-item">
+      <view class="stat-value">{{user.fans}}</view>
+      <view class="stat-label">我的粉丝</view>
+    </view>
+    <view class="stat-item">
+      <view class="stat-value">{{user.follows}}</view>
+      <view class="stat-label">我的关注</view>
+    </view>
+    <view class="stat-item">
+      <view class="stat-value">{{user.likes}}</view>
+      <view class="stat-label">我的点赞</view>
+    </view>
+  </view>
+
+  <view class="points-card" data-action="credit" bindtap="handleCardTap">
+    <view class="points-top">
+      <view>
+        <view class="points-title">我的积分</view>
+        <view class="points-subtitle">完成任务可提升等级并兑换礼遇</view>
       </view>
-      <text class="user-points">积分:-</text>
+      <view class="level-badge">Lv{{user.level}}</view>
+    </view>
+    <view class="points-number">{{user.points}}</view>
+    <view class="progress-track">
+      <view class="progress-fill" style="width: {{user.progressPercent}}%;"></view>
+    </view>
+    <view class="progress-text">距离 Lv{{user.nextLevel}} 还需 {{user.remainingPoints}} 积分</view>
+  </view>
+
+  <view class="top-card-grid">
+    <view wx:for="{{topCards}}" wx:key="title" class="asset-card" data-action="{{item.action}}" bindtap="handleCardTap">
+      <image class="asset-bg" src="{{item.image}}" mode="aspectFill" />
     </view>
   </view>
 
-  <text class="chuyou-text">出游</text>
-
-  <view class="rectangle-section">
-    <view class="rectangle" bindtap='navigateToMember'>
-      <image class="rectangle-icon" src="/pages/graph/会员.png" />
-      <text class="rectangle-text">会员</text>
-    </view>
-    <view class="rectangle" bindtap="navigateToOrders">
-      <image class="rectangle-icon" src="/pages/graph/我的订单.png" />
-      <text class="rectangle-text">我的订单</text>
-    </view>
-    <view class="rectangle" bindtap='navigateToHistoryBrowse'>
-      <image class="rectangle-icon" src="/pages/graph/历史行程.png" />
-      <text class="rectangle-text">历史行程</text>
-    </view>
-    <view class="rectangle" bindtap='navigateToCategory'>
-      <image class="rectangle-icon" src="/pages/graph/购物车.png" />
-      <text class="rectangle-text">购物车</text>
+  <view class="section-head">
+    <view class="section-title">我的订单</view>
+    <view class="section-more" data-action="orders" bindtap="handleCardTap">全部 ›</view>
+  </view>
+  <view class="order-grid">
+    <view wx:for="{{orderCards}}" wx:key="title" class="order-card" data-action="{{item.action}}" bindtap="handleCardTap">
+      <image class="order-image" src="{{item.image}}" mode="aspectFill" />
     </view>
   </view>
 
-  <text class="chuyou-text">社区</text>
-  <view class="rectangle-section"> 
-    <view class="rectangle" bindtap="navigateToHistory">
-      <image class="rectangle-icon" src="/pages/graph/浏览历史.png" />
-      <text class="rectangle-text">浏览历史</text>
-    </view>
-    <view class="rectangle" bindtap="navigateToLikes">
-      <image class="rectangle-icon" src="/pages/graph/收藏.png" />
-      <text class="rectangle-text">我的点赞</text>
-    </view>
-    <view class="rectangle" bindtap="navigateToPosts">
-      <image class="rectangle-icon" src="/pages/graph/发布.png" />
-      <text class="rectangle-text">我的发布</text>
+  <view class="section-head">
+    <view class="section-title">我的服务</view>
+  </view>
+  <view class="service-panel">
+    <view wx:for="{{serviceItems}}" wx:key="title" class="service-item" data-action="{{item.action}}" bindtap="handleCardTap">
+      <view class="service-icon">{{item.icon}}</view>
+      <view class="service-title">{{item.title}}</view>
     </view>
   </view>
-</view>
+
+  <view class="section-head">
+    <view class="section-title">随行工具</view>
+  </view>
+  <view class="tool-grid">
+    <view wx:for="{{toolCards}}" wx:key="title" class="tool-card" data-action="{{item.action}}" bindtap="handleCardTap">
+      <view class="tool-icon">{{item.icon}}</view>
+      <view class="tool-main">
+        <view class="tool-title">{{item.title}}</view>
+        <view class="tool-desc">{{item.desc}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-head">
+    <view class="section-title">积分任务</view>
+    <view class="section-more" data-action="credit" bindtap="handleCardTap">兑换 ›</view>
+  </view>
+  <view class="task-panel">
+    <view wx:for="{{pointTasks}}" wx:key="title" class="task-item" data-action="{{item.action}}" bindtap="handleCardTap">
+      <view>
+        <view class="task-title">{{item.title}}</view>
+        <view class="task-points">{{item.points}} 积分</view>
+      </view>
+      <view class="task-action">{{item.status}}</view>
+    </view>
+  </view>
+
+  <view class="section-head">
+    <view class="section-title">等级权益</view>
+  </view>
+  <view class="rights-list">
+    <view wx:for="{{memberRights}}" wx:key="title" class="right-card">
+      <view class="right-title">{{item.title}}</view>
+      <view class="right-desc">{{item.desc}}</view>
+    </view>
+  </view>
+
+  <view class="section-head">
+    <view class="section-title">丝路旅程</view>
+  </view>
+  <view class="journey-grid">
+    <view wx:for="{{journeyCards}}" wx:key="label" class="journey-card" data-action="{{item.action}}" bindtap="handleCardTap">
+      <view class="journey-value">{{item.value}}</view>
+      <view class="journey-label">{{item.label}}</view>
+    </view>
+  </view>
+
+  <view class="section-head">
+    <view class="section-title">旅行偏好</view>
+  </view>
+  <view class="preference-panel">
+    <view class="preference-desc">用于路线推荐、社区内容和文创兑换的个性化排序，本机保存，可随时调整。</view>
+    <view class="preference-grid">
+      <view wx:for="{{preferenceItems}}" wx:key="key" class="{{item.className}}" data-key="{{item.key}}" bindtap="togglePreference">
+        {{item.label}}
+      </view>
+    </view>
+  </view>
+
+  <view class="section-head">
+    <view class="section-title">近期动态</view>
+  </view>
+  <view class="recent-list">
+    <view wx:for="{{recentCards}}" wx:key="title" class="recent-card" data-action="{{item.action}}" bindtap="handleCardTap">
+      <view>
+        <view class="recent-title">{{item.title}}</view>
+        <view class="recent-desc">{{item.desc}}</view>
+      </view>
+      <view class="recent-value">{{item.value}}</view>
+    </view>
+  </view>
+
+  <view class="section-head">
+    <view class="section-title">服务保障</view>
+  </view>
+  <view class="guard-list">
+    <view wx:for="{{guardItems}}" wx:key="title" class="guard-card" data-action="{{item.action}}" bindtap="handleCardTap">
+      <view class="guard-title">{{item.title}}</view>
+      <view class="guard-desc">{{item.desc}}</view>
+    </view>
+  </view>
+
+  <view class="bottom-space"></view>
+</scroll-view>
+<tabbar></tabbar>

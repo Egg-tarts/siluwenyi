@@ -1,0 +1,228 @@
+<scroll-view class="translate-page" scroll-y="true" enhanced="true" show-scrollbar="false">
+  <view class="topbar">
+    <view class="back-button" bindtap="goBack">‹ 返回</view>
+    <view class="top-title">随行翻译</view>
+  </view>
+
+  <view class="hero">
+    <view class="hero-kicker">Travel Translator</view>
+    <view class="hero-title">甘肃方言与多语随行助手</view>
+    <view class="hero-desc">覆盖普通话、甘肃方言、英语、俄语常用表达，加入录音回放、方言词库、民俗提醒和旅途短句收藏。</view>
+    <view class="hero-stats">
+      <view class="hero-stat">
+        <view class="hero-stat-value">4</view>
+        <view class="hero-stat-label">语言模式</view>
+      </view>
+      <view class="hero-stat">
+        <view class="hero-stat-value">{{phraseGroups.length}}</view>
+        <view class="hero-stat-label">当前短句</view>
+      </view>
+      <view class="hero-stat">
+        <view class="hero-stat-value">{{favoriteCount}}</view>
+        <view class="hero-stat-label">已收藏</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="voice-card">
+    <view class="voice-head">
+      <view>
+        <view class="section-title light">语音输入</view>
+        <view class="section-subtitle light">{{voiceState}}</view>
+      </view>
+      <view class="voice-orb {{isListening ? 'active' : ''}}" bindtap="toggleListen">
+        <view class="voice-wave"></view>
+        <view class="voice-text">{{isListening ? '停止' : '录音'}}</view>
+      </view>
+    </view>
+    <view class="record-row">
+      <view class="record-info">最近录音：{{recordLabel}}</view>
+      <view class="record-play" bindtap="playRecord">回放</view>
+    </view>
+    <view wx:if="{{showVoiceHints}}" class="voice-hints">
+      <view class="hint-title">选择最接近的表达</view>
+      <view wx:for="{{voiceHints}}" wx:key="id" wx:for-index="index" class="hint-item" data-index="{{index}}" bindtap="useVoiceHint">
+        {{item.mandarin}}
+      </view>
+    </view>
+  </view>
+
+  <view class="translate-card">
+    <view class="lang-row">
+      <view class="lang-box">
+        <view class="lang-label">输入语言</view>
+        <scroll-view class="lang-scroll" scroll-x="true" show-scrollbar="false">
+          <view class="lang-track">
+            <view wx:for="{{fromLanguages}}" wx:key="key" class="{{item.className}}" data-lang="{{item.key}}" bindtap="chooseFrom">
+              {{item.name}}
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+
+      <view class="swap-button" bindtap="swapLang">⇄</view>
+
+      <view class="lang-box">
+        <view class="lang-label">输出语言</view>
+        <scroll-view class="lang-scroll" scroll-x="true" show-scrollbar="false">
+          <view class="lang-track">
+            <view wx:for="{{toLanguages}}" wx:key="key" class="{{item.className}}" data-lang="{{item.key}}" bindtap="chooseTo">
+              {{item.name}}
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+
+    <textarea class="translate-input" value="{{inputText}}" bindinput="onInput" placeholder="输入你想翻译的句子" />
+    <button class="translate-button" bindtap="translateNow">立即翻译</button>
+
+    <view class="output-panel">
+      <view class="output-label">翻译结果 · {{outputLangName}}</view>
+      <view class="output-text">{{outputText}}</view>
+      <view wx:if="{{readingHint}}" class="reading-hint">{{readingHint}}</view>
+      <view class="output-actions">
+        <view class="output-status">可复制、收藏，也可直接给当地人查看</view>
+        <view class="small-button speak" bindtap="speakOutput">{{isSpeaking ? '停止' : '朗读'}}</view>
+        <view class="small-button" bindtap="copyOutput">复制</view>
+        <view class="small-button gold" bindtap="saveFavorite">收藏</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="quick-panel">
+    <view class="section-row">
+      <view>
+        <view class="section-title">一键场景包</view>
+        <view class="section-subtitle">把常见旅途问题直接放入翻译框，适合现场快速给人看</view>
+      </view>
+    </view>
+    <view class="quick-grid">
+      <view wx:for="{{quickKits}}" wx:key="title" wx:for-index="index" class="quick-card" data-index="{{index}}" bindtap="useQuickKit">
+        <view class="quick-title">{{item.title}}</view>
+        <view class="quick-scene">{{item.scene}}</view>
+        <view class="quick-text">{{item.text}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="scenario-panel">
+    <view class="section-row">
+      <view>
+        <view class="section-title">旅途常用短句</view>
+        <view class="section-subtitle">按问路、票务、点餐、住宿、购物、求助快速筛选</view>
+      </view>
+    </view>
+    <scroll-view class="scenario-scroll" scroll-x="true" show-scrollbar="false">
+      <view class="scenario-track">
+        <view wx:for="{{scenarioTabs}}" wx:key="key" class="{{item.className}}" data-key="{{item.key}}" bindtap="setScenario">
+          {{item.name}}
+        </view>
+      </view>
+    </scroll-view>
+    <input class="search-input" placeholder="搜索：卫生间、门票、点餐、医院..." value="{{keyword}}" bindinput="onKeywordInput" />
+    <view class="phrase-list">
+      <view wx:for="{{phraseGroups}}" wx:key="id" wx:for-index="index" class="phrase-card" data-index="{{index}}" bindtap="usePhrase">
+        <view class="phrase-title">{{item.title}}</view>
+        <view class="phrase-text">{{item.mandarin}}</view>
+        <view class="phrase-dialect">{{item.gansu}}</view>
+        <view class="phrase-tip">{{item.tip}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="record-panel">
+    <view class="section-row">
+      <view>
+        <view class="section-title">翻译记录</view>
+        <view class="section-subtitle">本机保存最近 20 条，点击可继续使用</view>
+      </view>
+      <view class="record-clear" bindtap="clearHistory">清空</view>
+    </view>
+    <view wx:if="{{historyRecords.length}}" class="record-list">
+      <view wx:for="{{historyRecords}}" wx:key="id" wx:for-index="index" class="record-card" data-index="{{index}}" data-type="history" bindtap="useRecord">
+        <view class="record-input">{{item.input}}</view>
+        <view class="record-output">{{item.output}}</view>
+      </view>
+    </view>
+    <view wx:else class="empty-record">还没有翻译记录，试着输入一句旅途问题吧。</view>
+  </view>
+
+  <view class="record-panel">
+    <view class="section-row">
+      <view>
+        <view class="section-title">收藏短句</view>
+        <view class="section-subtitle">常用表达可以收藏，现场不必重新输入</view>
+      </view>
+      <view class="record-clear" bindtap="toggleFavorites">{{showFavorites ? '收起' : '展开'}}</view>
+    </view>
+    <view wx:if="{{showFavorites && favoriteRecords.length}}" class="record-list">
+      <view wx:for="{{favoriteRecords}}" wx:key="id" wx:for-index="index" class="record-card favorite" data-index="{{index}}" data-type="favorite" bindtap="useRecord">
+        <view class="record-input">{{item.input}}</view>
+        <view class="record-output">{{item.output}}</view>
+      </view>
+    </view>
+    <view wx:if="{{showFavorites && !favoriteRecords.length}}" class="empty-record">还没有收藏短句，翻译后点“收藏”即可保存。</view>
+  </view>
+
+  <view class="dialect-panel">
+    <view class="section-title">甘肃方言词库</view>
+    <view class="section-subtitle">方言表达有地域差异，这里用于旅途理解和礼貌交流</view>
+    <view class="word-grid">
+      <view wx:for="{{dialectWords}}" wx:key="word" wx:for-index="index" class="word-card {{item.word === activeWord.word ? 'active' : ''}}" data-index="{{index}}" bindtap="chooseWord">
+        <view class="word-main">{{item.word}}</view>
+        <view class="word-meaning">{{item.meaning}}</view>
+      </view>
+    </view>
+    <view class="word-detail">
+      <view class="word-detail-title">{{activeWord.word}}</view>
+      <view class="word-detail-line">意思：{{activeWord.meaning}}</view>
+      <view class="word-detail-line">例句：{{activeWord.sample}}</view>
+      <view class="word-detail-line">普通话：{{activeWord.standard}}</view>
+      <view class="word-detail-tag">{{activeWord.area}}</view>
+    </view>
+    <view class="replace-title">可替换表达库</view>
+    <view class="replace-grid">
+      <view wx:for="{{replacementPreview}}" wx:key="from" class="replace-card">
+        <view class="replace-from">{{item.from}}</view>
+        <view class="replace-arrow">→</view>
+        <view class="replace-to">{{item.to}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="region-panel">
+    <view class="section-title">方言片区参考</view>
+    <view class="region-list">
+      <view wx:for="{{dialectRegions}}" wx:key="city" class="region-card">
+        <view class="region-city">{{item.city}}</view>
+        <view class="region-title">{{item.title}}</view>
+        <view class="region-desc">{{item.desc}}</view>
+        <view class="tag-row">
+          <view wx:for="{{item.tags}}" wx:key="*this" class="region-tag">{{item}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="culture-panel">
+    <view class="section-title">民俗语音助手</view>
+    <view class="section-subtitle">进入民族特色地区时，先看礼仪提醒，再选择合适表达</view>
+    <view class="culture-main">
+      <view class="culture-city">{{activeCulture.city}}</view>
+      <view class="culture-nation">{{activeCulture.nation}}</view>
+      <view class="culture-title">{{activeCulture.title}}</view>
+      <view class="culture-desc">{{activeCulture.desc}}</view>
+      <view class="culture-phrase" bindtap="translateNow">{{activeCulture.phrase}}</view>
+    </view>
+    <scroll-view class="culture-scroll" scroll-x="true" show-scrollbar="false">
+      <view class="culture-track">
+        <view wx:for="{{cultureCards}}" wx:key="city" wx:for-index="index" class="culture-chip {{item.city === activeCulture.city ? 'active' : ''}}" data-index="{{index}}" bindtap="chooseCulture">
+          {{item.city}}
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="bottom-space"></view>
+</scroll-view>

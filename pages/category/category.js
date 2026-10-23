@@ -1,107 +1,89 @@
+const demoStore = require('../../utils/demoStore')
+
 Page({
   data: {
     cartItems: [],
-    startX: 0
+    isSelectAll: false,
+    hasItems: false,
+    totalText: '¥0'
   },
 
-  onLoad() {
-    this.fetchCartData();
+  onShow() {
+    this.fetchCartData()
   },
 
   fetchCartData() {
-    // 假设从后端获取购物车数据
-    wx.request({
-      url: 'https://lzuer.mynatapp.cc/SRJC/mycart/',
-      method: 'GET',
-      success: (res) => {
-        this.setData({ cartItems: res.data });
-      }
-    });
-  },
-
-  touchStart(e) {
+    const cartItems = demoStore.getCartItems().map(item => ({
+      ...item,
+      selected: !!item.selected
+    }))
     this.setData({
-      startX: e.touches[0].clientX
-    });
+      cartItems,
+      hasItems: cartItems.length > 0,
+      isSelectAll: cartItems.length > 0 && cartItems.every(item => item.selected)
+    }, () => this.updateTotal())
   },
 
-  touchMove(e) {
-    const index = e.currentTarget.dataset.index;
-    const moveX = e.touches[0].clientX - this.data.startX;
-
-    if (moveX < -50) {
-      this.setTranslateX(index, -150);
-    } else if (moveX > 50) {
-      this.setTranslateX(index, 0);
-    }
+  toggleSelectItem(e) {
+    const index = Number(e.currentTarget.dataset.index)
+    const cartItems = this.data.cartItems.slice()
+    cartItems[index].selected = e.detail.value.length > 0
+    this.setData({
+      cartItems,
+      isSelectAll: cartItems.length > 0 && cartItems.every(item => item.selected)
+    }, () => this.updateTotal())
   },
 
-  setTranslateX(index, value) {
-    const updatedItems = [...this.data.cartItems];
-    updatedItems[index].translateX = value;
-    this.setData({ cartItems: updatedItems });
+  toggleSelectAll() {
+    const isSelectAll = !this.data.isSelectAll
+    const cartItems = this.data.cartItems.map(item => ({
+      ...item,
+      selected: isSelectAll
+    }))
+    this.setData({ cartItems, isSelectAll }, () => this.updateTotal())
   },
 
-  selectItem(e) {
-    const index = e.detail1.value;
-    const updatedItems = [...this.data.cartItems];
-    updatedItems[index].checked = !updatedItems[index].checked;
-    this.setData({ cartItems: updatedItems });
-  },
-
-  selectAll() {
-    const allSelected = this.data.cartItems.every(item => item.checked);
-    const updatedItems = this.data.cartItems.map(item => {
-      return { ...item, checked: !allSelected };
-    });
-    this.setData({ cartItems: updatedItems });
-  },
-
-  deleteItem(e) {
-    const index = e.currentTarget.dataset.index;
-    const updatedItems = this.data.cartItems.filter((_, i) => i !== index);
-    this.setData({ cartItems: updatedItems });
-  },
-
-  shareItem(e) {
-    const index = e.currentTarget.dataset.index;
-    const item = this.data.cartItems[index];
-    wx.showToast({
-      title: `分享 ${item.name}`,
-      icon: 'none'
-    });
+  updateTotal() {
+    const total = this.data.cartItems.reduce((sum, item) => {
+      if (!item.selected) return sum
+      return sum + Number(item.cultural_product.money || 0) * Number(item.quantity || 1)
+    }, 0)
+    this.setData({
+      totalText: '¥' + total
+    })
+    demoStore.saveCartItems(this.data.cartItems)
   },
 
   payNow() {
-    const selectedItems = this.data.cartItems.filter(item => item.checked);
-    if (selectedItems.length > 0) {
-      this.addToOrders(selectedItems);
-      this.removeFromCart(selectedItems);
-      this.updateBackend(selectedItems);
-      wx.showToast({ title: '付款成功', icon: 'success' });
-    } else {
-      wx.showToast({ title: '请选择商品', icon: 'none' });
+    const selectedItems = this.data.cartItems.filter(item => item.selected)
+
+    if (!selectedItems.length) {
+      wx.showToast({
+        title: '请选择商品',
+        icon: 'none'
+      })
+      return
     }
-  },
 
-  addToOrders(selectedItems) {
-    // 这里可以将选中的商品添加到订单数据
-  },
+    demoStore.makeOrder(selectedItems)
+    const remainItems = this.data.cartItems.filter(item => !item.selected)
+    demoStore.saveCartItems(remainItems)
 
-  removeFromCart(selectedItems) {
-    const updatedCart = this.data.cartItems.filter(item => !item.checked);
-    this.setData({ cartItems: updatedCart });
-  },
+    this.setData({
+      cartItems: remainItems,
+      hasItems: remainItems.length > 0,
+      isSelectAll: false
+    }, () => this.updateTotal())
 
-  updateBackend(selectedItems) {
-    // 更新后端的购物车和订单数据
-    wx.request({
-      url: 'https://api.example.com/update',
-      method: 'POST',
-      data: {
-        cartItems: this.data.cartItems
-        // 这里需要添加订单数据
-      }
-    });
+    wx.showToast({
+      title: '购买成功',
+      icon: 'success'
+    })
+
+    setTimeout(() => {
+      wx.navigateTo({
+        url: '/pages/orders/orders'
+      })
+    }, 700)
   }
-});
+})

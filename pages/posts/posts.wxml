@@ -21,19 +21,18 @@
   >
     <!-- 加载动画 -->
     <view wx:if="{{loading}}" class="loading-spinner">
-      <image src="/assets/loading.gif" />
+      <text>正在读取发布记录...</text>
     </view>
 
-    <!-- 发布的内容列表 -->
+    <!-- 合成后的内容列表 -->
     <block wx:if="{{hasContent}}">
       <view class="posts-container">
-        <block wx:for="{{posts}}" wx:key="index">
-          <view class="post-item {{index % 2 === 0 ? 'left' : 'right'}}" bindtap="viewPost" data-post-id="{{item.id}}">
+        <block wx:for="{{posts}}" wx:key="id">
+          <view class="post-item" bindtap="viewPost" data-post-id="{{item.id}}">
+            <image class="post-image" src="{{item.image}}" mode="widthFix" />
             <view class="post-header">{{item.title}}</view>
-            <view class="post-body">{{item.description}}</view>
-            <view class="post-footer">
-              <text class="post-clicks">点击量：{{item.clicks}}</text>
-            </view>
+            <view class="post-content">{{item.text}}</view>
+            <view class="post-content1">时间：{{item.time}}</view>
           </view>
         </block>
       </view>
@@ -42,8 +41,8 @@
     <!-- 无内容时显示 -->
     <block wx:else>
       <view class="no-content">
-        <text>暂无发布内容</text>
-        <button class="create-btn" bindtap="createPost">创建新发布</button>
+        <text>暂无发布内容，快去发布吧</text>
+        <button class="create-btn" bindtap="createPost">前往发布</button>
       </view>
     </block>
 
@@ -56,4 +55,3 @@
     </view>
   </scroll-view>
 </view>
-

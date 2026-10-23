@@ -1,36 +1,68 @@
 {
   "pages": [
+    "pages/introduction/introduction",
     "pages/touring/touring",
+    "pages/cityIntro/cityIntro",
     "pages/community/community",
-    "components/tabbar/tabbar",
-    "components/search/search",
+    "pages/arViewer/arViewer",
+    "pages/travelTranslate/travelTranslate",
+    "pages/profile/profile",
+    "pages/profileService/profileService",
+    "pages/emergency/emergency",
     "pages/detail/detail",
     "pages/myrecommend/myrecommend",
-    "pages/profile/profile",
-    "pages/register/register",
-    "pages/cart/cart",
+    "pages/profileLogin/profileLogin",
     "pages/category/category",
     "pages/history/history",
-    "pages/historyBrowse/historyBrowse",
-    "pages/home/home",
     "pages/likes/likes",
-    "pages/logs/logs",
-    "pages/member/member",
     "pages/orders/orders",
     "pages/posts/posts",
     "pages/siluwenyi/siluwenyi",
     "pages/tuolingyuxiang/tuolingyuxiang",
     "pages/detail1/detail1",
+    "pages/detail2/detail2",
     "pages/map/map",
-    "pages/fengxingwanli/fengxingwanli"
+    "pages/fengxingwanli/fengxingwanli",
+    "pages/yantushijing/yantushijing",
+    "pages/yizhanxiejiao/yizhanxiejiao",
+    "pages/longshangxunwei/longshangxunwei",
+    "pages/anxingwuyou/anxingwuyou",
+    "pages/coupon/coupon",
+    "pages/credit/credit"
   ],
   "window": {
-
     "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#ffffff"
   },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于展示路线地图和当前位置"
+    },
+    "scope.camera": {
+      "desc": "用于拍摄照片并生成丝路影像"
+    },
+    "scope.record": {
+      "desc": "用于随行翻译录音、回放和民俗语音输入"
+    },
+    "scope.writePhotosAlbum": {
+      "desc": "用于保存生成的丝路影像视频到相册"
+    }
+  },
   "style": "v2",
+  "cloud": true,
+  "useAuthorizePage": true,
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "page": {
+    "pages/community/community": {
+      "navigationStyle": "custom"
+    },
+    "pages/touring/touring": {
+      "navigationStyle": "custom"
+    },
+    "pages/profile/profile": {
+      "navigationStyle": "custom"
+    }
+  }
 }

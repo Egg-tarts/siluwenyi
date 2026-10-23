@@ -1,146 +1,81 @@
-.page {
-  background-color: #f4f4ec;
+page {
+  background: #f4efe4;
 }
 
-/* 顶部用户信息及标题样式 */
-.header {
+.likes-page {
+  min-height: 100vh;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 78rpx 30rpx 50rpx;
+  color: #33281d;
+  background: linear-gradient(180deg, #f7f1e4, #efe3cf);
+}
+
+.hero {
+  padding: 36rpx 30rpx;
+  border-radius: 8rpx;
+  background: linear-gradient(135deg, #536957, #b98a4e);
+  color: #fff7e8;
+  box-shadow: 0 14rpx 32rpx rgba(82, 66, 41, 0.16);
+}
+
+.hero-title {
+  font-size: 48rpx;
+  font-weight: 900;
+}
+
+.hero-subtitle {
+  margin-top: 12rpx;
+  color: rgba(255, 247, 232, 0.78);
+  font-size: 25rpx;
+  line-height: 1.45;
+}
+
+.saved-list {
+  margin-top: 24rpx;
+}
+
+.saved-card {
   display: flex;
-  align-items: center;
-  padding: 20rpx;
-  background-color: #ffffff;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
   margin-bottom: 20rpx;
+  padding: 18rpx;
+  border-radius: 8rpx;
+  background: rgba(255, 252, 244, 0.92);
+  box-shadow: 0 10rpx 24rpx rgba(82, 66, 41, 0.1);
 }
 
-.user-avatar {
-  width: 80rpx;
-  height: 80rpx;
-  border-radius: 50%;
+.saved-image {
+  width: 190rpx;
+  height: 180rpx;
+  border-radius: 8rpx;
 }
 
-.user-details {
-  margin-left: 20rpx;
+.saved-info {
   flex: 1;
+  min-width: 0;
+  padding-left: 20rpx;
 }
 
-.user-name {
-  font-size: 36rpx;
-  font-weight: bold;
+.saved-tag {
+  display: inline-flex;
+  padding: 5rpx 12rpx;
+  border-radius: 999rpx;
+  background: #efe0c4;
+  color: #856239;
+  font-size: 20rpx;
+  font-weight: 900;
 }
 
-.page-title {
-  font-size:medium;
-  color: rgb(231, 123, 21);
-  text-align: center;
-  margin-left: 105px;
-  font-weight: bold;
+.saved-title {
+  margin-top: 12rpx;
+  color: #33281d;
+  font-size: 31rpx;
+  font-weight: 900;
 }
 
-/* 加载动画样式 */
-.loading-spinner {
-  display: flex;
-  justify-content: center;
-  padding: 20rpx;
-}
-
-/* 内容项样式 */
-.posts-container {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 10rpx;
-}
-
-.post-item {
-  position: relative;
-  width: 48%;
-  margin: 1%;
-  border-radius: 15rpx;
-  overflow: hidden;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
-  background-color: #ffffe0; /* 浅黄色背景 */
-  transition: transform 0.3s, box-shadow 0.3s;
-  padding: 20rpx;
-  box-sizing: border-box;
-  min-height: 300rpx; /* 增加模块的最小高度 */
-}
-
-/* 新增推荐内容样式 */
-.recommendations-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10rpx;
-}
-
-.recommendation-item {
-  width: 90%;
-  margin-bottom: 20rpx;
-  border-radius: 15rpx;
-  overflow: hidden;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
-  background-color: #ffe5b4; /* 暖色背景 */
-  padding: 20rpx;
-  box-sizing: border-box;
-}
-
-.post-image {
-  width: 100%;
-  height: auto;
-  border-radius: 10rpx;
-  margin-bottom: 20rpx;
-}
-
-.recommendation-body {
-  font-size: 28rpx;
-  margin-bottom: 10rpx;
-}
-
-.recommendation-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #888;
-}
-
-.recommendation-date {
+.saved-desc {
+  margin-top: 10rpx;
+  color: rgba(51, 40, 29, 0.64);
   font-size: 24rpx;
-}
-
-.like-icon {
-  width: 30rpx;
-  height: 30rpx;
-}
-
-/* 分页加载样式 */
-.load-more, .no-more {
-  text-align: center;
-  padding: 20rpx 0;
-  color: #888;
-  font-size: 28rpx;
-}
-/* 无内容样式 */
-.no-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;           /* 水平居中 */
-  justify-content: flex-start;    /* 垂直从顶部开始排列 */
-  height: 100vh;                 /* 占满整个视口高度，确保内容靠顶部 */
-  padding-top: 150rpx;           /* 为顶部的 "暂无发布内容" 提供一些间距 */
-  color: #888;
-}
-
-.no-content-text {
-  font-size: 32rpx;              /* 调整字体大小 */
-  font-weight: bold;             /* 粗体显示 */
-  color: #666;
-}
-
-/* 创建新发布按钮 */
-.create-btn {
-  margin-top: 40rpx;             /* 与 "暂无发布内容" 保持一定距离 */
-  background-color: #d2b56d;     /* 土黄色 */
-  color: #fff;
-  padding: 12rpx 24rpx;
-  border-radius: 20rpx;
-  font-size: 28rpx;
+  line-height: 1.44;
 }

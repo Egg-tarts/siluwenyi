@@ -1,0 +1,57 @@
+<scroll-view class="emergency-page" scroll-y="true" enhanced="true" show-scrollbar="false">
+  <view class="topbar">
+    <view class="back-button" bindtap="goBack">‹ 返回</view>
+    <view class="top-title">紧急救援</view>
+  </view>
+
+  <view class="hero">
+    <view class="hero-mark">SOS</view>
+    <view class="hero-title">遇到危险，先联系救援</view>
+    <view class="hero-desc">本页不依赖后台服务，可直接拨号、复制求助信息并打开当前位置。</view>
+  </view>
+
+  <view class="location-panel">
+    <view class="location-top">
+      <view>
+        <view class="location-status">{{locationStatus}}</view>
+        <view class="location-title">{{locationTitle}}</view>
+      </view>
+      <view class="refresh-button" bindtap="refreshLocation">刷新</view>
+    </view>
+    <view class="location-text">{{locationText}}</view>
+    <view class="action-row">
+      <view class="action-button action-button--dark" bindtap="copyHelpText">{{copiedText}}</view>
+      <view class="action-button" bindtap="openLocation">打开地图</view>
+      <view class="action-button" bindtap="openSetting">权限设置</view>
+    </view>
+  </view>
+
+  <view class="section-title">一键联系</view>
+  <view class="contact-list">
+    <view wx:for="{{contacts}}" wx:key="key" class="contact-card" data-phone="{{item.phone}}" bindtap="callPhone">
+      <view>
+        <view class="contact-title">{{item.title}}</view>
+        <view class="contact-desc">{{item.desc}}</view>
+      </view>
+      <view class="phone-pill">{{item.phone}}</view>
+    </view>
+  </view>
+
+  <view class="section-title">现场处理步骤</view>
+  <view class="step-panel">
+    <view wx:for="{{steps}}" wx:key="title" class="step-item">
+      <view class="step-index">{{index + 1}}</view>
+      <view class="step-main">
+        <view class="step-title">{{item.title}}</view>
+        <view class="step-desc">{{item.desc}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="help-panel">
+    <view class="section-title section-title--light">求助信息预览</view>
+    <view class="help-text">{{helpText}}</view>
+  </view>
+
+  <view class="bottom-space"></view>
+</scroll-view>

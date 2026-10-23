@@ -1,0 +1,72 @@
+<view class="login-page">
+  <image class="login-bg" src="https://free.picui.cn/free/2026/06/21/6a37a7e8168bf.png" mode="aspectFill" />
+  <view class="login-mask"></view>
+
+  <view class="top-bar">
+    <view class="back-button" bindtap="goBack">‹ 返回</view>
+    <view class="page-title">请登录</view>
+  </view>
+
+  <view class="login-card">
+    <view class="brand">Silk Road Chronicle</view>
+    <view class="title">丝路问驿</view>
+    <view class="subtitle">授权头像、昵称与手机号后，为你同步行程、收藏、订单与积分。</view>
+
+    <button class="avatar-button" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+      <image class="avatar-preview" src="{{avatarUrl}}" mode="aspectFill" />
+    </button>
+    <view class="avatar-hint">{{avatarHint}}</view>
+
+    <input
+      class="form-input"
+      type="nickname"
+      placeholder="请输入微信昵称"
+      value="{{nickName}}"
+      bindinput="onNameInput"
+    />
+
+    <view class="phone-auth">
+      <view class="phone-left">
+        <view class="phone-title">你的手机号</view>
+        <view class="phone-desc">{{phoneLabel}}</view>
+      </view>
+      <view class="{{phoneCheckClass}}">{{phoneCheckText}}</view>
+    </view>
+
+    <view class="status-line">
+      <view class="status-dot"></view>
+      <view class="status-main">
+        <view class="status-step">{{loginStepText}}</view>
+        <view class="status-text">{{loginStatus}}</view>
+      </view>
+    </view>
+
+    <button
+      class="primary-button"
+      open-type="getPhoneNumber"
+      bindgetphonenumber="onGetPhoneNumber"
+      loading="{{loading}}"
+      disabled="{{!canRequestPhone || loading}}"
+    >
+      微信手机号一键登录
+    </button>
+
+    <button class="guest-button" loading="{{loading}}" disabled="{{loading}}" bindtap="guestLogin">
+      游客登录
+    </button>
+    <view class="guest-note">游客模式可继续使用路线、发布、收藏、翻译等功能，相关操作会保存在本机；微信登录后可换设备同步。</view>
+
+    <view class="manual-link" bindtap="toggleManualPhone">使用其他手机号</view>
+    <view wx:if="{{showManualPhone}}" class="manual-box">
+      <input
+        class="form-input manual-input"
+        type="number"
+        maxlength="11"
+        placeholder="请输入手机号"
+        value="{{manualPhone}}"
+        bindinput="onManualPhoneInput"
+      />
+      <button class="manual-button" loading="{{loading}}" bindtap="loginWithManualPhone">确认绑定并登录</button>
+    </view>
+  </view>
+</view>

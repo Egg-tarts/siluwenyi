@@ -1,0 +1,28 @@
+<scroll-view class="coupon-page" scroll-y="true" enhanced="true" show-scrollbar="false">
+  <view class="hero">
+    <view class="hero-title">我的卡券</view>
+    <view class="hero-subtitle">丝路出行礼遇、文博优惠与城市补给都在这里。</view>
+  </view>
+
+  <scroll-view class="filter-scroll" scroll-x="true" show-scrollbar="false">
+    <view class="filter-track">
+      <view wx:for="{{filters}}" wx:key="*this" class="filter-chip" data-type="{{item}}" bindtap="setFilter">{{item}}</view>
+    </view>
+  </scroll-view>
+
+  <view class="coupon-list">
+    <view wx:for="{{coupons}}" wx:key="id" class="{{item.cardClass}}">
+      <view class="coupon-left">
+        <view class="coupon-amount">{{item.amount}}</view>
+        <view class="coupon-condition">{{item.condition}}</view>
+      </view>
+      <view class="coupon-main">
+        <view class="coupon-type">{{item.type}}</view>
+        <view class="coupon-title">{{item.title}}</view>
+        <view class="coupon-desc">{{item.desc}}</view>
+        <view class="coupon-date">{{item.date}}</view>
+      </view>
+      <view class="coupon-button" data-id="{{item.id}}" bindtap="claimCoupon">{{item.buttonText}}</view>
+    </view>
+  </view>
+</scroll-view>

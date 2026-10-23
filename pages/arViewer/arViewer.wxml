@@ -1,0 +1,215 @@
+<scroll-view class="ar-page" scroll-y="true" enhanced="true" show-scrollbar="false">
+  <view class="topbar">
+    <view class="back-button" bindtap="goBack">‹ 返回</view>
+    <view class="top-title">丝路影像生成</view>
+  </view>
+
+  <view class="hero-panel">
+    <view class="hero-kicker">Seedance · 甘肃风格动画视频</view>
+    <view class="hero-title">上传一张图，让丝路动起来</view>
+    <view class="hero-desc">选择照片、拍摄景观或使用示例图，生成带有敦煌光影、驼铃远行、黄河风与丹霞色彩的短视频。</view>
+    <view class="hero-tags">
+      <view wx:for="{{styleTags}}" wx:key="*this" class="hero-tag" data-tag="{{item}}" bindtap="useStyleTag">{{item}}</view>
+    </view>
+  </view>
+
+  <view class="camera-stage">
+    <camera
+      wx:if="{{!photoPath}}"
+      class="camera-view"
+      device-position="{{cameraPosition}}"
+      flash="{{flash}}"
+      resolution="high"
+      bindinitdone="onCameraInitDone"
+      binderror="onCameraError"
+    ></camera>
+    <image wx:if="{{photoPath}}" class="camera-view" src="{{photoPath}}" mode="aspectFill" />
+    <image wx:if="{{!cameraReady && !photoPath}}" class="camera-fallback" src="{{activeScene.image}}" mode="aspectFill" />
+
+    <view class="camera-shade"></view>
+    <view class="motion-ring ring-a"></view>
+    <view class="motion-ring ring-b"></view>
+    <view class="corner corner-a"></view>
+    <view class="corner corner-b"></view>
+    <view class="corner corner-c"></view>
+    <view class="corner corner-d"></view>
+
+    <view class="status-pill">
+      <view class="status-dot {{cameraReady || photoPath ? 'status-dot--active' : ''}}"></view>
+      <text>{{selectedImageLabel}}</text>
+    </view>
+
+    <view wx:if="{{cameraError}}" class="camera-error">{{cameraError}}</view>
+
+    <view class="ar-label label-main">
+      <view class="label-title">{{activeScene.name}}</view>
+      <view class="label-desc">{{activeScene.focus}}</view>
+    </view>
+    <view class="ar-label label-side">
+      <view class="label-title">{{activeScene.type}}</view>
+      <view class="label-desc">图片理解 · 风格迁移 · 镜头动画</view>
+    </view>
+  </view>
+
+  <view class="camera-toolbar">
+    <view class="tool-button" bindtap="chooseImage">选图</view>
+    <view class="capture-button" bindtap="takePhoto">
+      <view class="capture-core"></view>
+    </view>
+    <view class="tool-button" bindtap="toggleFlash">{{flashLabel}}</view>
+  </view>
+
+  <scroll-view class="scene-scroll" scroll-x="true" show-scrollbar="false">
+    <view class="scene-track">
+      <view
+        wx:for="{{scenes}}"
+        wx:key="name"
+        wx:for-index="index"
+        class="scene-chip {{index === activeIndex ? 'scene-chip--active' : ''}}"
+        data-index="{{index}}"
+        bindtap="chooseScene"
+      >
+        {{item.name}}
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="creator-panel">
+    <view class="section-head">
+      <view>
+        <view class="section-kicker">Image to Video</view>
+        <view class="section-title">生成设置</view>
+      </view>
+      <view class="scene-use" bindtap="useSceneImage">用示例图</view>
+    </view>
+
+    <view class="preview-box">
+      <image class="preview-image" src="{{previewImage}}" mode="aspectFill" />
+      <view class="preview-meta">
+        <view class="preview-title">{{selectedImageLabel}}</view>
+        <view class="preview-desc">{{activeScene.guide}}</view>
+      </view>
+    </view>
+
+    <view class="url-row">
+      <input class="url-input" value="{{customImageUrl}}" placeholder="也可以粘贴一张图片链接" bindinput="onImageUrlInput" />
+      <view class="url-button" bindtap="applyImageUrl">使用</view>
+    </view>
+
+    <view class="preset-head">
+      <view>
+        <view class="prompt-label">生成风格</view>
+        <view class="preset-current">当前：{{activePresetTitle}}</view>
+      </view>
+      <view class="custom-toggle" bindtap="toggleCustomPrompt">{{showCustomPrompt ? '收起自定义' : '自定义描述'}}</view>
+    </view>
+
+    <view class="preset-grid">
+      <view
+        wx:for="{{promptPresets}}"
+        wx:key="id"
+        class="{{item.className}}"
+        data-id="{{item.id}}"
+        bindtap="choosePreset"
+      >
+        <view class="preset-title">{{item.title}}</view>
+        <view class="preset-desc">{{item.desc}}</view>
+      </view>
+    </view>
+
+    <view wx:if="{{showCustomPrompt}}" class="custom-prompt-panel">
+      <view class="custom-prompt-tip">自定义内容会自动加入安全约束，尽量只描述风景、光影、纹样和镜头运动。</view>
+      <textarea
+        class="prompt-input"
+        value="{{videoPrompt}}"
+        auto-height="{{false}}"
+        maxlength="800"
+        placeholder="描述你想要的甘肃风格动画效果"
+        bindinput="onPromptInput"
+      ></textarea>
+    </view>
+
+    <view class="setting-group">
+      <view class="setting-title">时长</view>
+      <view class="option-row">
+        <view class="option {{duration === 5 ? 'option--active' : ''}}" data-value="5" bindtap="chooseDuration">5秒</view>
+        <view class="option {{duration === 8 ? 'option--active' : ''}}" data-value="8" bindtap="chooseDuration">8秒</view>
+        <view class="option {{duration === 10 ? 'option--active' : ''}}" data-value="10" bindtap="chooseDuration">10秒</view>
+      </view>
+    </view>
+
+    <view class="setting-grid">
+      <view class="setting-group">
+        <view class="setting-title">画幅</view>
+        <view class="option-row option-row--compact">
+          <view class="option {{ratio === 'adaptive' ? 'option--active' : ''}}" data-value="adaptive" bindtap="chooseRatio">自适应</view>
+          <view class="option {{ratio === '16:9' ? 'option--active' : ''}}" data-value="16:9" bindtap="chooseRatio">16:9</view>
+          <view class="option {{ratio === '9:16' ? 'option--active' : ''}}" data-value="9:16" bindtap="chooseRatio">9:16</view>
+        </view>
+      </view>
+      <view class="setting-group">
+        <view class="setting-title">清晰度</view>
+        <view class="option-row option-row--compact">
+          <view class="option {{resolution === '720p' ? 'option--active' : ''}}" data-value="720p" bindtap="chooseResolution">720p</view>
+          <view class="option {{resolution === '1080p' ? 'option--active' : ''}}" data-value="1080p" bindtap="chooseResolution">1080p</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="switch-row">
+      <view class="switch-item" bindtap="toggleAudio">
+        <view class="switch-dot {{generateAudio ? 'switch-dot--active' : ''}}"></view>
+        <text>生成环境声</text>
+      </view>
+      <view class="switch-item" bindtap="toggleCameraFixed">
+        <view class="switch-dot {{cameraFixed ? 'switch-dot--active' : ''}}"></view>
+        <text>稳定镜头</text>
+      </view>
+    </view>
+
+    <view class="generate-button {{isGenerating ? 'generate-button--loading' : ''}}" bindtap="startGeneration">
+      {{isGenerating ? '正在生成...' : '生成甘肃风格视频'}}
+    </view>
+  </view>
+
+  <view class="progress-panel">
+    <view class="section-head">
+      <view>
+        <view class="section-kicker">Process</view>
+        <view class="section-title">生成进度</view>
+      </view>
+      <view class="task-id" wx:if="{{taskId}}">任务 {{taskId}}</view>
+    </view>
+
+    <view class="progress-line">
+      <view class="progress-fill progress-fill-{{progressStage}}"></view>
+    </view>
+    <view class="progress-steps">
+      <view class="progress-step {{progressStage >= 1 ? 'progress-step--active' : ''}}">选图</view>
+      <view class="progress-step {{progressStage >= 2 ? 'progress-step--active' : ''}}">提交</view>
+      <view class="progress-step {{progressStage >= 3 ? 'progress-step--active' : ''}}">生成</view>
+      <view class="progress-step {{progressStage >= 5 ? 'progress-step--active' : ''}}">完成</view>
+    </view>
+    <view class="status-text">{{taskStatusText}}</view>
+    <view wx:if="{{errorText}}" class="error-text">{{errorText}}</view>
+
+    <view wx:if="{{generatedVideoUrl}}" class="video-card">
+      <video class="result-video" src="{{generatedVideoUrl}}" controls object-fit="contain"></video>
+      <view class="video-actions">
+        <view class="video-action" bindtap="previewVideo">全屏预览</view>
+        <view class="video-action video-action--save" bindtap="saveVideo">保存视频</view>
+        <view class="video-action" bindtap="copyVideoLink">复制链接</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="guide-card">
+    <view class="section-title">生成建议</view>
+    <view class="tip-row">
+      <view wx:for="{{tips}}" wx:key="*this" class="tip-chip">{{item}}</view>
+    </view>
+    <view class="guide-text">{{activeScene.restore}}</view>
+  </view>
+
+  <view class="bottom-space"></view>
+</scroll-view>

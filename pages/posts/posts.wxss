@@ -144,3 +144,21 @@
   border-radius: 20rpx;
   font-size: 28rpx;
 }
+.post-header {
+  font-size: larger;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.post-content {
+  font-size: medium;
+  font-weight: 400;
+  font-style: italic;
+  text-align: center;
+}
+
+.post-content1 {
+  font-size: medium;
+  font-weight: 400;
+  font-style: italic;
+}

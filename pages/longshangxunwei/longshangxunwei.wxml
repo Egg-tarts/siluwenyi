@@ -1,0 +1,46 @@
+<scroll-view class="page" scroll-y="true" enhanced="true" show-scrollbar="false">
+  <view class="back-button" bindtap="goBack">‹ 返回</view>
+
+  <view class="hero">
+    <view class="eyebrow">Gansu Taste</view>
+    <view class="title">陇上寻味</view>
+    <view class="subtitle">把城市的味道排进行程，走到哪儿就吃到哪儿，用烟火气补全丝路故事。</view>
+  </view>
+
+  <view class="pair-panel">
+    <view>
+      <view class="pair-title">风味搭配参考</view>
+      <view class="pair-subtitle">按甘肃常见旅途场景整理</view>
+    </view>
+    <view class="pair-row">
+      <view wx:for="{{pairing}}" wx:key="label" class="pair-item">
+        <text class="pair-label">{{item.label}}</text>
+        <text class="pair-value">{{item.value}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-title">城市菜单</view>
+  <view class="taste-grid">
+    <view wx:for="{{foods}}" wx:key="name" class="taste-card">
+      <image class="food-image" src="{{item.image}}" mode="aspectFill" />
+      <view class="food-body">
+        <view class="food-meta">{{item.city}} · {{item.time}}</view>
+        <view class="food-name">{{item.name}}</view>
+        <view class="food-desc">{{item.flavor}}</view>
+        <view class="food-pair">推荐搭配：{{item.pair}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="module">
+    <view class="section-title module-title">风味路线</view>
+    <view wx:for="{{routes}}" wx:key="title" class="route-item">
+      <view class="route-index">0{{index + 1}}</view>
+      <view>
+        <view class="route-title">{{item.title}}</view>
+        <view class="route-desc">{{item.desc}}</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

@@ -1,2 +1,143 @@
-<!--pages/fengxingwanli/fengxingwanli.wxml-->
-<text>pages/fengxingwanli/fengxingwanli.wxml</text>
+<scroll-view class="page page-fengxing" scroll-y="true" enhanced="true" show-scrollbar="false">
+  <view class="back-button" bindtap="goBack">‹ 返回</view>
+
+  <view class="hero">
+    <view class="eyebrow">Route Archive</view>
+    <view class="title">风行万里</view>
+    <view class="subtitle">把每一次路线整理成专属行程档案，城市、天数、餐食和提醒都能清楚回看。</view>
+    <view class="wind-line">
+      <view class="wind-node"></view>
+      <view class="wind-node"></view>
+      <view class="wind-node"></view>
+      <view class="wind-node"></view>
+    </view>
+  </view>
+
+  <view class="stats">
+    <view class="stat">
+      <text class="stat-num">{{routeCount}}</text>
+      <text class="stat-label">行程档案</text>
+    </view>
+    <view class="stat stat-main">
+      <text class="stat-num">{{totalDays}}</text>
+      <text class="stat-label">累计天数</text>
+    </view>
+    <view class="stat">
+      <text class="stat-num">{{completedCities}}</text>
+      <text class="stat-label">点亮城市</text>
+    </view>
+  </view>
+
+  <view wx:if="{{hasActiveRoute}}" class="archive-panel">
+    <view class="panel-top">
+      <view>
+        <view class="feature-kicker">当前档案</view>
+        <view class="feature-title">{{activeRoute.title}}</view>
+      </view>
+      <view class="route-source">{{activeRoute.mood}}</view>
+    </view>
+    <view class="feature-desc">{{activeRoute.summary}}</view>
+    <view class="city-row">
+      <text wx:for="{{activeRoute.cities}}" wx:key="*this" class="city-pill">{{item}}</text>
+    </view>
+    <view class="highlight-grid">
+      <view wx:for="{{activeRoute.highlights}}" wx:key="label" class="highlight">
+        <view class="highlight-label">{{item.label}}</view>
+        <view class="highlight-value">{{item.value}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{noActiveRoute}}" class="archive-panel empty-panel">
+    <view class="feature-kicker">档案状态</view>
+    <view class="feature-title">{{emptyText}}</view>
+    <view class="feature-desc">{{emptyDesc}}</view>
+  </view>
+
+  <view class="section-head">
+    <view>
+      <view class="section-title">路线档案</view>
+      <view class="section-subtitle">左右浏览，点击切换下方拆解</view>
+    </view>
+    <view wx:if="{{loadingRemote}}" class="syncing">整理中</view>
+  </view>
+
+  <scroll-view wx:if="{{hasRoutes}}" class="route-strip" scroll-x="true" show-scrollbar="false">
+    <view class="route-track">
+      <view
+        wx:for="{{routes}}"
+        wx:key="id"
+        class="route-card route-card--{{item.color}} {{item.activeClass}}"
+        data-id="{{item.id}}"
+        bindtap="chooseRoute"
+      >
+        <view class="route-date">{{item.created_at}}</view>
+        <view class="route-title">{{item.title}}</view>
+        <view class="route-summary">{{item.summary}}</view>
+        <view class="tag-row">
+          <text wx:for="{{item.tags}}" wx:key="*this" class="route-tag">{{item}}</text>
+        </view>
+        <view class="route-foot">{{item.cityText}}</view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{noRoutes}}" class="{{emptyClass}}">
+    <view class="empty-mark">{{emptyMark}}</view>
+    <view class="empty-title">{{emptyText}}</view>
+    <view class="empty-desc">{{emptyDesc}}</view>
+  </view>
+
+  <view wx:if="{{hasActiveRoute}}" class="module">
+    <view class="module-head">
+      <view>
+        <view class="section-title">行程拆解</view>
+        <view class="section-subtitle">按天查看每天的重点安排</view>
+      </view>
+      <view class="days-chip">{{activeRoute.days}}</view>
+    </view>
+    <view class="timeline">
+      <view wx:for="{{activeRoute.dayPlans}}" wx:key="day" class="timeline-item">
+        <view class="timeline-index">{{index + 1}}</view>
+        <view class="timeline-card">
+          <view class="day-row">
+            <view class="day-title">{{item.day}}</view>
+            <view class="day-city">{{item.city}}</view>
+          </view>
+          <view class="scenic-title">{{item.title}}</view>
+          <view class="info-row">
+            <view class="info-label">时间</view>
+            <view class="info-text">{{item.time}}</view>
+          </view>
+          <view class="info-row">
+            <view class="info-label">交通</view>
+            <view class="info-text">{{item.traffic}}</view>
+          </view>
+          <view class="info-row">
+            <view class="info-label">餐食</view>
+            <view class="info-text">{{item.foodLine}}</view>
+          </view>
+          <view class="note-box">{{item.noteLine}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{hasRoutes}}" class="module compact-module">
+    <view class="section-title">档案索引</view>
+    <view class="badge-grid">
+      <view class="badge">
+        <view class="badge-mark">行</view>
+        <view class="badge-name">专属路线</view>
+        <view class="badge-count">{{routeCount}}条</view>
+      </view>
+      <view class="badge">
+        <view class="badge-mark">城</view>
+        <view class="badge-name">城市足迹</view>
+        <view class="badge-count">{{completedCities}}座</view>
+      </view>
+    </view>
+  </view>
+
+  <button wx:if="{{hasActiveRoute}}" class="primary-button" bindtap="viewRouteDetail">查看完整行程</button>
+</scroll-view>

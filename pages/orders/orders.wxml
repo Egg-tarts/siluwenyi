@@ -1,16 +1,57 @@
-<view class="order-container">
-  <block wx:for="{{orderItems}}" wx:key="id">
-    <view class="order-item">
-      <view class="item-content">
-        <view class="item-photo">
-          <image src="{{item.photo}}" mode="aspectFill"></image>
-        </view>
-        <view class="item-info">
-          <text class="item-name">{{item.name}}</text>
-          <text class="item-quantity">数量：{{item.quantity}}</text>
-        </view>
-        <view class="item-price">¥{{item.price}}</view>
-      </view>
+<scroll-view class="orders-page" scroll-y="true" enhanced="true" show-scrollbar="false">
+  <view class="orders-hero">
+    <view class="orders-title">{{pageTitle}}</view>
+    <view class="orders-subtitle">查看预约、文创购买、售后进度与评价提醒</view>
+  </view>
+
+  <view class="tabs">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="key"
+      class="{{item.className}}"
+      data-type="{{item.key}}"
+      bindtap="switchTab"
+    >
+      <view class="tab-title">{{item.title}}</view>
+      <view class="tab-count">{{item.count}}</view>
     </view>
-  </block>
-</view>
+  </view>
+
+  <view wx:if="{{!hasOrders}}" class="empty-order">
+    <view class="empty-mark">{{emptyMark}}</view>
+    <view class="empty-title">{{emptyTitle}}</view>
+    <view class="empty-desc">{{emptyDesc}}</view>
+    <button class="market-button" bindtap="handleEmptyAction">{{emptyActionText}}</button>
+  </view>
+
+  <view wx:for="{{orders}}" wx:key="id" class="order-card" data-id="{{item.id}}" bindtap="openOrder">
+    <view class="order-head">
+      <view>
+        <view class="order-id">订单 {{item.displayId}}</view>
+        <view class="order-time">{{item.created_at}}</view>
+      </view>
+      <view class="order-status">{{item.status}}</view>
+    </view>
+
+    <view wx:for="{{item.items}}" wx:key="id" wx:for-item="product" class="order-product">
+      <image class="order-image" src="{{product.cultural_product.images1}}" mode="aspectFill" />
+      <view class="order-info">
+        <view class="order-name">{{product.cultural_product.name}}</view>
+        <view class="order-meta">{{product.cultural_product.city}} · x{{product.quantity}}</view>
+      </view>
+      <view class="order-price">¥{{product.cultural_product.money}}</view>
+    </view>
+
+    <view class="order-bottom">
+      <view>共 {{item.itemCount}} 件</view>
+      <view class="order-total">{{item.totalText}}</view>
+    </view>
+
+    <view class="order-actions">
+      <button class="plain-action" catchtap="primaryAction" data-action="refund">申请售后</button>
+      <button class="main-action" catchtap="primaryAction" data-action="review">去评价</button>
+    </view>
+  </view>
+
+  <view class="bottom-space"></view>
+</scroll-view>

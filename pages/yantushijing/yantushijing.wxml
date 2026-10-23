@@ -1,0 +1,56 @@
+<scroll-view class="page" scroll-y="true" enhanced="true" show-scrollbar="false">
+  <view class="back-button" bindtap="goBack">返回</view>
+
+  <view class="hero">
+    <view class="eyebrow">Scenery Notes · 独立拾景库</view>
+    <view class="title">沿途拾景</view>
+    <view class="subtitle">这里不做社区动态，只做旅途中的风景灵感、拍照点、停留建议和个人拾景清单。</view>
+    <view class="hero-stat">已收藏 {{savedCount}} 个停留点</view>
+  </view>
+
+  <view class="feature">
+    <image class="feature-image" src="{{featured.image}}" mode="aspectFill" />
+    <view class="feature-info">
+      <view class="feature-meta">{{featured.city}} · {{featured.tag}} · {{featured.best}}</view>
+      <view class="feature-title">{{featured.name}}</view>
+      <view class="feature-desc">{{featured.desc}}</view>
+      <view class="feature-tip">{{featured.shot}}</view>
+    </view>
+  </view>
+
+  <scroll-view class="filters" scroll-x="true" show-scrollbar="false">
+    <view class="filter-track">
+      <view wx:for="{{filters}}" wx:key="name" class="{{item.className}}" data-index="{{item.index}}" bindtap="setFilter">{{item.name}}</view>
+    </view>
+  </scroll-view>
+
+  <view class="section-title">景点灵感库</view>
+  <view class="spot-list">
+    <view wx:for="{{spots}}" wx:key="id" class="spot-card">
+      <image class="spot-image" src="{{item.image}}" mode="aspectFill" />
+      <view class="spot-info">
+        <view class="spot-meta">{{item.city}} · {{item.tag}} · {{item.best}}</view>
+        <view class="spot-name">{{item.name}}</view>
+        <view class="spot-desc">{{item.desc}}</view>
+        <view class="spot-tip">{{item.tip}}</view>
+        <view class="{{item.saveClass}}" data-id="{{item.id}}" bindtap="toggleSave">{{item.saveText}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="module">
+    <view class="section-title module-title">路线灵感</view>
+    <view wx:for="{{themes}}" wx:key="title" class="idea">
+      <view class="idea-index">0{{index + 1}}</view>
+      <view>
+        <view class="idea-title">{{item.title}}</view>
+        <view class="idea-desc">{{item.desc}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="module">
+    <view class="section-title module-title">拍照小抄</view>
+    <view wx:for="{{photoRules}}" wx:key="*this" class="photo-rule">{{item}}</view>
+  </view>
+</scroll-view>

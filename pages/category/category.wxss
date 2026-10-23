@@ -1,16 +1,60 @@
 .cart-container {
-  padding: 10px;
+  padding: 26rpx;
   background-color: #f4f4ec;
-  height: 100vh; /* 改为100vh以适应屏幕高度 */
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 150rpx;
+}
+
+.cart-title {
+  margin: 18rpx 0 28rpx;
+  color: #33271c;
+  font-size: 42rpx;
+  font-weight: 800;
+}
+
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 480rpx;
+  color: rgba(85, 66, 46, 0.62);
+}
+
+.empty-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 108rpx;
+  height: 108rpx;
+  border-radius: 50%;
+  color: #fff8e7;
+  font-size: 34rpx;
+  font-weight: 800;
+  background: #8a5b34;
+}
+
+.empty-text {
+  margin-top: 22rpx;
+  font-size: 28rpx;
 }
 
 .cart-item {
   position: relative;
-  margin-bottom: 10px;
-  background-color: rgb(255, 246, 168);
+  margin-bottom: 18rpx;
+  padding: 18rpx;
+  border-radius: 8rpx;
+  background-color: rgba(255, 255, 255, 0.78);
   overflow: hidden;
   display: flex;
+  align-items: center;
   transition: transform 0.3s ease;
+  box-shadow: 0 8rpx 24rpx rgba(83, 62, 37, 0.08);
+}
+
+.item-check {
+  margin-right: 12rpx;
 }
 
 .item-content {
@@ -21,10 +65,11 @@
 }
 
 .item-photo image {
-  width: 80px;
-  height: 80px;
+  width: 142rpx;
+  height: 142rpx;
   object-fit: cover;
-  margin-right: 10px;
+  margin-right: 18rpx;
+  border-radius: 8rpx;
 }
 
 .item-info {
@@ -32,19 +77,24 @@
 }
 
 .item-name {
-  font-size: 16px;
-  margin-bottom: 5px;
+  display: block;
+  color: #34281d;
+  font-size: 28rpx;
+  font-weight: 700;
+  margin-bottom: 12rpx;
 }
 
 .item-quantity {
-  font-size: 14px;
-  color: #888;
+  display: block;
+  font-size: 23rpx;
+  color: #8a745a;
 }
 
 .item-price {
-  font-size: 16px;
-  color: #f60;
-  margin-right: 10px;
+  font-size: 30rpx;
+  color: #a65c22;
+  font-weight: 800;
+  margin-right: 10rpx;
 }
 
 .item-select checkbox {
@@ -89,6 +139,7 @@
   padding: 10px;
   background-color: #fff;
   border-top: 1px solid #f0f0f0;
+  box-sizing: border-box;
 }
 
 .select-all-btn, .pay-btn {
@@ -97,12 +148,18 @@
 }
 
 .select-all-btn {
-  background-color: #f60;
-  color: white;
+  background-color: #f1dfbd;
+  color: #5a3c21;
+}
+
+.cart-total {
+  color: #a65c22;
+  font-size: 32rpx;
+  font-weight: 800;
 }
 
 .pay-btn {
-  background-color: #f60;
+  background-color: #2f2419;
   color: white;
 }
 

@@ -1,104 +1,208 @@
-<view class="container" >
-  <view class="search-container">
-    <!-- 搜索框 -->
-    <input class="search-input" bindinput="onInput"  bindconfirm="searchFunc"  />
-  <image class="search-icon" src="/pages/images/search.png" wx:if="{{showIcon}}" />
-    <!-- 显示信息的按钮 -->
-    <view class="info-button">
-      <button open-type="contact" bindcontact="handleContact" type="primary"class="custom-button" style="width: 164rpx; height: 80rpx; display: block; box-sizing: border-box; left: -36rpx; top: -15rpx; position: absolute">
-    <cover-image src="/pages/images/talk.png" class="button-image-1"></cover-image>
-</button>
-</view>
-  </view>
-  <view class="button-group">
-    <view 
-      class="button {{currentTab === 'scenic' ? 'active' : ''}}" 
-      data-type="scenic"
-      bindtap="handleButtonClick"
-    ><span class="text">景点</span></view>
-    <view 
-      class="button {{currentTab === 'city' ? 'active' : ''}}" 
-      data-type="city"
-      bindtap="handleButtonClick"
-    ><span class="text">推荐</span></view>
-  </view>
+<block wx:if="{{showDetail}}">
+  <scroll-view class="detail-page" scroll-y="true" enhanced="true" show-scrollbar="false">
+    <view class="detail-topbar">
+      <view class="detail-back" bindtap="closeDetail">‹ 返回</view>
+      <view class="detail-more">分享</view>
+    </view>
 
-  <view  wx:if="{{currentTab === 'scenic'}}" class="scroll-view" scroll-y="true" >
-    <view class="button-grid-left">
-      <block wx:for="{{buttonListleft}}" wx:key="index">
-        <view class="button_url_left" data-id="{{item.id}}" bindtap="handleButtonClickUrl">
-          <image class="button-image" src="https://lzuer.mynatapp.cc{{item.images[0]}}" mode="widthFix"></image>
-          <view class="button-text-big">{{item.text_big}}</view>
-          <view class="button-text-normal">{{item.text_normal}}</view>
-          <view class="stars">
-    <image class="star" src="/pages/images/star.png"></image>
-    <image class="star" src="/pages/images/star.png"></image>
-    <image class="star" src="/pages/images/star.png"></image>
-    <image class="star" src="/pages/images/star.png"></image>
-    <image class="star" src="/pages/images/star.png"></image>
-          </view>      
-          <view class="button-text-popular-money">
-          <view class="button-text-popular">{{popular}}</view>
-          <view class="button-text-money">{{item.money}}</view>
+    <image class="detail-image" src="{{activeNote.image}}" mode="aspectFill" />
+    <view class="detail-card">
+      <view class="detail-author">
+        <image class="avatar big" src="{{activeNote.avatar}}" mode="aspectFill" />
+        <view>
+          <view class="author-title">{{activeNote.author}}</view>
+          <view class="author-sub">分享了 {{activeNote.tag}} 旅行笔记</view>
         </view>
       </view>
-      </block>
-      </view>
-      <view class="button-grid-right">
-      <block wx:for="{{buttonListright}}" wx:key="index">
-        <view class="button_url_right" data-id="{{item.id}}" bindtap="handleButtonClickUrl">
-          <image class="button-image" src="https://lzuer.mynatapp.cc{{item.images[0]}}" mode="widthFix" ></image>
-          <view class="button-text-big">{{item.text_big}}</view>
-          <view class="button-text-normal">{{item.text_normal}}</view>
-          <view class="stars">
-    <image class="star" src="/pages/images/star.png"></image>
-    <image class="star" src="/pages/images/star.png"></image>
-    <image class="star" src="/pages/images/star.png"></image>
-    <image class="star" src="/pages/images/star.png"></image>
-    <image class="star" src="/pages/images/star.png"></image>
-          </view>      
-          <view class="button-text-popular-money">
-          <view class="button-text-popular">{{popular}}</view>
-          <view class="button-text-money">{{item.money}}</view>
+      <view class="detail-title">{{activeNote.title}}</view>
+      <view class="detail-body">{{activeNote.body}}</view>
+      <view class="detail-meta">{{activeNote.views}} 浏览 · {{activeNote.likes}} 赞 · {{activeNote.tag}}</view>
+      <view class="detail-actions">
+        <view class="detail-action {{activeNote.liked ? 'detail-action--active' : ''}}" bindtap="toggleNoteLike">
+          {{activeNote.liked ? '已赞' : '点赞'}} {{activeNote.likes}}
         </view>
+        <view class="detail-action {{activeNote.collected ? 'detail-action--active' : ''}}" bindtap="toggleNoteCollect">
+          {{activeNote.collected ? '已收藏' : '收藏'}}
+        </view>
+        <view class="detail-action detail-action--ar" bindtap="openArViewer">影像生成</view>
+        <view class="detail-action">评论 {{activeNote.comments.length}}</view>
       </view>
-      </block>
     </view>
-  </view>
-  <view  wx:if="{{currentTab === 'city'}}" class="scroll-view" scroll-y="true" >
-    <view class="floating-button" bindtap="navigateToMyRecommend">
-    <text class="plus-sign">+</text></view>
 
-    <view class="button-grid-left">
-  <block wx:for="{{buttonListleft_recommend}}" wx:key="index">
-    <view class="button_url_left" data-id="{{item.id}}" bindtap="handleButtonClickUrl">
-      <image class="button-image" src="https://lzuer.mynatapp.cc{{item.images[0]}}" mode="widthFix"></image>
-      <view class="button_head_txt">{{item.head_txt}}</view>
-      <view class="author-info">
-        <view class="author-avatar">
-          <image class="avatar" src="https://lzuer.mynatapp.cc{{item.author.avatar}}" mode="aspectFill"></image>
+    <view class="comment-panel">
+      <view class="section-title">大家的评论</view>
+      <view wx:for="{{activeNote.comments}}" wx:key="name" wx:for-index="index" class="comment-item" data-index="{{index}}" bindtap="openComment">
+        <image class="avatar" src="{{item.avatar}}" mode="aspectFill" />
+        <view class="comment-main">
+          <view class="comment-head">
+            <view class="comment-name">{{item.name}}</view>
+            <view class="comment-like {{item.liked ? 'comment-like--active' : ''}}" data-index="{{index}}" catchtap="toggleCommentLike">
+              {{item.liked ? '已赞' : '点赞'}} {{item.likes}}
+            </view>
+          </view>
+          <view class="comment-text">{{item.text}}</view>
+          <view class="comment-actions">
+            <view class="comment-mini-action" data-index="{{index}}" catchtap="replyComment">回复</view>
+            <view class="comment-mini-action" data-index="{{index}}" catchtap="openCommentFromAction">查看对话</view>
+          </view>
+          <view wx:for="{{item.replies}}" wx:key="*this" class="reply-item">{{item}}</view>
         </view>
-        <view class="author-name">{{item.author.username}}</view>
-        <view class="like">{{item.likes_count}}点赞</view>
       </view>
     </view>
-  </block>
-</view>
-<view class="button-grid-right">
-  <block wx:for="{{buttonListright_recommend}}" wx:key="index">
-    <view class="button_url_right" data-id="{{item.id}}" bindtap="handleButtonClickUrl">
-      <image class="button-image" src="https://lzuer.mynatapp.cc{{item.images[0]}}" mode="widthFix"></image>
-      <view class="button_head_txt">{{item.head_txt}}</view>
-      <view class="author-info">
-        <view class="author-avatar">
-          <image class="avatar" src="https://lzuer.mynatapp.cc{{item.author.avatar}}" mode="aspectFill"></image>
+
+    <view wx:if="{{showCommentFocus}}" class="comment-focus">
+      <view class="section-title">评论脉络</view>
+      <view class="focus-head">
+        <image class="avatar" src="{{activeComment.avatar}}" mode="aspectFill" />
+        <view class="focus-name">{{activeComment.name}}</view>
+      </view>
+      <view class="focus-text">{{activeComment.text}}</view>
+      <view wx:for="{{activeComment.replies}}" wx:key="*this" class="focus-reply">{{item}}</view>
+    </view>
+
+    <view class="section-head">
+      <view class="section-title">相关推荐</view>
+    </view>
+    <view class="related-list">
+      <view wx:for="{{relatedNotes}}" wx:key="id" class="related-card" data-id="{{item.id}}" bindtap="openNote">
+        <image class="related-image" src="{{item.image}}" mode="aspectFill" />
+        <view class="related-info">
+          <view class="note-tag">{{item.tag}}</view>
+          <view class="related-title">{{item.title}}</view>
+          <view class="related-desc">{{item.desc}}</view>
         </view>
-        <view class="author-name">{{item.author.username}}</view>
-        <view class="like">{{item.likes_count}}点赞</view>
       </view>
     </view>
-  </block>
-</view>
-</view>
-</view>
-<tabbar></tabbar>
+  </scroll-view>
+</block>
+
+<block wx:if="{{showList}}">
+  <scroll-view class="community-page" scroll-y="true" enhanced="true" show-scrollbar="false">
+    <view class="topbar">
+      <view class="top-title">用户社区</view>
+    </view>
+
+    <view class="question-bar">
+      <view class="question-avatar">问</view>
+      <view class="question-text">{{hotLine}}</view>
+      <view class="question-arrow">›</view>
+    </view>
+
+    <view class="search-card">
+      <view class="search-icon">⌕</view>
+      <input class="search-input" placeholder="搜索城市、攻略、笔记" value="{{searchValue}}" bindinput="onInput" />
+    </view>
+
+    <view class="ar-entry-card" bindtap="openArViewer">
+      <view class="ar-entry-main">
+        <view class="ar-entry-kicker">丝路影像生成</view>
+        <view class="ar-entry-title">上传照片生成甘肃风格动画</view>
+        <view class="ar-entry-desc">把旅行照片转成带有敦煌光影、驼铃远行与丹霞色彩的动态短片。</view>
+      </view>
+      <view class="ar-entry-visual">
+        <view class="ar-ring"></view>
+        <view class="ar-lens">影像</view>
+      </view>
+    </view>
+
+    <scroll-view class="topic-scroll" scroll-x="true" show-scrollbar="false">
+      <view class="topic-track">
+        <view wx:for="{{topicCards}}" wx:key="title" class="topic-card">
+          <image class="topic-image" src="{{item.image}}" mode="aspectFill" />
+          <view class="topic-mask"></view>
+          <view class="topic-content">
+            <view class="topic-title">{{item.title}}</view>
+            <view class="topic-desc">{{item.desc}}</view>
+            <view class="topic-count">{{item.count}}</view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <scroll-view class="quick-scroll" scroll-x="true" show-scrollbar="false">
+      <view class="quick-track">
+        <view wx:for="{{quickTopics}}" wx:key="*this" class="quick-chip" data-keyword="{{item}}" bindtap="selectTopic">{{item}}</view>
+      </view>
+    </scroll-view>
+
+    <view class="block-panel">
+      <view class="section-head compact">
+        <view class="section-title">正在讨论</view>
+        <view class="section-more">换一批 ›</view>
+      </view>
+      <view wx:for="{{discussList}}" wx:key="title" class="discuss-item" data-id="{{item.noteId}}" bindtap="openNote">
+        <view class="discuss-heat">{{item.heat}}</view>
+        <view class="discuss-title">{{item.title}}</view>
+        <view class="discuss-reply">{{item.reply}}</view>
+      </view>
+    </view>
+
+    <view class="section-head">
+      <view class="section-title">同路人小站</view>
+      <view class="section-more">全部城市 ›</view>
+    </view>
+    <scroll-view class="partner-scroll" scroll-x="true" show-scrollbar="false">
+      <view class="partner-track">
+        <view wx:for="{{cityPartners}}" wx:key="city" class="partner-card" data-id="{{item.noteId}}" bindtap="openNote">
+          <view class="partner-city">{{item.city}}</view>
+          <view class="partner-text">{{item.text}}</view>
+          <view class="partner-people">{{item.people}}</view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="section-head">
+      <view class="section-title">笔记故事</view>
+      <view class="section-more">全部 ›</view>
+    </view>
+
+    <view class="masonry">
+      <view class="column">
+        <view wx:for="{{leftNotes}}" wx:key="id" class="note-card" data-id="{{item.id}}" bindtap="openNote">
+          <image class="note-image" src="{{item.image}}" mode="widthFix" />
+          <view wx:if="{{item.video}}" class="play-badge">▶</view>
+          <view class="note-body">
+            <view class="note-tag">{{item.tag}}</view>
+            <view class="note-title">{{item.title}}</view>
+            <view class="note-desc">{{item.desc}}</view>
+            <view class="note-footer">
+              <view class="author">
+                <image class="avatar" src="{{item.avatar}}" mode="aspectFill" />
+                <view class="author-name">{{item.author}}</view>
+              </view>
+              <view class="metrics">{{item.views}} · {{item.likes}}赞</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="column">
+        <view wx:for="{{rightNotes}}" wx:key="id" class="note-card" data-id="{{item.id}}" bindtap="openNote">
+          <image class="note-image" src="{{item.image}}" mode="widthFix" />
+          <view wx:if="{{item.video}}" class="play-badge">▶</view>
+          <view class="note-body">
+            <view class="note-tag">{{item.tag}}</view>
+            <view class="note-title">{{item.title}}</view>
+            <view class="note-desc">{{item.desc}}</view>
+            <view class="note-footer">
+              <view class="author">
+                <image class="avatar" src="{{item.avatar}}" mode="aspectFill" />
+                <view class="author-name">{{item.author}}</view>
+              </view>
+              <view class="metrics">{{item.views}} · {{item.likes}}赞</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="end-card">
+      <view class="end-title">滑到底了哦</view>
+      <view class="end-text">今天的丝路故事先看到这里，晚点再来看看新的攻略和同路人分享吧。</view>
+    </view>
+
+    <view class="bottom-space"></view>
+  </scroll-view>
+
+  <view class="publish-button" bindtap="publishNote">＋</view>
+  <tabbar></tabbar>
+</block>

@@ -1,19 +1,53 @@
-<!-- pages/community/community.wxml -->
-<view class="container">
-  <button bindtap="publish" class="publish-btn"  >发表</button>
-  
-  <view class="input-section">
-    <textarea placeholder="旅游感受写下来吧" bindinput="bindTextInput" maxlength="300" class="input-textarea"></textarea>
+<scroll-view class="publish-page" scroll-y="true" enhanced="true" show-scrollbar="false">
+  <view class="topbar">
+    <view class="back-button" bindtap="goBack">‹ 返回</view>
+    <view class="top-title">发布笔记</view>
+    <view class="publish-action" bindtap="publish">{{publishing ? '发布中' : '发布'}}</view>
   </view>
-  
-  <view class="image-upload-section">
-    <block wx:for="{{images}}" wx:key="index">
-      <image src="{{item}}" class="uploaded-image"></image>
-    </block>
-    <button bindtap="choosepicture" class="add-image-btn" >+</button>
+
+  <view class="author-card">
+    <image class="author-avatar" src="{{user.avatarUrl}}" mode="aspectFill" />
+    <view class="author-main">
+      <view class="author-name">{{authorName}}</view>
+      <view class="author-desc">{{authorDesc}}</view>
+    </view>
   </view>
-  
-  <view class="title-input-section">
-    <input placeholder="标题" bindinput="bindTitleInput" class="title-input"/>
+
+  <view class="editor-card">
+    <input class="title-input" placeholder="给这段旅程起个标题" maxlength="36" value="{{head_txt}}" bindinput="bindTitleInput" />
+    <textarea class="content-input" placeholder="写下你的路线、景点感受、避坑提醒或美食发现..." maxlength="800" value="{{text}}" bindinput="bindTextInput"></textarea>
+
+    <view class="tag-row">
+      <view
+        wx:for="{{tagOptions}}"
+        wx:key="*this"
+        class="tag-chip {{item === activeTag ? 'tag-chip--active' : ''}}"
+        data-tag="{{item}}"
+        bindtap="chooseTag"
+      >
+        {{item}}
+      </view>
+    </view>
   </view>
-</view>
+
+  <view class="image-panel">
+    <view class="panel-title">添加图片</view>
+    <view class="image-grid">
+      <view wx:for="{{images}}" wx:key="*this" wx:for-index="index" class="image-cell">
+        <image class="uploaded-image" src="{{item}}" mode="aspectFill" />
+        <view class="remove-image" data-index="{{index}}" bindtap="removeImage">×</view>
+      </view>
+      <view wx:if="{{images.length < 3}}" class="add-image" bindtap="choosepicture">
+        <view class="add-plus">＋</view>
+        <view class="add-text">上传照片</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="publish-tips">
+    <view class="tip-title">发布建议</view>
+    <view class="tip-text">可以写清楚城市、时间、交通、花费、适合人群和注意事项，其他游客会更容易参考。</view>
+  </view>
+
+  <view class="bottom-space"></view>
+</scroll-view>

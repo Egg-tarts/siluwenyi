@@ -1,0 +1,309 @@
+page {
+  background: #efe4cf;
+}
+
+.city-page {
+  min-height: 100vh;
+  height: 100vh;
+  color: #2f261b;
+  background:
+    linear-gradient(180deg, #efe4cf 0%, #f8f1e4 44%, #e8d5b4 100%);
+}
+
+.hero {
+  position: relative;
+  height: 720rpx;
+  overflow: hidden;
+}
+
+.hero-image,
+.hero-mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-mask {
+  background:
+    linear-gradient(180deg, rgba(14, 19, 17, 0.2) 0%, rgba(14, 19, 17, 0.16) 34%, rgba(23, 23, 18, 0.82) 100%),
+    radial-gradient(circle at 18% 18%, rgba(255, 231, 172, 0.18), transparent 32%);
+}
+
+.topbar {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 74rpx 30rpx 0;
+}
+
+.back-button {
+  height: 56rpx;
+  padding: 0 20rpx;
+  border-radius: 999rpx;
+  color: #fff3d5;
+  font-size: 24rpx;
+  line-height: 56rpx;
+  font-weight: 900;
+  background: rgba(23, 20, 15, 0.42);
+}
+
+.top-title {
+  color: #fff3d5;
+  font-size: 26rpx;
+  font-weight: 900;
+}
+
+.hero-content {
+  position: absolute;
+  z-index: 3;
+  left: 38rpx;
+  right: 38rpx;
+  bottom: 54rpx;
+  color: #fff4dc;
+}
+
+.city-en {
+  color: rgba(255, 231, 172, 0.82);
+  font-size: 24rpx;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.city-name {
+  margin-top: 12rpx;
+  font-size: 72rpx;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.city-slogan {
+  margin-top: 16rpx;
+  font-size: 30rpx;
+  line-height: 1.34;
+  font-weight: 800;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 22rpx;
+}
+
+.tag-chip,
+.food-chip,
+.city-chip {
+  height: 52rpx;
+  padding: 0 18rpx;
+  border-radius: 999rpx;
+  font-size: 22rpx;
+  line-height: 52rpx;
+  font-weight: 900;
+}
+
+.tag-chip {
+  color: #fff7e8;
+  background: rgba(255, 247, 232, 0.16);
+}
+
+.intro-card,
+.section-card,
+.food-card,
+.tips-card {
+  margin: 24rpx 28rpx 0;
+  padding: 30rpx;
+  border-radius: 8rpx;
+  background: rgba(255, 252, 244, 0.86);
+  box-shadow: 0 14rpx 32rpx rgba(91, 64, 31, 0.1);
+}
+
+.section-kicker {
+  color: #8d6437;
+  font-size: 22rpx;
+  font-weight: 900;
+}
+
+.section-title {
+  margin-top: 8rpx;
+  color: #2f261b;
+  font-size: 36rpx;
+  font-weight: 900;
+}
+
+.intro-text,
+.tips-text {
+  margin-top: 18rpx;
+  color: rgba(47, 38, 27, 0.72);
+  font-size: 27rpx;
+  line-height: 1.62;
+  font-weight: 700;
+}
+
+.action-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18rpx;
+  margin: 24rpx 28rpx 0;
+}
+
+.action-button {
+  height: 78rpx;
+  border-radius: 8rpx;
+  color: #fff7e8;
+  font-size: 27rpx;
+  line-height: 78rpx;
+  text-align: center;
+  font-weight: 900;
+  background: #7c5a35;
+  box-shadow: 0 12rpx 24rpx rgba(124, 90, 53, 0.18);
+}
+
+.action-button--dark {
+  background: #265653;
+}
+
+.museum-list {
+  margin-top: 20rpx;
+}
+
+.museum-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid rgba(124, 90, 53, 0.09);
+}
+
+.museum-item:last-child {
+  border-bottom: 0;
+}
+
+.museum-index {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  color: #fff7e8;
+  font-size: 22rpx;
+  line-height: 48rpx;
+  text-align: center;
+  font-weight: 900;
+  background: #7c5a35;
+}
+
+.museum-name {
+  flex: 1;
+  min-width: 0;
+  margin-left: 18rpx;
+  color: #33281d;
+  font-size: 27rpx;
+  font-weight: 900;
+}
+
+.route-line {
+  margin-top: 22rpx;
+  border-left: 3rpx solid rgba(124, 90, 53, 0.18);
+}
+
+.route-item {
+  position: relative;
+  display: flex;
+  margin-left: -11rpx;
+  padding: 0 0 28rpx;
+}
+
+.route-dot {
+  width: 20rpx;
+  height: 20rpx;
+  margin-top: 10rpx;
+  border: 5rpx solid #f8f1e4;
+  border-radius: 50%;
+  background: #7c5a35;
+}
+
+.route-main {
+  flex: 1;
+  min-width: 0;
+  margin-left: 18rpx;
+}
+
+.route-step {
+  color: #8d6437;
+  font-size: 22rpx;
+  font-weight: 900;
+}
+
+.route-text {
+  margin-top: 8rpx;
+  color: rgba(47, 38, 27, 0.72);
+  font-size: 26rpx;
+  line-height: 1.48;
+  font-weight: 800;
+}
+
+.food-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 24rpx;
+}
+
+.food-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12rpx;
+  flex: 1;
+}
+
+.food-chip {
+  color: #fff7e8;
+  background: #7c5a35;
+}
+
+.tips-card {
+  background: #265653;
+}
+
+.tips-title {
+  color: #fff3d5;
+  font-size: 32rpx;
+  font-weight: 900;
+}
+
+.tips-text {
+  color: rgba(255, 247, 232, 0.82);
+}
+
+.city-switch-title {
+  margin: 34rpx 28rpx 0;
+  color: #2f261b;
+  font-size: 32rpx;
+  font-weight: 900;
+}
+
+.city-switch {
+  margin: 18rpx 0 0;
+  white-space: nowrap;
+}
+
+.city-switch-track {
+  display: inline-flex;
+  padding: 0 28rpx;
+}
+
+.city-chip {
+  margin-right: 12rpx;
+  color: #7c5a35;
+  background: rgba(255, 252, 244, 0.86);
+}
+
+.city-chip--active {
+  color: #fff7e8;
+  background: #7c5a35;
+}
+
+.bottom-space {
+  height: 70rpx;
+}

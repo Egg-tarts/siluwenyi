@@ -1,0 +1,13 @@
+{
+  "name": "slwy-ai-butler-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Silk Road Chronicle AI butler proxy for WeChat CloudRun.",
+  "main": "ai-butler-proxy.js",
+  "scripts": {
+    "start": "node ai-butler-proxy.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

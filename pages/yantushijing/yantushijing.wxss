@@ -1,0 +1,263 @@
+page {
+  background: #efe4cf;
+}
+
+.page {
+  min-height: 100vh;
+  height: 100vh;
+  padding: 74rpx 30rpx 58rpx;
+  box-sizing: border-box;
+  color: #3e3528;
+  background: linear-gradient(180deg, #f8f1e3 0%, #eadac1 62%, #debf99 100%);
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  height: 58rpx;
+  padding: 0 22rpx;
+  margin-bottom: 22rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 250, 238, 0.88);
+  color: #6b5537;
+  font-size: 25rpx;
+  font-weight: 800;
+  box-shadow: 0 8rpx 18rpx rgba(92, 66, 35, 0.1);
+}
+
+.hero {
+  padding: 36rpx 34rpx;
+  border-radius: 8rpx;
+  background:
+    linear-gradient(135deg, rgba(62, 86, 75, 0.94), rgba(139, 95, 45, 0.78)),
+    url("https://free.picui.cn/free/2026/06/21/6a376641229b8.png");
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 18rpx 40rpx rgba(77, 54, 30, 0.18);
+}
+
+.eyebrow {
+  color: rgba(255, 234, 194, 0.84);
+  font-size: 22rpx;
+  font-weight: 800;
+}
+
+.title {
+  margin-top: 12rpx;
+  color: #fff5df;
+  font-size: 62rpx;
+  line-height: 1.04;
+  font-weight: 900;
+}
+
+.subtitle {
+  margin-top: 16rpx;
+  color: rgba(255, 245, 223, 0.84);
+  font-size: 27rpx;
+  line-height: 1.55;
+}
+
+.hero-stat {
+  display: inline-flex;
+  align-items: center;
+  height: 54rpx;
+  margin-top: 22rpx;
+  padding: 0 18rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 245, 223, 0.16);
+  color: #fff5df;
+  font-size: 22rpx;
+  font-weight: 900;
+}
+
+.feature {
+  margin-top: 24rpx;
+  overflow: hidden;
+  border-radius: 8rpx;
+  background: rgba(255, 250, 238, 0.92);
+  box-shadow: 0 14rpx 32rpx rgba(82, 58, 32, 0.12);
+}
+
+.feature-image {
+  width: 100%;
+  height: 360rpx;
+}
+
+.feature-info {
+  padding: 24rpx;
+}
+
+.feature-meta,
+.spot-meta {
+  color: #9b784c;
+  font-size: 22rpx;
+  font-weight: 800;
+}
+
+.feature-title {
+  margin-top: 8rpx;
+  color: #3e3528;
+  font-size: 38rpx;
+  font-weight: 900;
+}
+
+.feature-desc,
+.spot-desc,
+.spot-tip,
+.feature-tip {
+  margin-top: 10rpx;
+  color: rgba(62, 53, 40, 0.68);
+  font-size: 25rpx;
+  line-height: 1.48;
+}
+
+.feature-tip,
+.spot-tip {
+  color: #7a5a34;
+  font-weight: 800;
+}
+
+.filters {
+  margin: 28rpx -30rpx 0;
+  white-space: nowrap;
+}
+
+.filter-track {
+  display: inline-flex;
+  padding: 0 30rpx;
+}
+
+.filter {
+  height: 58rpx;
+  padding: 0 28rpx;
+  margin-right: 16rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 250, 238, 0.8);
+  color: #856a48;
+  font-size: 25rpx;
+  line-height: 58rpx;
+  font-weight: 800;
+}
+
+.filter-active {
+  background: #3f5d54;
+  color: #fff5df;
+}
+
+.section-title {
+  margin-top: 30rpx;
+  color: #3e3528;
+  font-size: 36rpx;
+  font-weight: 900;
+}
+
+.spot-list {
+  margin-top: 18rpx;
+}
+
+.spot-card {
+  display: flex;
+  min-height: 246rpx;
+  margin-bottom: 18rpx;
+  padding: 18rpx;
+  border-radius: 8rpx;
+  background: rgba(255, 251, 242, 0.9);
+  box-shadow: 0 10rpx 24rpx rgba(82, 58, 32, 0.1);
+}
+
+.spot-image {
+  flex: 0 0 206rpx;
+  width: 206rpx;
+  height: 218rpx;
+  border-radius: 8rpx;
+  background: #efe2c7;
+}
+
+.spot-info {
+  flex: 1;
+  min-width: 0;
+  padding-left: 22rpx;
+}
+
+.spot-name {
+  margin-top: 8rpx;
+  color: #3e3528;
+  font-size: 32rpx;
+  line-height: 1.25;
+  font-weight: 900;
+}
+
+.spot-desc,
+.spot-tip {
+  font-size: 23rpx;
+  line-height: 1.42;
+}
+
+.save-button {
+  display: inline-flex;
+  align-items: center;
+  height: 46rpx;
+  margin-top: 14rpx;
+  padding: 0 16rpx;
+  border-radius: 999rpx;
+  background: #3f5d54;
+  color: #fff5df;
+  font-size: 21rpx;
+  font-weight: 900;
+}
+
+.saved {
+  background: #c08b47;
+}
+
+.module {
+  margin-top: 24rpx;
+  padding: 28rpx;
+  border-radius: 8rpx;
+  background: rgba(255, 251, 242, 0.9);
+  box-shadow: 0 10rpx 24rpx rgba(82, 58, 32, 0.08);
+}
+
+.module-title {
+  margin-top: 0;
+}
+
+.idea {
+  display: flex;
+  padding: 18rpx 0;
+  border-bottom: 2rpx solid rgba(63, 93, 84, 0.1);
+}
+
+.idea:last-child {
+  border-bottom: 0;
+}
+
+.idea-index {
+  flex: 0 0 58rpx;
+  color: #3f5d54;
+  font-size: 24rpx;
+  font-weight: 900;
+}
+
+.idea-title {
+  color: #3e3528;
+  font-size: 29rpx;
+  font-weight: 900;
+}
+
+.idea-desc,
+.photo-rule {
+  margin-top: 8rpx;
+  color: rgba(62, 53, 40, 0.66);
+  font-size: 24rpx;
+  line-height: 1.45;
+}
+
+.photo-rule {
+  padding: 18rpx 0;
+  border-bottom: 2rpx solid rgba(63, 93, 84, 0.1);
+}
+
+.photo-rule:last-child {
+  border-bottom: 0;
+}

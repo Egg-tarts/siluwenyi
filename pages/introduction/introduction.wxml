@@ -1,0 +1,31 @@
+<view class="welcome welcome--{{welcome.layout}} welcome--{{welcome.tone}}" bindtap="onEnterClick">
+  <image class="welcome__image welcome__image--{{welcome.focus}}" src="{{welcome.image}}" mode="aspectFill" />
+  <view class="welcome__wash"></view>
+  <view class="welcome__veil"></view>
+  <view class="welcome__grain"></view>
+  <view class="welcome__glow welcome__glow--one"></view>
+  <view class="welcome__glow welcome__glow--two"></view>
+
+  <view class="welcome__ornaments">
+    <view class="welcome__trail welcome__trail--one"></view>
+    <view class="welcome__trail welcome__trail--two"></view>
+    <view class="welcome__star welcome__star--one"></view>
+    <view class="welcome__star welcome__star--two"></view>
+    <view class="welcome__star welcome__star--three"></view>
+  </view>
+
+  <view class="welcome__content">
+    <view class="welcome__eyebrow">{{welcome.eyebrow}}</view>
+    <view class="welcome__title">丝路问驿</view>
+    <view class="welcome__en">Silk Road Chronicle</view>
+    <view class="welcome__subtitle">{{welcome.subtitle}}</view>
+  </view>
+
+  <view class="welcome__entry">
+    <button class="welcome__button" hover-class="welcome__button--hover" catchtap="onEnterClick">
+      <text>点击进入</text>
+      <text class="welcome__arrow">→</text>
+    </button>
+    <view class="welcome__hint">{{welcome.hint}}</view>
+  </view>
+</view>

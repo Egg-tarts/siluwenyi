@@ -1,0 +1,74 @@
+<scroll-view class="page" scroll-y="true" enhanced="true" show-scrollbar="false">
+  <view class="back-button" bindtap="goBack">返回</view>
+
+  <view class="hero">
+    <view class="eyebrow">Rest Stop · Nanny Service</view>
+    <view class="title">驿站歇脚</view>
+    <view class="subtitle">把休息、补给、照护、行李、返程都安排好，让每一次停靠都像有人在旁边细细照看。</view>
+    <view class="hero-button" bindtap="makePlan">生成本次歇脚计划</view>
+  </view>
+
+  <view class="comfort-panel">
+    <view>
+      <view class="comfort-title">当前驿站</view>
+      <view class="comfort-score">{{currentStation.name}}</view>
+      <view class="comfort-desc">{{currentStation.plan}}</view>
+    </view>
+    <view class="comfort-grid">
+      <view wx:for="{{comfort}}" wx:key="label" class="comfort-item">
+        <text class="comfort-label">{{item.label}}</text>
+        <text class="comfort-value">{{item.value}}</text>
+      </view>
+    </view>
+  </view>
+
+  <scroll-view class="station-strip" scroll-x="true" show-scrollbar="false">
+    <view class="station-track">
+      <view wx:for="{{stations}}" wx:key="name" wx:for-index="index" class="{{item.className}}" data-index="{{index}}" bindtap="selectStation">
+        {{item.name}}
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="current-card">
+    <image class="current-image" src="{{currentStation.image}}" mode="aspectFill" />
+    <view class="current-info">
+      <view class="current-meta">{{currentStation.type}} · {{currentStation.distance}}</view>
+      <view class="current-title">{{currentStation.name}}</view>
+      <view class="current-desc">{{currentStation.desc}}</view>
+      <view class="tag-row">
+        <text wx:for="{{currentStation.tags}}" wx:key="*this" class="tag">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{planReady}}" class="plan-card">
+    <view class="section-title">本次歇脚计划</view>
+    <view class="plan-text">{{currentStation.plan}}</view>
+    <view class="plan-text">建议休整 {{restMinutes}} 分钟后再进入下一段路线，优先确认同行人、补水、充电和返程方式。</view>
+  </view>
+
+  <view class="section-title">保姆级服务流程</view>
+  <view wx:for="{{serviceFlow}}" wx:key="step" class="service-item">
+    <view class="service-index">{{item.step}}</view>
+    <view>
+      <view class="service-title">{{item.title}}</view>
+      <view class="service-desc">{{item.desc}}</view>
+    </view>
+  </view>
+
+  <view class="module">
+    <view class="section-title module-title">到站检查</view>
+    <view wx:for="{{checklist}}" wx:key="id" class="{{item.className}}" data-id="{{item.id}}" bindtap="toggleTodo">
+      <view class="todo-dot">{{item.checkedText}}</view>
+      <view class="todo-text">{{item.text}}</view>
+    </view>
+  </view>
+
+  <view class="nanny-grid">
+    <view wx:for="{{nannyServices}}" wx:key="title" class="nanny-card">
+      <view class="nanny-title">{{item.title}}</view>
+      <view class="nanny-desc">{{item.desc}}</view>
+    </view>
+  </view>
+</scroll-view>

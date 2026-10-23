@@ -1,0 +1,6 @@
+{
+  "identityServiceConfig": {
+    "authorizeMiniprogramType": 1,
+    "miniprogramLoginPath": "/pages/profileLogin/profileLogin"
+  }
+}

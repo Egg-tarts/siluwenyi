@@ -2,7 +2,7 @@
   <swiper class="swiper-container" autoplay="true" interval="5000" duration="500">
     <block wx:for="{{dataItem.images}}" wx:key="*this">
       <swiper-item>
-        <image src="https://lzuer.mynatapp.cc{{item}}" class="swiper-image"></image>
+        <image src="{{item}}" class="swiper-image"></image>
       </swiper-item>
     </block>
   </swiper>
@@ -23,7 +23,7 @@
   <!-- 评论和点赞容器 -->
   <view class="comment-container">
     <!-- 输入评论 -->
-    <input class="comment-input"  value="{{comment}}" placeholder="想说点什么...🖊" bindconfirm="onInputComment" />
+    <input class="comment-input" value="{{comment}}" placeholder="想说点什么...🖊" bindinput="onCommentInput" confirm-type="send" bindconfirm="onInputComment" />
     <!-- 点赞按钮 -->
     <button class="like-button" bindtap="onLike">
       <image class="like-icon" src="{{likeIcon}}"></image>
@@ -33,10 +33,17 @@
   <view class="comments">
     <block wx:for="{{dataItem.comments}}" wx:key="*this">
       <view class="comment-item">
-        <image src="https://lzuer.mynatapp.cc{{item.author.avatar}}" class="avatar"></image>
+        <image class="avatar" src="{{item.author.avatar}}" mode="aspectFill" />
         <view class="comment-content">
           <text class="name">{{item.author.username}}</text>
           <text class="comment">{{item.comment}}</text>
+          <view class="comment-actions">
+            <view class="comment-action" data-id="{{item.id}}" bindtap="onCommentLike">{{item.liked ? '已赞' : '点赞'}} {{item.likeCount}}</view>
+            <view class="comment-action" data-id="{{item.id}}" bindtap="onCommentReply">回复</view>
+          </view>
+          <view wx:if="{{item.replies.length}}" class="reply-list">
+            <view wx:for="{{item.replies}}" wx:key="*this" wx:for-item="reply" class="reply-item">问驿旅人：{{reply}}</view>
+          </view>
         </view>
       </view>
     </block>
